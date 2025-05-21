@@ -30,7 +30,7 @@ class Film {
     this.#fsk = fsk;
     this.#beschreibung = beschreibung;
     this.#vorschaubild = vorschaubild;
-}
+  }
 
   get id() {
     return this.#id;
@@ -75,26 +75,26 @@ class Film {
   }
 }
 
-function HomeButton(){
-  return(
+function HomeButton() {
+  return (
     <button>
-        Home
+      Home
     </button>
   );
 }
 
 
 function App() {
-  const Jumanji = new Film(1, "Jumanji", 119, 12,"Vier Teenager werden beim Spielen eines Videospiels in eine Dschungelwelt transportiert. Statt mit Hausaufgaben und Nachsitzen haben sie es jetzt mit schwarzen Mambas und anderen Dschungelfallen zu tun. Auch ihre Körper haben sich verändert: so ist aus dem bescheidenen Spencer ein richtiger Abenteurer geworden, und die Außenseiterin Martha trägt jetzt den Titel Ruby Roundhouse. Nur gemeinsam können sie entkommen.",
+  const Jumanji = new Film(1, "Jumanji", 119, 12, "Vier Teenager werden beim Spielen eines Videospiels in eine Dschungelwelt transportiert. Statt mit Hausaufgaben und Nachsitzen haben sie es jetzt mit schwarzen Mambas und anderen Dschungelfallen zu tun. Auch ihre Körper haben sich verändert: so ist aus dem bescheidenen Spencer ein richtiger Abenteurer geworden, und die Außenseiterin Martha trägt jetzt den Titel Ruby Roundhouse. Nur gemeinsam können sie entkommen.",
     JumanjiBild
   );
 
   return (
     <>
-    <a href = "/Jumanji">
-    <img src={Jumanji.vorschaubild} alt={Jumanji.title}/>
-    </a>
-    <HomeButton />
+      <a href="/Jumanji">
+        <img src={Jumanji.vorschaubild} alt={Jumanji.title} />
+      </a>
+      <HomeButton />
     </>
   );
 }
