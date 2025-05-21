@@ -1,4 +1,5 @@
 import './App.css';
+import { useNavigate } from 'react-router-dom';
 import JumanjiBild from './Bilder/Jumanji.jpg';
 import LiloundStichBild from './Bilder/LiloundStich.jpg';
 import Thunderbolts from './Bilder/Thunderbolts.jpg';
@@ -15,18 +16,17 @@ import UntilDawn from './Bilder/UntilDawn.jpg';
 import TheTransporter from './Bilder/TheTransporter.jpg';
 import StarWars from './Bilder/StarWars.png';
 
-function HomeButton() {
-  return (
-    <button className = "homebutton">
-      Home
-    </button>
-  );
-}
-function App() {
 
+
+function App() {
+ const navigate = useNavigate();
   return (
     <>
-    <HomeButton />
+    <div className="buttonBar">
+      <button className="suchButton">Suchen</button>
+      <button className="ticketButton"onClick={() => navigate('/Tickets')}>Tickets</button>
+      <button className="accountButton"onClick={() => navigate('/Account')}>Account</button>
+    </div>
     <div className = "bild-galerie">
     <a href="/Jumanji">
       <img src={JumanjiBild} alt="Jumanji" />
@@ -73,7 +73,8 @@ function App() {
     <a href="/StarWars">
       <img src={StarWars} alt="StarWars" />
     </a>
-  </div></>
+  </div>
+  </>
 
   );
 }
