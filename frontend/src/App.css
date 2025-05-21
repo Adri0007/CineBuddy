@@ -19,3 +19,19 @@
 .bild-galerie img:hover {
   transform: scale(1.05);
 }
+
+.homebutton {
+    position: fixed;      
+    bottom: 20px;           
+    left: 50%;           
+    transform: translateX(-50%);  
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    z-index: 1000;       
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
