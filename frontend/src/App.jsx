@@ -17,63 +17,64 @@ import StarWars from './Bilder/StarWars.png';
 
 function HomeButton() {
   return (
-    <button>
+    <button className = "homebutton">
       Home
     </button>
   );
 }
-
 function App() {
 
   return (
+    <>
+    <HomeButton />
     <div className = "bild-galerie">
-      <a href="/Jumanji">
-        <img src={JumanjiBild} alt="Jumanji" />
-      </a>
-      <a href="/LiloundStichBild">
-        <img src={LiloundStichBild} alt="LiloundStichBild" />
-      </a>
-      <a href="/Thunderbolts">
-        <img src={Thunderbolts} alt="Thunderbolts" />
-      </a>
-      <a href="/TheAccountTwo">
-        <img src={TheAccountTwo} alt="TheAccountTwo" />
-      </a>
-      <a href="/MissionImpossible">
-        <img src={MissionImpossible} alt="MissionImpossible" />
-      </a>
-      <a href="/Batman">
-        <img src={Batman} alt="Batman" />
-      </a>
-      <a href="/Minecraft">
-        <img src={Minecraft} alt="Minecraft" />
-      </a>
-      <a href="/HarryPotter">
-        <img src={HarryPotter} alt="HarryPotter" />
-      </a>
-      <a href="/HerrDerRinge">
-        <img src={HerrDerRinge} alt="HerrDerRinge" />
-      </a>
-      <a href="/TheAmateur">
-        <img src={TheAmateur} alt="TheAmateur" />
-      </a>
-      <a href="/FastandFurious">
-        <img src={FastandFurious} alt="FastandFurious" />
-      </a>
-      <a href="/Spongebob">
-        <img src={Spongebob} alt="Spongebob" />
-      </a>
-      <a href="/UntilDawn">
-        <img src={UntilDawn} alt="UntilDawn" />
-      </a>
-      <a href="/TheTransporter">
-        <img src={TheTransporter} alt="TheTransporter" />
-      </a>
-      <a href="/StarWars">
-        <img src={StarWars} alt="StarWars" />
-      </a>
-      <HomeButton />
-    </div>
+    <a href="/Jumanji">
+      <img src={JumanjiBild} alt="Jumanji" />
+    </a>
+    <a href="/LiloundStichBild">
+      <img src={LiloundStichBild} alt="LiloundStichBild" />
+    </a>
+    <a href="/Thunderbolts">
+      <img src={Thunderbolts} alt="Thunderbolts" />
+    </a>
+    <a href="/TheAccountTwo">
+      <img src={TheAccountTwo} alt="TheAccountTwo" />
+    </a>
+    <a href="/MissionImpossible">
+      <img src={MissionImpossible} alt="MissionImpossible" />
+    </a>
+    <a href="/Batman">
+      <img src={Batman} alt="Batman" />
+    </a>
+    <a href="/Minecraft">
+      <img src={Minecraft} alt="Minecraft" />
+    </a>
+    <a href="/HarryPotter">
+      <img src={HarryPotter} alt="HarryPotter" />
+    </a>
+    <a href="/HerrDerRinge">
+      <img src={HerrDerRinge} alt="HerrDerRinge" />
+    </a>
+    <a href="/TheAmateur">
+      <img src={TheAmateur} alt="TheAmateur" />
+    </a>
+    <a href="/FastandFurious">
+      <img src={FastandFurious} alt="FastandFurious" />
+    </a>
+    <a href="/Spongebob">
+      <img src={Spongebob} alt="Spongebob" />
+    </a>
+    <a href="/UntilDawn">
+      <img src={UntilDawn} alt="UntilDawn" />
+    </a>
+    <a href="/TheTransporter">
+      <img src={TheTransporter} alt="TheTransporter" />
+    </a>
+    <a href="/StarWars">
+      <img src={StarWars} alt="StarWars" />
+    </a>
+  </div></>
+
   );
 }
 
