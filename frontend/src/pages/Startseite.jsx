@@ -1,96 +1,66 @@
-import './App.css';
+// src/pages/Startseite.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { faTicket } from '@fortawesome/free-solid-svg-icons';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
+import './Startseite.css';
 
-import JumanjiBild from './Bilder/Jumanji.jpg';
-import LiloundStitchBild from './Bilder/LiloundStitch.jpg';
-import Thunderbolts from './Bilder/Thunderbolts.jpg';
-import TheAccountTwo from './Bilder/TheAccountTwo.jpg';
-import MissionImpossible from './Bilder/MissionImpossible.jpg';
-import Batman from './Bilder/Batman.jpg';
-import Minecraft from './Bilder/Minecraft.jpg';
-import HarryPotter from './Bilder/HarryPotter.jpg';
-import HerrDerRinge from './Bilder/HerrDerRinge.jpg';
-import TheAmateur from './Bilder/TheAmateur.jpg';
-import FastandFurious from './Bilder/FastandFurious.jpg';
-import Spongebob from './Bilder/Spongebob.jpg';
-import UntilDawn from './Bilder/UntilDawn.jpg';
-import TheTransporter from './Bilder/TheTransporter.jpg';
-import StarWars from './Bilder/StarWars.png';
+import JumanjiBild from '../Bilder/Jumanji.jpg';
+import LiloundStitchBild from '../Bilder/LiloundStitch.jpg';
+import Thunderbolts from '../Bilder/Thunderbolts.jpg';
+import TheAccountTwo from '../Bilder/TheAccountTwo.jpg';
+import MissionImpossible from '../Bilder/MissionImpossible.jpg';
+import Batman from '../Bilder/Batman.jpg';
+import Minecraft from '../Bilder/Minecraft.jpg';
+import HarryPotter from '../Bilder/HarryPotter.jpg';
+import HerrDerRinge from '../Bilder/HerrDerRinge.jpg';
+import TheAmateur from '../Bilder/TheAmateur.jpg';
+import FastandFurious from '../Bilder/FastandFurious.jpg';
+import Spongebob from '../Bilder/Spongebob.jpg';
+import UntilDawn from '../Bilder/UntilDawn.jpg';
+import TheTransporter from '../Bilder/TheTransporter.jpg';
+import StarWars from '../Bilder/StarWars.png';
 
-function App() {
+function Startseite() {
   const navigate = useNavigate();
-  
-  /* Suche */
   const [showSearch, setShowSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = () => {
-  if (!searchTerm) return;
-
-  const searchTermNormalized = searchTerm.toLowerCase().replace(/\s/g, '');
-
-  const imageIds = [
-    'jumanji',
-    'liloundstitchbild',
-    'thunderbolts',
-    'theaccounttwo',
-    'missionimpossible',
-    'batman',
-    'minecraft',
-    'harrypotter',
-    'herrderringe',
-    'theamateur',
-    'fastandfurious',
-    'spongebob',
-    'untildawn',
-    'thetransporter',
-    'starwars',
-  ];
-
-  const foundId = imageIds.find(id => id.includes(searchTermNormalized));
-
-  if (foundId) {
-    const element = document.getElementById(foundId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setShowSearch(false);
-    }
-  } else {
-    alert('Kein Film gefunden!');
-  }
-};
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      handleSearch();
+    if (!searchTerm) return;
+    const searchTermNormalized = searchTerm.toLowerCase().replace(/\s/g, '');
+    const imageIds = [
+      'jumanji', 'liloundstitch', 'thunderbolts', 'theaccounttwo',
+      'missionimpossible', 'batman', 'minecraft', 'harrypotter',
+      'herrderringe', 'theamateur', 'fastandfurious',
+      'spongebob', 'untildawn', 'thetransporter', 'starwars',
+    ];
+    const foundId = imageIds.find(id => id.includes(searchTermNormalized));
+    if (foundId) {
+      const element = document.getElementById(foundId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        setShowSearch(false);
+      }
+    } else {
+      alert('Kein Film gefunden!');
     }
   };
-  /* Seite */
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') handleSearch();
+  };
+
   return (
     <>
       <div className="buttonBar">
-        <button
-          className="suchButton"
-          onClick={() => setShowSearch(prev => !prev)} /* Suchleiste anzeigen */
-        >
-          Suchen <FontAwesomeIcon icon={faMagnifyingGlass}/>
+        <button className="suchButton" onClick={() => setShowSearch(prev => !prev)}>
+          Suchen <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
-        <button
-          className="ticketButton"
-          onClick={() => navigate('/Tickets')} /* Navigation zu /Tickets */
-        >
-          Ticket <FontAwesomeIcon icon={faTicket}/>
+        <button className="ticketButton" onClick={() => navigate('/Tickets')}>
+          Ticket <FontAwesomeIcon icon={faTicket} />
         </button>
-        <button
-          className="accountButton"
-          onClick={() => navigate('/Account')} /* Navigation zu /Account */
-        >
+        <button className="accountButton" onClick={() => navigate('/Account')}>
           Account <FontAwesomeIcon icon={faUser} />
         </button>
       </div>
@@ -106,7 +76,7 @@ function App() {
             onKeyDown={handleKeyDown}
           />
           <button onClick={handleSearch}>
-            <FontAwesomeIcon icon={faMagnifyingGlass}/>
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
         </div>
       )}
@@ -132,4 +102,4 @@ function App() {
   );
 }
 
-export default App;
+export default Startseite;

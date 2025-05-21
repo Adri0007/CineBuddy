@@ -1,0 +1,73 @@
+.bild-galerie {
+    padding: 2rem; 
+}
+
+.bild-galerie a {
+    display: block;          
+    margin-bottom: 2rem;    
+    text-align: center;      
+}
+
+.bild-galerie img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s;
+}
+
+.bild-galerie img:hover {
+    transform: scale(1.04);
+}
+
+.buttonBar {
+    position: fixed;
+    justify-content: center;  
+    box-sizing: border-box;
+    background-color: #333;
+    width: 100%;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;               
+    z-index: 1000;
+}
+
+.buttonBar button {
+    flex: 0 1 auto;       
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #530f0f;
+    color: white;
+    border-color: black;
+    border-style: solid;
+    border-radius: 0px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.suchbereich {
+    background-color: #333;
+    padding: 1rem;
+    text-align: center;
+}
+.suchbereich input {
+    background-color: #530f0f;
+    border-color: black;
+    border-style: solid;
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 60%;
+    max-width: 80%;
+}
+.suchbereich button {
+    width: 15%;
+    max-width:50px;
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #530f0f;
+    border-color: black;
+    border-style: solid;
+    border-radius: 0px;
+}
