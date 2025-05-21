@@ -40,7 +40,8 @@ export default function AppRouter() {
       <Route path="/Spongebob" element={<Spongebob />} />
       <Route path="/UntilDawn" element={<UntilDawn />} />
       <Route path="/TheTransporter" element={<TheTransporter />} />
-      <Route path="/Tickets" element={<Tickets />} />
+      <Route path="/TheTransporter" element={<TheTransporter />} />
+      <Route path="/StarWars" element={<StarWars />} />
       <Route path="/Account" element={<Account />} />
 
       
