@@ -1,6 +1,12 @@
 import './App.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faTicket } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+
 import JumanjiBild from './Bilder/Jumanji.jpg';
 import LiloundStitchBild from './Bilder/LiloundStitch.jpg';
 import Thunderbolts from './Bilder/Thunderbolts.jpg';
@@ -73,19 +79,19 @@ function App() {
           className="suchButton"
           onClick={() => setShowSearch(prev => !prev)} /* Suchleiste anzeigen */
         >
-          Suchen
+          Suchen <FontAwesomeIcon icon={faMagnifyingGlass}/>
         </button>
         <button
           className="ticketButton"
           onClick={() => navigate('/Tickets')} /* Navigation zu /Tickets */
         >
-          Tickets
+          Ticket <FontAwesomeIcon icon={faTicket}/>
         </button>
         <button
           className="accountButton"
           onClick={() => navigate('/Account')} /* Navigation zu /Account */
         >
-          Account
+          Account <FontAwesomeIcon icon={faUser} />
         </button>
       </div>
 
@@ -100,7 +106,7 @@ function App() {
             onKeyDown={handleKeyDown}
           />
           <button onClick={handleSearch}>
-            Los
+            <FontAwesomeIcon icon={faMagnifyingGlass}/>
           </button>
         </div>
       )}
