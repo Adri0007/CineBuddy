@@ -26,7 +26,7 @@ function HomeButton() {
 function App() {
 
   return (
-    <div class = "bild-galerie">
+    <div className = "bild-galerie">
       <a href="/Jumanji">
         <img src={JumanjiBild} alt="Jumanji" />
       </a>

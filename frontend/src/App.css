@@ -1,0 +1,21 @@
+.bild-galerie {
+  padding: 2rem; 
+}
+
+.bild-galerie a {
+  display: block;          
+  margin-bottom: 2rem;    
+  text-align: center;      
+}
+
+.bild-galerie img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+}
+
+.bild-galerie img:hover {
+  transform: scale(1.05);
+}
