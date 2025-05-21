@@ -42,9 +42,8 @@ export default function AppRouter() {
       <Route path="/TheTransporter" element={<TheTransporter />} />
       <Route path="/TheTransporter" element={<TheTransporter />} />
       <Route path="/StarWars" element={<StarWars />} />
+      <Route path="/Tickets" element={<Tickets />} />
       <Route path="/Account" element={<Account />} />
-
-      
     </Routes>
   );
 }
