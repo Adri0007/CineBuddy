@@ -1,0 +1,21 @@
+.vorstellung-bild {
+  display: block;
+  margin: 0 auto 24px auto;      
+  width: 100%;
+  max-width: 650px;
+  height: auto;
+  object-fit: contain;
+  background: #222;
+  border-radius: 16px;           
+  box-shadow: 0 4px 20px #0008; 
+}
+
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #222;
+  color: #fff;
+}
