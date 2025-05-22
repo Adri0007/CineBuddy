@@ -1,0 +1,107 @@
+[
+	{
+		"titel": "Lilo & Stitch",
+		"bild": "../Bilder/LiloundStitch.jpg",
+		"dauer": 108,
+		"fsk": 6,
+		"beschreibung": "Lilo (Maia Kealoha) ist ein junges hawaiisches Mädchen, das kurz vor ihrem fünften Geburtstag ihre Eltern verlor. Seitdem kümmert sich ihre ältere Schwester Nani (Sydney Agudong) liebevoll um Lilo, die in ihrer Freizeit eine Hula-Tanzgruppe besucht. Lilos Leben ändert sich schlagartig, als sie auf Stitch trifft. Das blaue Wesen, welches sich zunächst als Hund ausgibt, ist eigentlich das illegale genetische Experiment 626 des außerirdischen Wissenschaftlers Jamba Jookiba. Gemeinsam mit dem frechen Stitch erlebt Lilo ein Abenteuer nach dem anderen. Doch die Außerirdischen wollen den Ausreißer Stitch wieder einfangen, was es für Lilo dringend zu verhindern gilt."
+	},
+	{
+		"titel": "Thunderbolts",
+		"bild": "/Bilder/Thunderbolts.jpg",
+		"dauer": 126,
+		"fsk": 12,
+		"beschreibung": "Als das erfolgreichste Filmfranchise der Welt setzt das Marvel Cinematic Universe (kurz MCU) auch in den kommenden Jahren weiterhin auf ihr großes Portfolio aus der Comicreihe. Eine neue Gruppe an Superheld*innen, die in der Vergangenheit jedoch meist als Bösewicht*innen in Erscheinung getreten sind, erwartet uns am 1. Mai 2025, wenn „Thunderbolts*“ in den Kinos startet."
+	},
+	{
+		"titel": "The Accountant 2",
+		"bild": "/Bilder/TheAccountTwo.jpg",
+		"dauer": 124,
+		"fsk": 16,
+		"beschreibung": "Christian Wolff (Ben Affleck), der brillante und zugleich gefährliche Buchhalter mit autistischen Zügen, ist zurück. Als Spezialist für Zahlen und Geldwäsche arbeitet er für die gefährlichsten Verbrecher der Welt – stets im Schatten und immer einen Schritt voraus. Doch diesmal wird er tiefer in ein Netz aus Korruption, kriminellen Machenschaften und persönlichen Konflikten gezogen. An seiner Seite steht erneut sein Bruder Brax (Jon Bernthal), der mittlerweile ein Sicherheitsunternehmen für hochkarätige Klienten leitet. Während Ray King (J.K. Simmons), der erfahrene Leiter des Treasury Departments, weiter an Wolffs Spur heftet, erhält die junge Treasury-Agentin Marybeth Medina (Cynthia Addai-Robinson) neue Hinweise auf Christians wahre Identität. Neue Gegner und unerwartete Verbündete, darunter eine mysteriöse Figur gespielt von Daniella Pineda, machen seine Mission zu einem Wettlauf gegen die Zeit."
+	},
+	{
+		"titel": "Mission: Impossible – The Final Reckoning",
+		"bild": "/Bilder/MissionImpossible.jpg",
+		"dauer": 169,
+		"fsk": 12,
+		"beschreibung": "Nachdem „Mission: Impossible – Fallout“ 2018 mit weltweit 791 Millionen US-Dollar das bis dato beste Einspielergebnis der Reihe erzielt hat, war schnell klar, dass weitere Fortsetzungen folgen sollten. 2019 wurde bekannt, dass sowohl „Mission: Impossible 7“ als auch „Mission: Impossible 8“ in Planung seien. Mit über einem Jahr Verspätung soll der achte Teil der beliebten Reihe am 23. Mai 2025 in den US-Kinos starten, der neue deutsche Kinostart ist vermutlich bereits am 21. Mai 2025."
+	},
+	{
+		"titel": "Ein Minecraft Film",
+		"bild": "/Bilder/Minecraft.jpg",
+		"dauer": 101,
+		"fsk": 12,
+		"beschreibung": "Als die vier Außenseiter Garrett „The Garbage Man“ Garrison (Jason Momoa), Henry (Sebastian Eugene Hansen), Natalie (Emma Myers) und Dawn (Danielle Brooks) eines Tages durch ein geheimnisvolles Portal in die Oberwelt katapultiert werden, setzt das dem Alltagstrott ein jähes Ende. In der bizzaren, würfelförmigen Landschaft können sie mit ihrer Fantasie Dinge fernab ihrer Vorstellungskraft erschaffen. Nichtsdestotrotz wollen sie gerne heile wieder zuhause ankommen, doch dafür gilt es zunächst diese Welt zu überstehen, die neben fantastischen Möglichkeiten auch düstere Nächte mit bösartigen Wesen bereithält. Der erfahrene Carfter Steve (Jack Black) führt die Fremden durch das absurde Abenteuer. Die fünf Gefährten finden sich mit der großen Herausforderung konfrontiert, sich auch im Angesicht bedrohlicher Gefahren auf die kreativen Qualitäten zu besinnen, die jeden Einzelnen von ihnen ausmachen. Damit retten sie sich nicht nur in der Minecraft-Welt das Leben, sondern lernen auch, was sie bereits in sich tragen, um auch in der realen Welt erfolgreich zu sein."
+	},
+	{
+		"titel": "The Amateur",
+		"bild": "/Bilder/TheAmateur.jpg",
+		"dauer": 123,
+		"fsk": 12,
+		"beschreibung": "CIA-Kryptograph Charles Heller (Rami Malek) stößt an seine ganz persönlichen und beruflichen Grenzen, als er seine Frau bei einem Terroranschlag in London verliert. Seine Vorgesetzten lassen die Ermittlungen aufgrund widersprüchlicher interner Prioritäten nicht voranschreiten. Mit diesem Wissen beginnt er den US-amerikanischen Geheimdienst zu erpressen, damit er ausgebildet wird um auf eigene Faust auf die Suche nach den Attentätern gehen zu können."
+	},
+	{
+		"titel": "Jumanji",
+		"bild": "/Bilder/Jumanji.jpg",
+		"dauer": 124,
+		"fsk": 12,
+		"beschreibung": "Mit dem Wurf eines Würfels wird der zwölfjährige Alan in das Innere des Brettspiels „Jumanji“ gezogen. 26 Jahre später wird Alan von zwei Kindern wieder befreit - und mit ihm eine ganze Schar von Dschungelwesen, die für Chaos in einer Kleinstadt sorgen. Nur, wenn Alan und die Kinder das Spiel beenden, kann Jumanjis Zauber besiegt werden."
+	},
+	{
+		"titel": "The Fast and the Furious: Tokyo Drift",
+		"bild": "/Bilder/FastandFurious.jpg",
+		"dauer": 104,
+		"fsk": 12,
+		"beschreibung": "Shaun Boswell ist ein geborener Außenseiter, der mit seiner Teilnahme an illegalen Straßenrennen immer wieder bei den Autoritäten aneckt. Um einer Gefängnisstrafe zu entgehen, wird Shaun nach Tokio zu seinem Vater geschickt, der beim Militär dient. Dort gerät er vom Regen in die Traufe, weil die Geschwindigkeitssüchtigen in Japan längst die nächste Stufe des Straßenrennens pflegen: Drift Racing, bei dem die Schwerkraft regelmäßig aufgehoben wird. Shaun kann nicht widerstehen und legt sich unwissentlich mit DK an, der Kontakte zur Yakuza pflegt."
+	},
+	{
+		"titel": "The Transporter",
+		"bild": "/Bilder/TheTransporter.jpg",
+		"dauer": 92,
+		"fsk": 16,
+		"beschreibung": "Der für die kriminelle Klientel arbeitende Kurierfahrer Frank Martin plant alle Einsätze bis ins kleinste Detail und vergisst nie seine beiden ehernen Regeln: Stelle keine Fragen und mache niemals ein Paket auf. Bis zu jenem Tag, als der ultralässige Kerl mit seinen Prinzipien bricht und das zappelnde Frachtstück in seinem Kofferraum öffnet. Plötzlich hat er die schöne Lai am Hals, die gegen einen Menschenhändlerring kämpft. Und als wäre das nicht genug, ist plötzlich auch noch eine schießfreudige Mafiosi-Bande hinter dem gut gebauten Stoiker her."
+	},
+	{
+		"titel": "Until Dawn",
+		"bild": "/Bilder/UntilDawn.jpg",
+		"dauer": 103,
+		"fsk": 16,
+		"beschreibung": "Zehn Jahre nach der Veröffentlichung des ersten „Until Dawn“-Videospiels im Jahr 2015 erscheint am 24. April 2025 der erste Live-Action-Kinofilm in den hiesigen Kinos. Darin sehen sich die Protagonist*innen einer tödlichen Bedrohung gegenübergestellt. Clover (Ella Rubin), Max (Michael Cimino), Megan (Ji-young Yoo) und Nina (Odessa A’zion) verbringen eine scheinbar harmlose Nacht in einer abgelegenen Berghütte. Doch das Unheil nimmt seinen Lauf, als sie herausfinden, dass sie von mysteriösen Feinden verfolgt werden. Inmitten des Schreckens müssen sie ihren vermissten Freund finden und das Rätsel um eine unheimliche Todesschleife lösen, die sie gefangen hält. Jede Entscheidung kann über Leben und Tod entscheiden – und die Zeit drängt."
+	},
+	{
+		"titel": "Der SpongeBob Schwammkopf Film",
+		"bild": "/Bilder/Spongebob.jpg",
+		"dauer": 87,
+		"fsk": 6,
+		"beschreibung": "In Bikini Bottom, einer Stadt wie deine und meine irgendwo unten auf dem Grunde des Pazifiks, lebt SpongeBob, ein rechteckiger gelber Schwamm. SpongeBob wohnt in einer Ananas und arbeitet als Koch im Restaurant des freundlichen Mr. Krabs. Ausgerechnet der soll nun Neptuns Krone entwendet haben und muss um sein Leben fürchten. Kurzentschlossen reisen SpongeBob und sein Kumpel Patrick, der Seestern, in die tiefsten Abgründe des Ozeans, um den Chef zu entlasten und, wenn möglich, die Krone ihrem rechtmäßigen Besitzer zurück zu bringen."
+	},
+	{
+		"titel": "Star Wars: Episode II - Angriff der Klonkrieger",
+		"bild": "/Bilder/StarWars.png",
+		"dauer": 142,
+		"fsk": 12,
+		"beschreibung": "Unter der besonnenen Leitung von Obi Wan-Kenobi (Ewan McGregor) entwickelt sich der Jugendliche Anakin (Hayden Christensen) zunehmend zu einem ernstzunehmenden Jedi, dem eigentlich nur die eigene Arroganz im Weg steht - und die verbotene Liebe zu Königin Amidala (Natalie Portman). Sie kommt zu einem jähen Ende, als die Jedis zu Beginn der Klonkriege gefordert sind. Doch die dunkle Seite streckt bereits ihre Fühler nach Anakin aus."
+	},
+	{
+		"titel": "Der Herr der Ringe: Die Gefährten",
+		"bild": "/Bilder/HerrDerRinge.jpg",
+		"dauer": 178,
+		"fsk": 12,
+		"beschreibung": "Am Ende des zweiten Zeitalters lässt Sauron die Ringe der Macht schmieden und verschenkt sie an Elben, Zwerge und Menschen. Heimlich fertigt er jedoch auch den Einen Ring, der alle anderen Ringe  beherrscht und ihm die Macht verleiht, alle Völker von Mittelerde zu unterwerfen. Doch Sauron verliert die entscheidende Schlacht und damit auch den Ring. Fast 2500 Jahre später ist der Ring fast in Vergessenheit geraten und fällt über viele Irrwege in die Hände von dem vielleicht unscheinbarsten Wesen von ganz Mittelerde: Der Hobbit Bilbo Beutlin (Ian Holm) findet das wertvolle Kleinod, das den Träger unsichtbar machen kann, und behält es 60 Jahre in seinem Besitz. An seinem 111. Geburtstag beschließt Bilbo seine Heimat, das beschauliche und ruhige Auenland, zu verlassen und den Ring schweren Herzens an seinen Neffen Frodo (Elijah Wood) weiterzugeben. Er ahnt jedoch nicht, was für eine Bürde er dem jungen Hobbit damit auferlegt hat. Der Zauberer Gandalf (Ian McKellen) kommt bald hinter das Geheimnis über die Herkunft des Ringes und sieht nur eine Möglichkeit, um der drohenden Gefahr durch Sauron, die sich wie ein Schatten über Mittelerde ausbreitet, ein für alle Mal Herr zu werden: Frodo und sein Freund Sam (Sean Astin) müssen sich auf den beschwerlichen Weg nach Mordor machen und den Meisterring vernichten. Zusammen mit einer Gemeinschaft aus neun Gefährten, darunter der geheimnisvolle Waldläufer Aragorn (Viggo Mortensen), der beherzte Boromir (Sean Bean), der Elb Legolas (Orlando Bloom) und der Zwerg Gimli (John Rhys-Davies), machen sich die Hobbits auf die gefährliche und abenteuerliche Reise."
+	},
+	{
+		"titel": "Harry Potter und die Heiligtümer des Todes Teil 2",
+		"bild": "/Bilder/HarryPotter.jpg",
+		"dauer": 130,
+		"fsk": 12,
+		"beschreibung": "Ron und Hermine die meiste Zeit ihrer Jugend gesehen haben – in Hogwarts. Der Film setzt dort ein, wo Part 1 endet. Voldemort (Ralph Fiennes) stiehlt den Elderstab aus dem Grab Dumbledores und scheint nun der Unbesiegbarkeit den entscheidenden Schritt entgegenzukommen. Währenddessen machen sich Harry (Daniel Radcliffe), Ron (Rupert Grint) und Hermine (Emma Watson) auf die Suche nach den letzten, verbliebenen Seelenbruchstücke Voldemorts – den Horkruxen. Nach einem Einbruch in Gringotts reisen die drei in ihrer ehemaligen Schule, auf der Suche nach einem weiteren Horkrux. Als Voldemort Wind davon bekommt, dass sich Harry Potter  in dem von ihm kontrollierten Hogwarts befindet und im Begriff ist, die Horkruxe zu zerstören, macht er sich selbst auf den Weg zur Schlacht, die über das Schicksal der Zauberer entscheiden wird. Dort versammeln sich alle altbekannten Mitstreiter des einstigen Zauberlehrlings, um ihn in der alles entscheidenden Schlacht zur Seite zu stehen. Wird es Harry gelingen, der Schreckensherrschaft des Mannes Einhalt zu gebieten, der böser wurde als alle vor ihm? Der letzte Teil der Saga ließ die Herzen von Warner Bros. noch einmal höher schlagen, gehört der Abschlussfilm doch zu den erfolgreichsten Filmen aller Zeiten. Zur Zeit der Kinopremiere stellte der Film einen Rekord für das beste Startwochenende ein. Der Rekord wurde zehn Monate später von „ Marvel’s The Avengers“ erneut gebrochen. David Yates führte seit „Harry Potter und der Orden des Phönix“ die Regie bei den Filmen der Harry-Potter-Reihe, und damit bei ganzen vier Leinwandabenteuern des populären Zauberers. Somit hat er bei mehr Filmen des Zauberlehrlings Regie geführt als sonst jemand. Zusätzlich führt er bei der neuen Trilogie aus dem Harry-Potter-Universum („Fantastic Beasts and where to find them“) erneut Regie."
+	},
+	{
+		"titel": "Batman Begins",
+		"bild": "/Bilder/Batman.jpg",
+		"dauer": 140,
+		"fsk": 12,
+		"beschreibung": "Bruce Wayne (Christian Bale) erlebt früh in seiner Kindheit ein einschneidendes Erlebnis, als er in einen Brunnen fällt und dort von Fledermäusen attackiert wird. In der Folge hat der heranwachsende Bruce (Gus Lewis) eine riesige Furcht vor den geflügelten Säugern, was ein tragisches Ereignis heraufbeschwört. Denn als er eines Abends seine Eltern zu einem Opernbesuch in Gotham City begleitet, sind dort als Fledermäuse kostümierte Darsteller. Bruce überzeugt seine Eltern, die Vorstellung zu verlassen, was dazu führt, dass die dreiköpfige Wayne-Familie von dem Straßenräuber Joe Chill (Richard Brake) überfallen wird. Vater und Ehemann Thomas Wayne stellt sich vor seine Familie, um diese zu beschützen, kann jedoch nicht verhindern, dass Chill ihn und seine Frau  Martha (Sara Stewart) erschießt. Der traumatisierte Bruce wird in der Folge vom loyalen Familienbutler Alfred aufgezogen. Nachdem Chill vierzehn Jahre später durch einen Deal frei kommen könnte, in dem er Informationen über den Mafiaboss Carmine Falcone (Tom Wilkinson) preisgibt, versucht Bruce, Chill nach dem Ende der Gerichtsverhandlungen mit einem versteckten Revolver zu töten. Ihm kommt jedoch eine Auftragskillerin zuvor, was dafür sorgt, dass sich Bruce damit auseinandersetzt, ob ein Rachemord im Sinne seiner Eltern gewesen wäre. Seine Kindheitsfreundin Rachel Dawes (Katie Holmes) verneint dies und redet ihm ins Gewissen, was mit zur Folge hat, dass Bruce Falcone zur Rede stellt. Dessen Ansichten veranlassen Bruce Wane dazu, das kriminelle Denken zu studieren. Nach einer jahrelangen und  umfangreichen Reise rund um die Welt, beginnt er schließlich ein Training in der „Gesellschaft der Schatten“  und kehrt nach Gotham zurück, um mit einer geheimen Identität dem Verbrechen den Kampf anzusagen. Das Familienunternehmen „Wayne Enterprises“ und das riesige Vermögen, das ihm seine Eltern hinterlassen haben, sind, sind dabei sicher nicht von Nachteil."
+	}
+]
