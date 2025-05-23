@@ -40,3 +40,15 @@ app.get('/api/filme', async (req, res) => {
     res.status(500).json({ error: 'Serverfehler' });
   }
 });
+
+app.get('/api/filme/:id', async (req, res) => {
+  try {
+    const film = await Film.findById(req.params.id);
+    if (!film) {
+      return res.status(404).json({ message: 'Film nicht gefunden' });
+    }
+    res.json(film);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
