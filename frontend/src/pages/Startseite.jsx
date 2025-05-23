@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+
 import './Startseite.css';
 
 import React, { useEffect, useState } from 'react';
@@ -29,12 +31,13 @@ function Startseite() {
         </button>
       </div>
       <div className="bild-galerie">
-        {filme.map(film => (
-          <a key={film._id} href={`/${film.titel}`}>
-            <img src={film.bild} alt={film.titel} />
-          </a>
-        ))}
+       {filme.map(film => (
+       <Link key={film._id} to={`/film/${film._id}`}>
+       <img src={film.bild} alt={film.titel} />
+       </Link>
+         ))}
       </div>
+
     </>
   );
 }
