@@ -1,13 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+require("dotenv").config({ path: "./config.env" })
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 
-const mongoUrl = 'mongodb://admin:SWP2025Projekt@localhost:27017/cinebuddys?authSource=admin';
+const mongoUrl = process.env.DB;
 /*
 const mongoUrl = 'mongodb://localhost:27017/Cinebuddy'
 */
@@ -38,5 +39,17 @@ app.get('/api/filme', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Serverfehler' });
+  }
+});
+
+app.get('/api/filme/:id', async (req, res) => {
+  try {
+    const film = await Film.findById(req.params.id);
+    if (!film) {
+      return res.status(404).json({ message: 'Film nicht gefunden' });
+    }
+    res.json(film);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
