@@ -20,6 +20,9 @@ function Vorstellung() {
       .catch(err => console.error(err));
   }, [id]);
 
+  if (!film || !vorstellung) {
+    return <div>Lade Daten...</div>;
+  }
 
 
   return (
