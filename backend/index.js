@@ -8,10 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 
-const mongoUrl = process.env.DB;
-/*
+
+
 const mongoUrl = 'mongodb://localhost:27017/Cinebuddy'
-*/
+
 mongoose.connect(mongoUrl)
   .then(() => console.log('MongoDB verbunden!'))
   .catch(err => console.error('MongoDB Fehler:', err));
