@@ -1,17 +1,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const { ObjectId } = require('mongoose').Types; // Für ObjectId-Umwandlung
+
+const { ObjectId } = require('mongoose').Types; 
+
+require("dotenv").config({ path: "./config.env" })
+
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 
-const mongoUrl = 'mongodb://admin:SWP2025Projekt@localhost:27017/cinebuddys?authSource=admin';
-/*
+
+//const mongoUrl = 'mongodb://admin:SWP2025Projekt@localhost:27017/cinebuddys?authSource=admin';
+ 
 const mongoUrl = 'mongodb://localhost:27017/Cinebuddy'
-*/
+
 mongoose.connect(mongoUrl)
   .then(() => console.log('MongoDB verbunden!'))
   .catch(err => console.error('MongoDB Fehler:', err));
