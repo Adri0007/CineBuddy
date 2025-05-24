@@ -43,18 +43,15 @@ export function Startseite() {
           </Link>
         ))}
       </div>
-
-      <div className="buttonBar">
-        <button className="suchButton" onClick={() => setShowSearch(prev => !prev)}>
-          Suchen <FontAwesomeIcon icon={faMagnifyingGlass} />
-        </button>
-        <button className="ticketButton" onClick={() => navigate('/Tickets')}>
-          Ticket <FontAwesomeIcon icon={faTicket} />
-        </button>
-        <button className="accountButton" onClick={() => navigate('/Account')}>
-          Account <FontAwesomeIcon icon={faUser} />
-        </button>
-      </div>
+      <button className="suchButton" onClick={() => setShowSearch(prev => !prev)}>
+        <FontAwesomeIcon icon={faMagnifyingGlass} />
+      </button>
+      <button className="ticketButton" onClick={() => navigate('/Tickets')}>
+        <FontAwesomeIcon icon={faTicket} />
+      </button>
+      <button className="accountButton" onClick={() => navigate('/Account')}>
+        <FontAwesomeIcon icon={faUser} />
+      </button>
     </>
   );
 }

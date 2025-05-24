@@ -1,5 +1,7 @@
+/* --- Bild-Galerie --- */
 .bild-galerie {
   padding: 2rem;
+  background: linear-gradient(to right, #300000, #600000, #300000);
 }
 
 .bild-galerie a {
@@ -20,33 +22,65 @@
   transform: scale(1.04);
 }
 
-.buttonBar {
+/* Gemeinsame Icon Styles */
+.suchButton svg,
+.ticketButton svg,
+.accountButton svg {
+  background: none;
+  /* Kein Hintergrund */
+  color: white;
+  /* Farbe des Icons */
+  font-size: 2rem;
+  /* Größe erhöhen */
+  width: 2rem;
+  /* optional */
+  height: 2rem;
+  /* optional */
+}
+
+/* Gemeinsame Button Styles */
+.suchButton,
+.accountButton,
+.ticketButton {
   position: fixed;
-  justify-content: center;
-  box-sizing: border-box;
-  background-color: #333;
-  width: 100%;
-  bottom: 0px;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  background-color: #530f0f;
+  border: 0.3rem solid black;
+  box-sizing: border-box;
   z-index: 1000;
 }
 
-.buttonBar button {
-  flex: 0 1 auto;
-  padding: 10px 20px;
-  font-size: 18px;
-  background-color: #530f0f;
-  color: white;
-  border-color: black;
-  border-style: solid;
-  border-radius: 0px;
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+/* Such- und Account-Button spezifisch */
+.suchButton {
+  left: 25%;
+  width: 50%;
+  height: 7vh;
+  z-index: 1050;
 }
 
+.accountButton {
+  left: 75%;
+  width: 50%;
+  height: 7vh;
+  z-index: 1050;
+}
+
+/* Ticket-Button spezifisch */
+.ticketButton {
+  width: 12vh;
+  height: 12vh;
+  border-radius: 50%;
+  z-index: 1100;
+  flex-direction: column;
+}
+
+/* --- Suchbereich --- */
 .suchbereich {
   background-color: #333;
   padding: 1rem;
@@ -56,22 +90,9 @@
 .suchbereich input {
   color: white;
   background-color: #530f0f;
-  border-color: black;
-  border-style: solid;
+  border: 1px solid black;
   padding: 0.5rem;
   font-size: 1rem;
   width: 60%;
   max-width: 80%;
-}
-
-.suchbereich button {
-  color: white;
-  width: 15%;
-  max-width: 50px;
-  margin-left: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: #530f0f;
-  border-color: black;
-  border-style: solid;
-  border-radius: 0px;
 }
