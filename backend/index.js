@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const { ObjectId } = require('mongoose').Types; // Für ObjectId-Umwandlung
 
 const app = express();
 app.use(cors());
@@ -50,5 +51,20 @@ app.get('/api/filme/:id', async (req, res) => {
     res.json(film);
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+});
+
+
+app.get('/api/vorstellungen/:filmId', async (req, res) => {
+  try {
+    const filmId = req.params.filmId;
+    const vorstellung = await mongoose.connection.db.collection('Vorstellungen')
+      .findOne({ id_film: new ObjectId(filmId) });
+    if (!vorstellung) {
+      return res.status(404).json({ message: "Vorstellung nicht gefunden" });
+    }
+    res.json(vorstellung);
+  } catch (err) {
+    res.status(500).json({ error: "Serverfehler", details: err.message });
   }
 });
