@@ -1,27 +1,24 @@
-import { getFilme } from "../../api"
 import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 import './Startseite.css';
 
-export function Home() {
-
-  const [posts, setPosts] = useState([])
+export function Startseite() {
   const navigate = useNavigate();
   const [showSearch, setShowSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [filme, setFilme] = useState([]);
 
   useEffect(() => {
-    async function loadAllFilm() {
-      const data = await getFilme()
-      setPosts(data)
-    }
-    loadAllFilm()
-  }, [])
+    axios.get('http://localhost:5000/api/filme')
+      .then(res => setFilme(res.data))
+      .catch(err => console.error("Fehler beim Laden der Filme:", err));
+  }, []);
 
-  const filteredPosts = posts.filter((film) =>
+  const gefilterteFilme = filme.filter(film =>
     film.titel.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -34,17 +31,15 @@ export function Home() {
             placeholder="Film suchen..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            autoFocus
           />
-          <button>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </button>
         </div>
       )}
 
       <div className="bild-galerie">
-        {filteredPosts.map((film) => (
+        {gefilterteFilme.map((film) => (
           <Link to={`/Film/${film._id}`} className="Film" key={film._id}>
-            <img src={`${film.bild}`} alt={film.titel} />
+            <img src={film.bild} alt={film.titel || "Filmbild"} />
           </Link>
         ))}
       </div>
@@ -61,8 +56,7 @@ export function Home() {
         </button>
       </div>
     </>
-
-  )
+  );
 }
 
-export default Home
+export default Startseite;
