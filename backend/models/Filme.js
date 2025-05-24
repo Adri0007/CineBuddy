@@ -5,7 +5,7 @@ const FilmSchema = new mongoose.Schema({
   bildUrl: String,
   beschreibung: String,
   dauer: Number,
-  fsk: Number,    
+  fsk: Number,
 }, {
   collection: 'Filmliste'
 });
