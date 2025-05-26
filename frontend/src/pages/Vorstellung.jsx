@@ -115,9 +115,7 @@ function Vorstellung() {
     {vorstellung.uhrzeiten.map((uhrzeit, index) => (
       <button
         key={index}
-        className="uhrzeit-button"
-        onClick={() => uhrzeitClick(uhrzeit)}
-        >
+        className="uhrzeit-button" onClick={() => navigate(`/Film/${film._id}/${index}`)}>
         {uhrzeit}
       </button>
         ))}
