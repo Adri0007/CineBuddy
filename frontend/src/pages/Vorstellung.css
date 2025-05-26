@@ -11,13 +11,14 @@
 }
 
 /* ========== Klassisches Kino Look ========== */
-body {
+.bodyVorstellung {
   margin: 0;
   padding: 0;
   background: radial-gradient(circle, #440000, #1a0000 80%);
   color: #f8e8d6;
   font-family: 'Georgia', serif;
   text-shadow: 0 0 2px #aa0000;
+  min-height: 100vh;
 }
 
 

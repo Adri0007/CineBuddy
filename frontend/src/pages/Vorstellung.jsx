@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  faHome , faTicket, faUser} from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import "./Vorstellung.css";
 
 function Vorstellung() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [film, setFilm] = useState(null);
   const [vorstellung, setVorstellung] = useState(null);
@@ -61,7 +65,7 @@ function Vorstellung() {
       : film.beschreibung;
 
   return (
-    <div>
+    <div className = "bodyVorstellung">
       <img src={film.bild} alt={film.titel} className="vorstellung-bild" />
 
       <div className="text-and-rating-container">
@@ -117,6 +121,17 @@ function Vorstellung() {
         {uhrzeit}
       </button>
         ))}
+  </div>
+  <div>
+        <button className="suchButton" onClick={() => navigate('/')}>
+          <FontAwesomeIcon icon={ faHome } />
+        </button>
+        <button className="ticketButton" onClick={() => navigate('/Tickets')}>
+          <FontAwesomeIcon icon={faTicket} />
+        </button>
+        <button className="accountButton" onClick={() => navigate('/Account')}>
+          <FontAwesomeIcon icon={faUser} />
+        </button>
   </div>
 </div>
   );

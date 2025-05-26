@@ -23,7 +23,7 @@ export function Startseite() {
   );
 
   return (
-    <>
+    <div className="bodyStartseite">
       {showSearch && (
         <div className="suchbereich">
           <input
@@ -52,7 +52,7 @@ export function Startseite() {
       <button className="accountButton" onClick={() => navigate('/Account')}>
         <FontAwesomeIcon icon={faUser} />
       </button>
-    </>
+    </div>
   );
 }
 

@@ -1,12 +1,20 @@
+.bodyStartseite{
+  background: linear-gradient(to right, #300000, #600000, #300000);
+  min-height: 100vh;
+}
+
 /* --- Bild-Galerie --- */
 .bild-galerie {
   padding: 2rem;
   background: linear-gradient(to right, #300000, #600000, #300000);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .bild-galerie a {
-  display: block;
-  margin-bottom: 2rem;
+  display: inline-block;
   text-align: center;
 }
 
@@ -58,6 +66,7 @@
 
 /* Such- und Account-Button spezifisch */
 .suchButton {
+  background: radial-gradient(circle, #440000, #1a0000 80%);
   left: 25%;
   width: 50%;
   height: 7vh;
@@ -65,6 +74,7 @@
 }
 
 .accountButton {
+  background: radial-gradient(circle, #440000, #1a0000 80%);
   left: 75%;
   width: 50%;
   height: 7vh;
@@ -73,6 +83,7 @@
 
 /* Ticket-Button spezifisch */
 .ticketButton {
+  background: radial-gradient(circle, #440000, #1a0000 80%);
   width: 12vh;
   height: 12vh;
   border-radius: 50%;
@@ -82,7 +93,7 @@
 
 /* --- Suchbereich --- */
 .suchbereich {
-  background-color: #333;
+  background: linear-gradient(to top, #300000, #600000);
   padding: 1rem;
   text-align: center;
 }
