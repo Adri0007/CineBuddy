@@ -84,7 +84,7 @@ function Vorstellung() {
         <div className="right-sidebar-content button-container">
           <button
             className="bewertung-button"
-            onClick={() => bewertungClick("4,5")}
+            onClick={() => navigate(`/Film/${film._id}/Bewertungen`)}
           >
             4,5
           </button>
