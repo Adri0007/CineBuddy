@@ -10,4 +10,8 @@ const FilmSchema = new mongoose.Schema({
   collection: 'Filmliste'
 });
 
-module.exports = mongoose.model('Film', FilmSchema);
+
+const Film = mongoose.model('Film', FilmSchema);
+
+
+module.exports = { Film};

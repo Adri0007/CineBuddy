@@ -1,0 +1,573 @@
+[
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 1,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "behindert"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 2,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "behindert"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 3,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 4,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 5,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "normal"
+	},
+
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 1,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 2,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 3,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 4,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 5,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 1,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 2,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 3,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 4,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 5,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 1,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 2,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 3,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 4,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acb",
+        "nummer": 5,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 1,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "behindert"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 2,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "behindert"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 3,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 4,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 5,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "normal"
+	},
+
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 1,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 2,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 3,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 4,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 5,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 1,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 2,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 3,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 4,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 5,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 1,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 2,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 3,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 4,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acc",
+        "nummer": 5,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 1,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "behindert"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 2,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "behindert"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 3,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 4,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 5,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "normal"
+	},
+
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 1,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 2,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 3,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 4,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 5,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 1,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 2,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 3,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 4,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 5,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 1,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 2,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 3,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 4,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7acd",
+        "nummer": 5,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 1,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "behindert"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 2,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "behindert"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 3,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 4,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 5,
+        "reihe": "A",
+		"belegt": true,
+		"Art": "normal"
+	},
+
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 1,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 2,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 3,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 4,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 5,
+        "reihe": "B",
+		"belegt": true,
+		"Art": "normal"
+	},
+
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 1,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 2,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 3,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 4,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 5,
+        "reihe": "C",
+		"belegt": true,
+		"Art": "normal"
+	},
+
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 1,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 2,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 3,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 4,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	},
+	{
+		"id_saal": "683af39028ea3cfc084f7ace",
+        "nummer": 5,
+        "reihe": "D",
+		"belegt": true,
+		"Art": "loge"
+	}
+]

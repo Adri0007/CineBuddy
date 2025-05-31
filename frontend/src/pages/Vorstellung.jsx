@@ -13,6 +13,9 @@ function Vorstellung() {
   const [vorstellung, setVorstellung] = useState(null);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const descriptionMaxLength = 200;
+  const [ausgewaehltesDatum, setAusgewaehltesDatum] = useState("");
+  const [ausgewaehlteUhrzeit, setAusgewaehlteUhrzeit] = useState("");
+
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/filme/${id}`)
@@ -32,14 +35,6 @@ function Vorstellung() {
     console.log("Bewertung geklickt:", wert);
   };
 
-  const datumChange = (e) => {
-    console.log("Datum geändert:", e.target.value);
-  };
-
-  const uhrzeitClick = (uhrzeit) => {
-    console.log("Uhrzeit geklickt:", uhrzeit);
-  };
-
   const getNaechste7Tage = (tage) => {
   const heute = new Date();
    const zukunftstage = tage
@@ -56,6 +51,21 @@ function Vorstellung() {
 
   return zukunftstage.map(obj => obj.original);
 };
+
+const datumChange = (e) => {
+  setAusgewaehltesDatum(e.target.value);
+  console.log("Datum geändert:", e.target.value);
+};
+const uhrzeitClick = (uhrzeit, index) => {
+  if (!ausgewaehltesDatum) {
+    alert("Bitte wählen Sie zuerst ein Datum aus!");
+    return;
+  }
+  setAusgewaehlteUhrzeit(uhrzeit); // darf bleiben, falls du den Wert woanders brauchst
+  console.log("Uhrzeit geklickt:", uhrzeit);
+  navigate(`/Film/${film._id}/${index}/${ausgewaehltesDatum}/${uhrzeit}`);
+};
+
 
 
 
@@ -115,7 +125,7 @@ function Vorstellung() {
     {vorstellung.uhrzeiten.map((uhrzeit, index) => (
       <button
         key={index}
-        className="uhrzeit-button" onClick={() => navigate(`/Film/${film._id}/${index}`)}>
+        className="uhrzeit-button"   disabled={!ausgewaehltesDatum} onClick={() => uhrzeitClick(uhrzeit, index, ausgewaehltesDatum)}>
         {uhrzeit}
       </button>
         ))}
