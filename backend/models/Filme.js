@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Definiere das Schema für einen Film
 const FilmSchema = new mongoose.Schema({
   titel: String,
   bildUrl: String,
@@ -7,11 +8,11 @@ const FilmSchema = new mongoose.Schema({
   dauer: Number,
   fsk: Number,
 }, {
-  collection: 'Filmliste'
+  collection: 'Filmliste' // Optional: expliziter Collection-Name in MongoDB
 });
 
-
+// Erstelle das Mongoose-Modell
 const Film = mongoose.model('Film', FilmSchema);
 
-
-module.exports = { Film};
+// Exportiere das Modell als Einzelwert
+module.exports = Film;
