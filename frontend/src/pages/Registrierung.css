@@ -1,0 +1,231 @@
+/* Registrierung.css */
+
+/* Registrierung-Container: Hintergrund und Zentrierung */
+.registrierung-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, #440000, #1a0000 80%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* Optionale kleinere Schriftgröße für eine kompaktere Ansicht */
+  font-size: 0.95rem;
+  /* Gesamtschriftgröße etwas kleiner */
+  padding: 0 1rem;
+  /* Hinzugefügt: Seitlicher Abstand für kleine Bildschirme */
+}
+
+/* Registrierungs-Box Stile (ähnlich zum login-form) */
+.registrierung-box {
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(5px);
+  padding: 1.8rem;
+  /* Etwas weniger Padding für kompakteres Aussehen */
+  border-radius: 12px;
+  /* Etwas kleinere Rundung */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 3px 6px rgba(0, 0, 0, 0.2);
+  /* Kleinerer Schatten */
+  width: 320px;
+  /* Kompaktere Breite */
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.registrierung-box:hover {
+  transform: translateY(-3px);
+  /* Weniger Bewegung beim Hover */
+}
+
+.registrierung-box h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  /* Weniger Abstand */
+  color: #ff6b6b;
+  /* Geändert: Leuchtendes Rot wie bei der Account-Seite */
+  font-size: 1.8rem;
+  /* Etwas kleinere Überschrift */
+  font-weight: 600;
+  text-shadow: 0 0 4px rgba(255, 107, 107, 0.5);
+  /* Angepasster Lichtschimmer */
+}
+
+/* Labels */
+.registrierung-box label {
+  margin: 0.6rem 0 0.2rem;
+  /* Angepasste Abstände */
+  font-weight: 600;
+  color: #d8c8b6;
+  font-size: 0.85rem;
+  /* Etwas kleinere Schrift */
+}
+
+/* Eingabefelder */
+.registrierung-box input {
+  padding: 0.7rem;
+  /* Weniger Padding */
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  /* Kleinere Rundung */
+  margin-bottom: 0.5rem;
+  /* Wichtig: Weniger Abstand hier, da Fehlermeldung folgt */
+  font-size: 0.95rem;
+  /* Etwas kleinere Schrift */
+  color: #f8e8d6;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.registrierung-box input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.registrierung-box input:focus {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+  /* Kleinerer Schatten */
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- NEU: Stil für Fehlermeldungen unter den Inputs --- */
+.input-error-message {
+  color: #ff9999;
+  /* Helles Rot für Lesbarkeit auf dunklem Hintergrund */
+  font-size: 0.8em;
+  /* Kleinere Schriftgröße für die Fehlermeldung */
+  margin-top: -0.3rem;
+  /* Etwas näher an das Input-Feld */
+  margin-bottom: 0.8rem;
+  /* Abstand zum nächsten Element */
+  text-align: left;
+  /* Text linksbündig */
+  padding-left: 0.2rem;
+  /* Kleiner Einzug */
+  font-weight: normal;
+  /* Normales Gewicht */
+  opacity: 0;
+  /* Standardmäßig unsichtbar */
+  animation: fadeIn 0.3s forwards;
+  /* Sanft einblenden */
+}
+
+/* Button */
+.registrierung-box button {
+  padding: 0.8rem;
+  /* Weniger Padding */
+  background: linear-gradient(to right, #ff6b6b, #e63946);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  /* Kleinere Rundung */
+  font-size: 1rem;
+  /* Etwas kleinere Schrift */
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  margin-top: 1rem;
+  /* Abstand zum letzten Element (Fehlermeldung oder Input) */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  /* Kleinerer Schatten */
+}
+
+.registrierung-box button:hover {
+  background: linear-gradient(to right, #e63946, #cc2936);
+  transform: translateY(-1px);
+  /* Weniger Bewegung */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.registrierung-box button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Globale Meldungen (Fehler/Erfolg) - weiterhin vorhanden */
+.message {
+  margin-top: -0.5rem;
+  /* Angepasster Abstand */
+  margin-bottom: 1rem;
+  /* Angepasster Abstand */
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  /* Etwas kleinere Schrift */
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.message.success {
+  color: #7aff7a;
+  text-shadow: 0 0 3px rgba(122, 255, 122, 0.5);
+}
+
+.message.error {
+  color: #ff9999;
+  text-shadow: 0 0 3px rgba(255, 153, 153, 0.5);
+}
+
+/* Link zur Anmeldung */
+.login-prompt {
+  margin-top: 1rem;
+  /* Etwas weniger Abstand */
+  text-align: center;
+  color: #d8c8b6;
+  font-size: 0.85rem;
+  /* Etwas kleinere Schrift */
+}
+
+.login-link {
+  color: #ff6b6b;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.login-link:hover {
+  color: #ffa0a0;
+  text-decoration: underline;
+  text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+}
+
+/* Keyframe-Animation bleibt gleich */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ... (Dein vorhandenes CSS) ... */
+
+/* Stil für Fehlermeldungen direkt unter den Inputs */
+.input-error-message {
+  color: #ff9999;
+  /* Helles Rot für Lesbarkeit auf dunklem Hintergrund */
+  font-size: 0.8em;
+  /* Kleinere Schriftgröße für die Fehlermeldung */
+  margin-top: -0.3rem;
+  /* Etwas näher an das Input-Feld */
+  margin-bottom: 0.8rem;
+  /* Abstand zum nächsten Element */
+  text-align: left;
+  /* Text linksbündig */
+  padding-left: 0.2rem;
+  /* Kleiner Einzug */
+  font-weight: normal;
+  /* Normales Gewicht */
+  opacity: 0;
+  /* Standardmäßig unsichtbar */
+  animation: fadeIn 0.3s forwards;
+  /* Sanft einblenden */
+}
+
+/* ... (Rest deines CSS) ... */
