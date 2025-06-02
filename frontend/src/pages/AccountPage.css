@@ -1,0 +1,167 @@
+/* AccountPage.css */
+
+/* account-container: Hintergrund und Zentrierung */
+.account-container {
+  min-height: 100vh; /* Mindesthöhe des Viewports, aber erlaubt Wachstum */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Konsistenter radialer Farbverlauf wie bei Anmeldung/Registrierung */
+  background: radial-gradient(circle, #440000, #1a0000 80%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f8e8d6; /* Helle Textfarbe für die gesamte Seite */
+  padding: 3rem 2rem; /* Mehr vertikaler Padding für den Container */
+  text-align: center;
+}
+
+/* account-box: Ähnlich wie login-form/registrierung-box, jetzt größer */
+.account-box {
+  background-color: rgba(255, 255, 255, 0.08); /* Sehr dezenter, leicht transparenter Hintergrund */
+  backdrop-filter: blur(5px); /* Für einen leicht verschwommenen Effekt */
+  padding: 3.5rem; /* Deutlich mehr Padding innen, um es größer wirken zu lassen */
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 500px; /* Etwas breiter als zuvor für mehr Inhalt */
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.account-title {
+  font-size: 2.8rem; /* Etwas größerer Titel */
+  font-weight: 700;
+  margin-bottom: 2.5rem; /* Mehr Abstand nach dem Titel */
+  color: #ff6b6b; /* Leuchtendes Rot für den Titel */
+  text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
+  text-align: center;
+}
+
+/* Info Sektionen */
+.account-info-section,
+.account-actions-section {
+  margin-bottom: 2.5rem; /* Mehr Abstand zwischen den Sektionen */
+  text-align: left; /* Text innerhalb der Sektionen linksbündig */
+}
+
+.account-info-section h3 {
+  font-size: 1.4rem; /* Etwas größere Überschrift */
+  color: #ff9999; /* Etwas helleres Rot für Überschriften */
+  margin-bottom: 1.2rem; /* Mehr Abstand nach der Sektionsüberschrift */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Dezenter Trenner */
+  padding-bottom: 0.6rem;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between; /* Label und Wert an den Rändern ausrichten */
+  align-items: center;
+  margin-bottom: 1rem; /* Mehr Abstand zwischen den Info-Items */
+  padding: 0.6rem 0; /* Mehr Padding für jedes Info-Item */
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.05); /* Dezenter gestrichelter Trenner */
+}
+
+.info-item:last-child {
+  border-bottom: none; /* Kein Trenner nach dem letzten Element */
+}
+
+.info-item label {
+  font-weight: 600;
+  color: #d8c8b6; /* Etwas dunklere Textfarbe für Labels */
+  flex-basis: 40%; /* Nimmt 40% der Breite ein */
+  text-align: left;
+}
+
+.info-item span {
+  color: #f8e8d6; /* Helle Textfarbe für die Werte */
+  flex-basis: 60%; /* Nimmt 60% der Breite ein */
+  text-align: right;
+  word-break: break-all; /* Lange E-Mails umbrechen */
+}
+
+/* Logout Button - Angepasst an Anmeldung/Registrierung Button-Stil */
+.logout-button {
+  width: 100%; /* Button über die volle Breite */
+  padding: 0.9rem; /* Angepasst an den Anmelde-Button */
+  background: linear-gradient(to right, #ff6b6b, #e63946); /* Konsistenter Farbverlauf */
+  color: white;
+  border: none;
+  border-radius: 8px; /* Konsistenter Border-Radius */
+  font-size: 1.1rem; /* Konsistente Schriftgröße */
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Konsistenter Schatten */
+  margin-top: 1.5rem; /* Etwas mehr Abstand nach oben */
+}
+
+.logout-button:hover {
+  background: linear-gradient(to right, #e63946, #cc2936); /* Konsistenter Hover-Effekt */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.logout-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+  .account-container {
+    padding: 2rem 1rem; /* Weniger Padding auf kleinen Bildschirmen */
+  }
+  .account-box {
+    padding: 2.5rem; /* Weniger Padding innen auf kleinen Bildschirmen */
+    width: 95%;
+  }
+
+  .account-title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .account-info-section h3 {
+    font-size: 1.3rem;
+  }
+
+  .info-item {
+    flex-direction: column; /* Auf kleinen Bildschirmen untereinander */
+    align-items: flex-start;
+    padding-bottom: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .info-item label,
+  .info-item span {
+    flex-basis: auto;
+    text-align: left;
+    width: 100%;
+  }
+
+  .info-item label {
+    margin-bottom: 0.3rem;
+  }
+
+  .logout-button {
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .account-box {
+    padding: 2rem;
+    border-radius: 12px;
+  }
+
+  .account-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .account-info-section h3 {
+    font-size: 1.1rem;
+  }
+}
