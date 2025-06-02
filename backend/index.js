@@ -77,7 +77,7 @@ app.get('/api/vorstellungen/:filmId', async (req, res) => {
 app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body; // email and password from request body
-    const user = await mongoose.connection.db.collection('User').findOne({ email: email });
+    const user = await mongoose.connection.db.collection('Users').findOne({ email: email });
 
     if (!user) {
       return res.json({ success: false, message: "User not found!" });
