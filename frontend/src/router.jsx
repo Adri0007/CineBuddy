@@ -16,10 +16,10 @@ export default function AppRouter() {
     <Routes>
       <Route path="/" element={<Startseite />} />
       <Route path="/film/:id" element={<Vorstellung />} />
-      
+
       <Route path="/Tickets" element={<Tickets />} />
       {/* Die /Account Route nutzt jetzt den Wrapper, der die Logik für die Weiterleitung enthält */}
-      <Route path="/Account" element={<AccountRouteWrapper />} /> 
+      <Route path="/Account" element={<AccountRouteWrapper />} />
       <Route path="/Registrieren" element={<Registrierung />} />
       <Route path="/Anmeldung" element={<Anmeldung />} />
       {/* Optional: Wenn du AccountPage direkt ansteuern willst ohne Wrapper:
