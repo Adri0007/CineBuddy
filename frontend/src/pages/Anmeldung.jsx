@@ -8,6 +8,7 @@ export function Anmeldung() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState(''); // 'success' oder 'error'
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => { // Made async
     e.preventDefault();

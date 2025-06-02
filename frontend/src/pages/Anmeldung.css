@@ -7,14 +7,13 @@
   /* Neuer radialer Farbverlauf für einen dunklen, rotstichigen Look */
   background: radial-gradient(circle, #440000, #1a0000 80%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0 1rem; /* Hinzugefügt: Seitlicher Abstand für kleine Bildschirme */
 }
 
 /* login-form: Das Herzstück des Designs */
 .login-form {
-  background-color: rgba(255, 255, 255, 0.08);
-  /* Sehr dezenter, leicht transparenter Hintergrund */
-  backdrop-filter: blur(5px);
-  /* Für einen leicht verschwommenen Effekt */
+  background-color: rgba(255, 255, 255, 0.08); /* Sehr dezenter, leicht transparenter Hintergrund */
+  backdrop-filter: blur(5px); /* Für einen leicht verschwommenen Effekt */
   padding: 2.5rem;
   border-radius: 16px;
   /* Stärkerer, aber noch subtilerer Schatten für den dunklen Hintergrund */
@@ -24,67 +23,56 @@
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease-in-out;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  /* Eine ganz feine, helle Umrandung */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Eine ganz feine, helle Umrandung */
 }
 
 .login-form:hover {
-  transform: translateY(-5px);
+    transform: translateY(-5px);
 }
 
 .login-form h2 {
   text-align: center;
   margin-bottom: 2rem;
-  color: #f8e8d6;
-  /* Helle, cremige Farbe für Überschrift */
+  color: #ff6b6b; /* Geändert: Leuchtendes Rot wie bei der Account-Seite */
   font-size: 2rem;
   font-weight: 600;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-  /* Dezenter Lichtschimmer */
+  text-shadow: 0 0 5px rgba(255, 107, 107, 0.5); /* Angepasster Lichtschimmer */
 }
 
 .login-form label {
   margin: 0.8rem 0 0.4rem;
   font-weight: 600;
-  color: #d8c8b6;
-  /* Etwas dunkler als die Überschrift für Labels */
+  color: #d8c8b6; /* Etwas dunkler als die Überschrift für Labels */
   font-size: 0.95rem;
 }
 
 .login-form input {
   padding: 0.8rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  /* Sehr dunkler, transparenter Input-Hintergrund */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  /* Hellerer Rahmen */
+  background-color: rgba(255, 255, 255, 0.05); /* Sehr dunkler, transparenter Input-Hintergrund */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Hellerer Rahmen */
   border-radius: 8px;
   margin-bottom: 1.2rem;
   font-size: 1.05rem;
-  color: #f8e8d6;
-  /* Helle Textfarbe für die Eingabe */
+  color: #f8e8d6; /* Helle Textfarbe für die Eingabe */
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .login-form input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-  /* Helleres, semi-transparentes Placeholder */
+  color: rgba(255, 255, 255, 0.5); /* Helleres, semi-transparentes Placeholder */
 }
 
 .login-form input:focus {
-  border-color: #ff6b6b;
-  /* Ein leuchtendes Rot beim Fokus */
+  border-color: #ff6b6b; /* Ein leuchtendes Rot beim Fokus */
   box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.25);
   outline: none;
-  background-color: rgba(255, 255, 255, 0.1);
-  /* Leichter Aufhellung beim Fokus */
+  background-color: rgba(255, 255, 255, 0.1); /* Leichter Aufhellung beim Fokus */
 }
 
 .login-form button {
   padding: 0.9rem;
   /* Angepasster Button-Farbverlauf passend zum Thema */
   background: linear-gradient(to right, #ff6b6b, #e63946);
-  color: white;
-  /* Weißer Text auf dem roten Button */
+  color: white; /* Weißer Text auf dem roten Button */
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
@@ -92,21 +80,18 @@
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
   margin-top: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  /* Schatten für den Button */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Schatten für den Button */
 }
 
 .login-form button:hover {
-  background: linear-gradient(to right, #e63946, #cc2936);
-  /* Dunkler beim Hover */
+  background: linear-gradient(to right, #e63946, #cc2936); /* Dunkler beim Hover */
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  /* Stärkerer Schatten beim Hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stärkerer Schatten beim Hover */
 }
 
 .login-form button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .message {
@@ -121,43 +106,34 @@
 
 /* Angepasste Farben für Nachrichten auf dem dunklen Hintergrund */
 .message.success {
-  color: #7aff7a;
-  /* Ein helleres, leuchtendes Grün */
+  color: #7aff7a; /* Ein helleres, leuchtendes Grün */
   text-shadow: 0 0 3px rgba(122, 255, 122, 0.5);
 }
 
 .message.error {
-  color: #ff9999;
-  /* Ein helleres Rot für Fehler */
-  text-shadow: 0 0 3px rgba(255, 153, 153, 0.5);
+    color: #ff9999; /* Ein helleres Rot für Fehler */
+    text-shadow: 0 0 3px rgba(255, 153, 153, 0.5);
 }
 
 /* Neue Stile für den Registrierungs-Prompt */
 .registration-prompt {
-  margin-top: 1.5rem;
-  /* Abstand zum Anmelde-Button */
+  margin-top: 1.5rem; /* Abstand zum Anmelde-Button */
   text-align: center;
-  color: #d8c8b6;
-  /* Passt zum Label-Text */
+  color: #d8c8b6; /* Passt zum Label-Text */
   font-size: 0.9rem;
 }
 
 .registration-link {
-  color: #ff6b6b;
-  /* Ein leuchtendes Rot, das hervorsticht */
-  text-decoration: none;
-  /* Unterstreichung entfernen */
+  color: #ff6b6b; /* Ein leuchtendes Rot, das hervorsticht */
+  text-decoration: none; /* Unterstreichung entfernen */
   font-weight: bold;
   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .registration-link:hover {
-  color: #ffa0a0;
-  /* Etwas heller beim Hover */
-  text-decoration: underline;
-  /* Unterstreichung beim Hover für Klickbarkeit */
-  text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
-  /* Dezenter Glüheffekt */
+  color: #ffa0a0; /* Etwas heller beim Hover */
+  text-decoration: underline; /* Unterstreichung beim Hover für Klickbarkeit */
+  text-shadow: 0 0 5px rgba(255, 107, 107, 0.5); /* Dezenter Glüheffekt */
 }
 
 /* Keyframe-Animation bleibt gleich */
@@ -166,7 +142,6 @@
     opacity: 0;
     transform: translateY(10px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
