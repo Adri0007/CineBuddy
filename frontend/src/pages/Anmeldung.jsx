@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Import axios
-import './Anmeldung.css';
+import './Anmeldung.css'; // Stelle sicher, dass deine CSS-Datei importiert wird
+import { useNavigate } from 'react-router-dom'; // Importiere useNavigate
+import axios from 'axios';
 
 export function Anmeldung() {
   const [email, setEmail] = useState('');
@@ -20,16 +21,20 @@ export function Anmeldung() {
       if (response.data.success) {
         setMessage('✅ Anmeldung erfolgreich!');
         setMessageType('success');
-        // You might want to redirect the user or update global state here
-        // For example: window.location.href = '/Account';
+        localStorage.setItem('isLoggedIn', 'true'); // Set login status
+        setTimeout(() => {
+          navigate('/Account'); // Redirect to Account page
+        }, 1000); // Short delay to see the message
       } else {
         setMessage(`❌ ${response.data.message}`);
         setMessageType('error');
+        localStorage.setItem('isLoggedIn', 'false'); // Set login status to false
       }
     } catch (error) {
       console.error('Login error:', error);
       setMessage('❌ Serverfehler bei der Anmeldung.');
       setMessageType('error');
+      localStorage.setItem('isLoggedIn', 'false'); // Set login status to false on server error
     }
   };
 

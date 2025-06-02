@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bcrypt = require("bcrypt")
 
 require("dotenv").config({ path: "./config.env" })
 
@@ -73,7 +74,6 @@ app.get('/api/vorstellungen/:filmId', async (req, res) => {
   }
 });
 
-// New POST endpoint for login (actual login attempt)
 app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body; // email and password from request body
@@ -85,7 +85,7 @@ app.post('/api/login', async (req, res) => {
 
     // In a real application, you would hash and compare passwords securely.
     // For this example, we'll do a plain text comparison (NOT SECURE FOR PRODUCTION).
-    if (user.password === password) { // Assuming 'password' field in your User collection
+    if (bcrypt.compare(req.body.password, user.password)) { // Assuming 'password' field in your User collection
       // In a real app, establish a session (e.g., using express-session)
       // For now, we'll just indicate success.
       return res.json({ success: true, message: "Login successful!" });
@@ -96,15 +96,4 @@ app.post('/api/login', async (req, res) => {
     console.error("Login error:", error);
     res.status(500).json({ success: false, message: "Server error" });
   }
-});
-
-// New GET endpoint to check if a user is currently logged in (e.g., by checking session/cookie)
-// This is a placeholder for actual session management.
-app.get('/api/check-auth', (req, res) => {
-  // In a real application, you would check req.session or a JWT token here.
-  // For demonstration, let's assume a user is logged in if there's a certain cookie or session variable.
-  // Since we don't have session management set up yet, we'll simulate.
-  // This needs to be implemented with proper session management (e.g., express-session).
-  // For now, we'll always return false.
-  res.json({ eingeloggt: false, message: "Not logged in (session check not fully implemented)" });
 });
