@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // Define the User Schema
 const userSchema = new mongoose.Schema({
-  name: { // ✅ Added name field
+  username: { //  Added name field
     type: String,
     required: true,
     trim: true // Removes whitespace from both ends of a string

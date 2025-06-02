@@ -2,23 +2,21 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bcrypt = require("bcrypt")
+const User = require('./models/User');
+
 
 require("dotenv").config({ path: "./config.env" })
 
-const { ObjectId } = require('mongoose').Types;
+const { ObjectId } = require('mongoose').Types; 
 
 const app = express();
-
-app.use(cors({
-  origin: 'http://localhost:5173', // ✅ Explicitly allow your frontend's origin
-  credentials: true               // ✅ Allow credentials (cookies, auth headers)
-}));
+app.use(cors());
 app.use(express.json());
 
 //Für Dima nicht löschen
-//const mongoUrl = 'mongodb://admin:SWP2025Projekt@localhost:27017/cinebuddys?authSource=admin';
+const mongoUrl = 'mongodb://admin:SWP2025Projekt@localhost:27017/cinebuddys?authSource=admin';
 
-const mongoUrl = 'mongodb://localhost:27017/Cinebuddy'
+//const mongoUrl = 'mongodb://localhost:27017/Cinebuddy'
 
 mongoose.connect(mongoUrl)
   .then(() => console.log('MongoDB verbunden!'))
@@ -76,24 +74,60 @@ app.get('/api/vorstellungen/:filmId', async (req, res) => {
 
 app.post('/api/login', async (req, res) => {
   try {
-    const { email, password } = req.body; // email and password from request body
-    const user = await mongoose.connection.db.collection('User').findOne({ email: email });
+    const { username, email, password } = req.body;
 
-    if (!user) {
-      return res.json({ success: false, message: "User not found!" });
+    
+    const existUser = await User.findOne({ $or: [{ username }, { email }] });
+    if (existUser) {
+      return res.status(400).json({ message: 'Benutzername oder E-Mail schon vergeben' });
     }
 
-    // In a real application, you would hash and compare passwords securely.
-    // For this example, we'll do a plain text comparison (NOT SECURE FOR PRODUCTION).
-    if (bcrypt.compare(req.body.password, user.password)) { // Assuming 'password' field in your User collection
-      // In a real app, establish a session (e.g., using express-session)
-      // For now, we'll just indicate success.
-      return res.json({ success: true, message: "Login successful!" });
-    } else {
-      return res.json({ success: false, message: "Invalid email or password" });
+    
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    
+    const user = new User({
+      username,
+      email,
+      password: hashedPassword
+    });
+    await user.save();
+
+    res.status(201).json({ message: 'Benutzer erfolgreich registriert' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Serverfehler' });
+  }
+});
+
+
+
+app.post('/api/register', async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+
+    
+    const existUser = await User.findOne({ $or: [{ username }, { email }] });
+    if (existUser) {
+      return res.status(400).json({ message: 'Benutzername oder E-Mail schon vergeben' });
     }
-  } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ success: false, message: "Server error" });
+
+    
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    
+    const user = new User({
+      username,
+      email,
+      password: hashedPassword
+    });
+    await user.save();
+
+    res.status(201).json({ message: 'Benutzer erfolgreich registriert' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Serverfehler' });
   }
 });
