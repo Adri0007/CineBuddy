@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faHome , faTicket, faUser} from '@fortawesome/free-solid-svg-icons';
+import { faHome, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import "./Vorstellung.css";
 
@@ -28,36 +28,9 @@ function Vorstellung() {
     return <div>Keine Verbindung zum Backend</div>;
   }
 
-  const bewertungClick = (wert) => {
-    console.log("Bewertung geklickt:", wert);
-  };
-
   const datumChange = (e) => {
     console.log("Datum geändert:", e.target.value);
   };
-
-  const uhrzeitClick = (uhrzeit) => {
-    console.log("Uhrzeit geklickt:", uhrzeit);
-  };
-
-  const getNaechste7Tage = (tage) => {
-  const heute = new Date();
-   const zukunftstage = tage
-    .map(tag => {
-      const [tagStr, monatStr, jahrStr] = tag.split("-");
-      return {
-        original: tag,
-        date: new Date(`${jahrStr}-${monatStr}-${tagStr}`) // Format: yyyy-mm-dd
-      };
-    })
-    .filter(obj => obj.date >= heute) // nur Tage in der Zukunft
-    .sort((a, b) => a.date - b.date) // sicherstellen, dass sie sortiert sind
-    .slice(0, 7); // nur die nächsten 7
-
-  return zukunftstage.map(obj => obj.original);
-};
-
-
 
   const displayedDescription =
     film.beschreibung.length > descriptionMaxLength && !showFullDescription
@@ -65,7 +38,7 @@ function Vorstellung() {
       : film.beschreibung;
 
   return (
-    <div className = "bodyVorstellung">
+    <div className="bodyVorstellung">
       <img src={film.bild} alt={film.titel} className="vorstellung-bild" />
 
       <div className="text-and-rating-container">
@@ -80,7 +53,6 @@ function Vorstellung() {
             </span>
           )}
         </p>
-
         <div className="right-sidebar-content button-container">
           <button
             className="bewertung-button"
@@ -94,35 +66,35 @@ function Vorstellung() {
       </div>
 
       <select className="datum-dropdown" onChange={datumChange}>
-  <option value="">Datum auswählen</option>
-  {vorstellung.tage
-    .filter((tag) => {
-      const [day, month, year] = tag.split("-").map(Number);
-      const tagDate = new Date(year, month - 1, day);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const in7Days = new Date(today);
-      in7Days.setDate(today.getDate() + 6);
-      return tagDate >= today && tagDate <= in7Days;
-    })
-    .map((tag, index) => (
-      <option key={index} value={tag}>
-        {tag}
-      </option>
-    ))}
-</select>
-  <div className="button-grid vorstellung-container">
-    {vorstellung.uhrzeiten.map((uhrzeit, index) => (
-      <button
-        key={index}
-        className="uhrzeit-button" onClick={() => navigate(`/Film/${film._id}/${index}`)}>
-        {uhrzeit}
-      </button>
+        <option value="">Datum auswählen</option>
+        {vorstellung.tage
+          .filter((tag) => {
+            const [day, month, year] = tag.split("-").map(Number);
+            const tagDate = new Date(year, month - 1, day);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const in7Days = new Date(today);
+            in7Days.setDate(today.getDate() + 6);
+            return tagDate >= today && tagDate <= in7Days;
+          })
+          .map((tag, index) => (
+            <option key={index} value={tag}>
+              {tag}
+            </option>
+          ))}
+      </select>
+      <div className="button-grid vorstellung-container">
+        {vorstellung.uhrzeiten.map((uhrzeit, index) => (
+          <button
+            key={index}
+            className="uhrzeit-button" onClick={() => navigate(`/Film/${film._id}/${index}`)}>
+            {uhrzeit}
+          </button>
         ))}
-  </div>
-  <div>
+      </div>
+      <div>
         <button className="suchButton" onClick={() => navigate('/')}>
-          <FontAwesomeIcon icon={ faHome } />
+          <FontAwesomeIcon icon={faHome} />
         </button>
         <button className="ticketButton" onClick={() => navigate('/Tickets')}>
           <FontAwesomeIcon icon={faTicket} />
@@ -130,8 +102,8 @@ function Vorstellung() {
         <button className="accountButton" onClick={() => navigate('/Account')}>
           <FontAwesomeIcon icon={faUser} />
         </button>
-  </div>
-</div>
+      </div>
+    </div>
   );
 }
 

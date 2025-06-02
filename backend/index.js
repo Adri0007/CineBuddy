@@ -1,13 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bcrypt = require("bcrypt")
 
 require("dotenv").config({ path: "./config.env" })
 
-const { ObjectId } = require('mongoose').Types; 
+const { ObjectId } = require('mongoose').Types;
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: 'http://localhost:5173', // ✅ Explicitly allow your frontend's origin
+  credentials: true               // ✅ Allow credentials (cookies, auth headers)
+}));
 app.use(express.json());
 
 //Für Dima nicht löschen
@@ -66,5 +71,29 @@ app.get('/api/vorstellungen/:filmId', async (req, res) => {
     res.json(vorstellung);
   } catch (err) {
     res.status(500).json({ error: "Serverfehler", details: err.message });
+  }
+});
+
+app.post('/api/login', async (req, res) => {
+  try {
+    const { email, password } = req.body; // email and password from request body
+    const user = await mongoose.connection.db.collection('User').findOne({ email: email });
+
+    if (!user) {
+      return res.json({ success: false, message: "User not found!" });
+    }
+
+    // In a real application, you would hash and compare passwords securely.
+    // For this example, we'll do a plain text comparison (NOT SECURE FOR PRODUCTION).
+    if (bcrypt.compare(req.body.password, user.password)) { // Assuming 'password' field in your User collection
+      // In a real app, establish a session (e.g., using express-session)
+      // For now, we'll just indicate success.
+      return res.json({ success: true, message: "Login successful!" });
+    } else {
+      return res.json({ success: false, message: "Invalid email or password" });
+    }
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });

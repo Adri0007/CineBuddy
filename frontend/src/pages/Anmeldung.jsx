@@ -1,32 +1,41 @@
 import React, { useState } from 'react';
 import './Anmeldung.css'; // Stelle sicher, dass deine CSS-Datei importiert wird
 import { useNavigate } from 'react-router-dom'; // Importiere useNavigate
+import axios from 'axios';
 
-function Anmeldung() {
+export function Anmeldung() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState(''); // 'success' oder 'error'
-  const navigate = useNavigate(); // Hook für die Navigation
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => { // Made async
     e.preventDefault();
 
-    // 💡 DYNAMISCH: Hier würdest du normalerweise einen API-Call machen
-    // Beispiel: fetch('/api/login', { method: 'POST', body: JSON.stringify({ email, password }) })
+    try {
+      const response = await axios.post('http://localhost:5000/api/login', { // Changed to POST
+        email,
+        password,
+      });
 
-    // Temporäre Platzhalter-Logik zur Demonstration
-    if (email === 'test@example.com' && password === 'pass123') {
-      setMessage('✅ Anmeldung erfolgreich!');
-      setMessageType('success');
-      localStorage.setItem('isLoggedIn', 'true'); // Setze den Anmeldestatus
-      setTimeout(() => {
-        navigate('/Account'); // Leite zur Account-Seite weiter
-      }, 1000); // Kurze Verzögerung, um die Nachricht zu sehen
-    } else {
-      setMessage('❌ Ungültige E-Mail oder Passwort');
+      if (response.data.success) {
+        setMessage('✅ Anmeldung erfolgreich!');
+        setMessageType('success');
+        localStorage.setItem('isLoggedIn', 'true'); // Set login status
+        setTimeout(() => {
+          navigate('/Account'); // Redirect to Account page
+        }, 1000); // Short delay to see the message
+      } else {
+        setMessage(`❌ ${response.data.message}`);
+        setMessageType('error');
+        localStorage.setItem('isLoggedIn', 'false'); // Set login status to false
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setMessage('❌ Serverfehler bei der Anmeldung.');
       setMessageType('error');
-      localStorage.setItem('isLoggedIn', 'false'); // Setze den Anmeldestatus auf false
+      localStorage.setItem('isLoggedIn', 'false'); // Set login status to false on server error
     }
   };
 
