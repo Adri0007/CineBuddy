@@ -28,7 +28,7 @@ function Registrierung() {
     setGlobalMessage('');
     setGlobalMessageType('');
 
-    let isValid = true;
+		let isValid = true;
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
