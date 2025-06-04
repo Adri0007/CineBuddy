@@ -93,14 +93,14 @@ function Sitzplaetze() {
         const vorstellung = res.data.find(v => {
           const startzeitString = typeof v.startzeit === "string" ? v.startzeit : v.startzeit?.$date;
           if (!startzeitString) return false;
-        
+
           const startzeit = new Date(startzeitString);
           const zeitenGleich = startzeit.getTime() === dateObj.getTime();
           const idGleich = v.filmId === id || v.filmId?.$oid === id;
-        
+
           return zeitenGleich && idGleich;
         });
-        
+
 
         if (!vorstellung) {
           console.warn("Keine passende Vorstellung gefunden");
@@ -159,7 +159,7 @@ function Sitzplaetze() {
   // Prüfen ob Sitz belegt ist
   const istSitzBelegt = (reihe, nummer) => {
     if (!aktuelleVorstellung?._id) return false;
-  
+
     console.log("WICHTIG " + aktuelleVorstellung?._id);
     console.log("WICHTIG " + film?._id);
     const gefunden = vorstellungssitze.find(s => {
@@ -169,19 +169,19 @@ function Sitzplaetze() {
         vorstellungIdStr === aktuelleVorstellung._id &&
         s.sitz?.reihe === reihe &&
         s.sitz?.nummer === nummer;
-  
+
       if (match) {
         console.log("Belegter Sitz gefunden:", s.sitz, "für Vorstellung", aktuelleVorstellung._id);
       }
       return match;
     });
-  
+
     if (!gefunden) {
       console.log(`Sitz ${reihe}${nummer} nicht belegt`);
     }
     return !!gefunden;
   };
-  
+
 
   // Sitz klicken zum Auswählen
   const handleClick = (index) => {
@@ -196,6 +196,8 @@ function Sitzplaetze() {
   const spaltenLabels = saal?.sitze
     ? [...new Set(saal.sitze.map(s => s.nummer))].sort((a, b) => a - b)
     : [];
+  const leinwandBreite = `calc(${spaltenLabels.length} * clamp(6vh, 10vw, 10vh) + ${(spaltenLabels.length - 1)} * 1vh)`;
+
 
   const reihenLabels = saal?.sitze
     ? [...new Set(saal.sitze.map(s => s.reihe))].sort()
@@ -208,11 +210,15 @@ function Sitzplaetze() {
       </h1>
       <h2>{saal ? saal.name : "Saal wird geladen..."}</h2>
 
-      <div className="Filmwand">
-        <p className="LeinwandText">Leinwand</p>
-      </div>
-
       <div className="grid-container">
+        <div
+          className="Filmwand"
+          style={{
+            gridColumn: `2 / span ${spaltenLabels.length}`
+          }}
+        >
+          <p className="LeinwandText">Leinwand</p>
+        </div>
         <div className="corner-cell"></div>
 
         {spaltenLabels.map((colNum) => (
@@ -265,6 +271,45 @@ function Sitzplaetze() {
           </React.Fragment>
         ))}
       </div>
+
+      <h1 style={{ marginTop: "4vh" }}>Legende</h1>
+      <div className="legende">
+        <div className="legendeneintrag">
+          <button className="Sitze" disabled><FontAwesomeIcon icon={faCouch} /></button>
+          <span>Normal</span>
+        </div>
+        <div className="legendeneintrag">
+          <button className="Sitze belegt" disabled><FontAwesomeIcon icon={faCouch} /></button>
+          <span>Besetzt</span>
+        </div>
+        <div className="legendeneintrag">
+          <button className="Sitze behindert" disabled><FontAwesomeIcon icon={faCouch} /></button>
+          <span>Behindert</span>
+        </div>
+        <div className="legendeneintrag">
+          <button className="Sitze loge" disabled><FontAwesomeIcon icon={faCouch} /></button>
+          <span>Loge</span>
+        </div>
+      </div>
+
+      <div style={{ textAlign: "center", marginTop: "4vh" }}>
+        <h1>Deine Bestellung</h1>
+        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+          {selectedSeats.map((index) => {
+            const sitz = saal?.sitze[index];
+            if (!sitz) return null;
+
+            return (
+              <li key={index}>
+                Reihe {sitz.reihe}, Platz {sitz.nummer} ({sitz.typ})
+              </li>
+            );
+          })}
+          {selectedSeats.length === 0 && <li>Keine Sitze ausgewählt</li>}
+        </ul>
+      </div>
+
+
     </div>
   );
 }

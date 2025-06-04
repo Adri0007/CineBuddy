@@ -11,8 +11,14 @@
   align-items: center;  /* horizontal zentrieren */
 }
 
+.bodySitzplaetze h1, .bodySitzplaetze h2 {
+  margin-top: 0;
+  margin-bottom: clamp(0.5vh, 1vw, 1.5vh);
+  font-size: clamp(3vh, 4vw, 5vh); /* Optional: Schriftgröße responsiv */
+}
+
+
 .Filmwand {
-  margin: 1vh 0;
   background-color: #444;
   height: 5vh;
   display: flex;
@@ -22,9 +28,8 @@
   font-weight: bold;
   border-radius: 0.5vh;
   font-size: clamp(2vh, 3vw, 3vh);
-  width: 100%; /* optional, dass Leinwand volle Breite hat */
-  max-width: 600px; /* oder eine max-Breite */
 }
+
 
 .LeinwandText {
   margin: 0;
@@ -37,7 +42,6 @@
   gap: 1vh;
   justify-content: start;
   align-items: center;
-  margin-top: 2vh;
 
   /* Wichtig: damit die Gridbox nicht die volle Breite einnimmt */
   width: max-content;
@@ -100,7 +104,7 @@
 }
 
 .Sitze.behindert {
-  background-color: #2196f3;
+  background-color: #ff9800;
   color: white;
 }
 
@@ -116,7 +120,7 @@
 }
 
 .Sitze.loge {
-  background-color: #ff9800;
+  background-color: #2196f3;
   color: white;
 }
 
@@ -138,6 +142,42 @@
   min-height: clamp(6vh, 10vw, 10vh);
   box-sizing: border-box;
 }
+
+.legende {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2vh;
+  margin-top: 2vh;
+}
+
+.legendeneintrag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.legendeneintrag .Sitze {
+  pointer-events: none;
+  margin-bottom: 0.5vh;
+  width: clamp(6vh, 10vw, 10vh);
+  height: clamp(6vh, 10vw, 10vh);
+  font-size: clamp(2vh, 4vw, 4vh);
+}
+
+.deine-auswahl {
+  margin-top: 2vh;
+  text-align: center;
+}
+
+.deine-auswahl ul {
+  padding: 0;
+  list-style: none;
+}
+
+
 
 @media (max-width: 480px) {
   .grid-container {
