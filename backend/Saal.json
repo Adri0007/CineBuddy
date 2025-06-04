@@ -1,0 +1,102 @@
+[
+    {
+  "name": "Saal 1",
+  "sitze": [
+            { "reihe": "A", "nummer": 1, "typ": "behindert"},
+            { "reihe": "A", "nummer": 2, "typ": "behindert"},
+            { "reihe": "A", "nummer": 3, "typ": "behindert"},
+            { "reihe": "A", "nummer": 4, "typ": "normal"},
+            { "reihe": "A", "nummer": 5, "typ": "normal"},
+            { "reihe": "B", "nummer": 1, "typ": "normal"},
+            { "reihe": "B", "nummer": 2, "typ": "normal"},
+            { "reihe": "B", "nummer": 3, "typ": "normal"},
+            { "reihe": "B", "nummer": 4, "typ": "normal"},
+            { "reihe": "B", "nummer": 5, "typ": "normal"},
+            { "reihe": "C", "nummer": 1, "typ": "normal"},
+            { "reihe": "C", "nummer": 2, "typ": "normal"},
+            { "reihe": "C", "nummer": 3, "typ": "normal"},
+            { "reihe": "C", "nummer": 4, "typ": "normal"},
+            { "reihe": "C", "nummer": 5, "typ": "normal"},
+            { "reihe": "D", "nummer": 1, "typ": "loge"},
+            { "reihe": "D", "nummer": 2, "typ": "loge"},
+            { "reihe": "D", "nummer": 3, "typ": "loge"},
+            { "reihe": "D", "nummer": 4, "typ": "loge"},
+            { "reihe": "D", "nummer": 5, "typ": "loge"}
+        ]
+    },
+    {
+  "name": "Saal 2",
+  "sitze": [
+            { "reihe": "A", "nummer": 1, "typ": "behindert"},
+            { "reihe": "A", "nummer": 2, "typ": "behindert"},
+            { "reihe": "A", "nummer": 3, "typ": "behindert"},
+            { "reihe": "A", "nummer": 4, "typ": "normal"},
+            { "reihe": "A", "nummer": 5, "typ": "normal"},
+            { "reihe": "B", "nummer": 1, "typ": "normal"},
+            { "reihe": "B", "nummer": 2, "typ": "normal"},
+            { "reihe": "B", "nummer": 3, "typ": "normal"},
+            { "reihe": "B", "nummer": 4, "typ": "normal"},
+            { "reihe": "B", "nummer": 5, "typ": "normal"},
+            { "reihe": "C", "nummer": 1, "typ": "normal"},
+            { "reihe": "C", "nummer": 2, "typ": "normal"},
+            { "reihe": "C", "nummer": 3, "typ": "normal"},
+            { "reihe": "C", "nummer": 4, "typ": "normal"},
+            { "reihe": "C", "nummer": 5, "typ": "normal"},
+            { "reihe": "D", "nummer": 1, "typ": "loge"},
+            { "reihe": "D", "nummer": 2, "typ": "loge"},
+            { "reihe": "D", "nummer": 3, "typ": "loge"},
+            { "reihe": "D", "nummer": 4, "typ": "loge"},
+            { "reihe": "D", "nummer": 5, "typ": "loge"}
+        ]
+    },
+    {
+  "name": "Saal 3",
+  "sitze": [
+            { "reihe": "A", "nummer": 1, "typ": "behindert"},
+            { "reihe": "A", "nummer": 2, "typ": "behindert"},
+            { "reihe": "A", "nummer": 3, "typ": "behindert"},
+            { "reihe": "A", "nummer": 4, "typ": "normal"},
+            { "reihe": "A", "nummer": 5, "typ": "normal"},
+            { "reihe": "B", "nummer": 1, "typ": "normal"},
+            { "reihe": "B", "nummer": 2, "typ": "normal"},
+            { "reihe": "B", "nummer": 3, "typ": "normal"},
+            { "reihe": "B", "nummer": 4, "typ": "normal"},
+            { "reihe": "B", "nummer": 5, "typ": "normal"},
+            { "reihe": "C", "nummer": 1, "typ": "normal"},
+            { "reihe": "C", "nummer": 2, "typ": "normal"},
+            { "reihe": "C", "nummer": 3, "typ": "normal"},
+            { "reihe": "C", "nummer": 4, "typ": "normal"},
+            { "reihe": "C", "nummer": 5, "typ": "normal"},
+            { "reihe": "D", "nummer": 1, "typ": "loge"},
+            { "reihe": "D", "nummer": 2, "typ": "loge"},
+            { "reihe": "D", "nummer": 3, "typ": "loge"},
+            { "reihe": "D", "nummer": 4, "typ": "loge"},
+            { "reihe": "D", "nummer": 5, "typ": "loge"}
+        ]
+    },
+    {
+  "name": "Saal 4",
+  "sitze": [
+            { "reihe": "A", "nummer": 1, "typ": "behindert"},
+            { "reihe": "A", "nummer": 2, "typ": "behindert"},
+            { "reihe": "A", "nummer": 3, "typ": "behindert"},
+            { "reihe": "A", "nummer": 4, "typ": "normal"},
+            { "reihe": "A", "nummer": 5, "typ": "normal"},
+            { "reihe": "B", "nummer": 1, "typ": "normal"},
+            { "reihe": "B", "nummer": 2, "typ": "normal"},
+            { "reihe": "B", "nummer": 3, "typ": "normal"},
+            { "reihe": "B", "nummer": 4, "typ": "normal"},
+            { "reihe": "B", "nummer": 5, "typ": "normal"},
+            { "reihe": "C", "nummer": 1, "typ": "normal"},
+            { "reihe": "C", "nummer": 2, "typ": "normal"},
+            { "reihe": "C", "nummer": 3, "typ": "normal"},
+            { "reihe": "C", "nummer": 4, "typ": "normal"},
+            { "reihe": "C", "nummer": 5, "typ": "normal"},
+            { "reihe": "D", "nummer": 1, "typ": "loge"},
+            { "reihe": "D", "nummer": 2, "typ": "loge"},
+            { "reihe": "D", "nummer": 3, "typ": "loge"},
+            { "reihe": "D", "nummer": 4, "typ": "loge"},
+            { "reihe": "D", "nummer": 5, "typ": "loge"}
+        ]
+    }
+]

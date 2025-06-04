@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Startseite from './pages/Startseite.jsx';
 import Vorstellung from "./pages/Vorstellung.jsx";
+import Sitzplaetze from "./pages/Sitzplaetze.jsx";
 import AccountRouteWrapper from './pages/AccountRouteWrapper'; // Behält den Wrapper
 import Registrierung from './pages/Registrierung.jsx';
 import Anmeldung from './pages/Anmeldung.jsx';
@@ -15,16 +16,13 @@ export default function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<Startseite />} />
-      <Route path="/film/:id" element={<Vorstellung />} />
-
-      <Route path="/Tickets" element={<Tickets />} />
-      {/* Die /Account Route nutzt jetzt den Wrapper, der die Logik für die Weiterleitung enthält */}
+      <Route path="/Film/:id" element={<Vorstellung />} />
       <Route path="/Account" element={<AccountRouteWrapper />} />
+      <Route path="/Tickets" element={<Tickets />} />
+      <Route path="/Film/:id/:index/:date/:time" element={<Sitzplaetze />} />
+      <Route path="/film/:id" element={<Vorstellung />} />
       <Route path="/Registrieren" element={<Registrierung />} />
       <Route path="/Anmeldung" element={<Anmeldung />} />
-      {/* Optional: Wenn du AccountPage direkt ansteuern willst ohne Wrapper:
-      <Route path="/meinkonto" element={<AccountPage />} />
-      */}
     </Routes>
   );
 }
