@@ -14,9 +14,9 @@ app.use(cors());
 app.use(express.json());
 
 //Für Dima nicht löschen
-const mongoUrl = 'mongodb://admin:SWP2025Projekt@localhost:27017/cinebuddys?authSource=admin';
+//const mongoUrl = 'mongodb://admin:SWP2025Projekt@localhost:27017/cinebuddys?authSource=admin';
 
-//const mongoUrl = 'mongodb://localhost:27017/Cinebuddy'
+const mongoUrl = 'mongodb://localhost:27017/Cinebuddy'
 
 mongoose.connect(mongoUrl)
   .then(() => console.log('MongoDB verbunden!'))
