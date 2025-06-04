@@ -109,6 +109,12 @@
   color: white;
 }
 
+.Sitze.behindert.belegt {
+  background-color: #f44336;
+  cursor: not-allowed;
+  color: white;
+}
+
 .Sitze.loge {
   background-color: #ff9800;
   color: white;
@@ -116,6 +122,12 @@
 
 .Sitze.loge.selected {
   background-color: #4caf50;
+  color: white;
+}
+
+.Sitze.loge.belegt {
+  background-color: #f44336;
+  cursor: not-allowed;
   color: white;
 }
 
