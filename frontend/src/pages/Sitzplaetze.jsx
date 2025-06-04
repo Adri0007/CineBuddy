@@ -81,11 +81,24 @@ function Sitzplaetze() {
           return;
         }
 
+        /*
         const vorstellung = res.data.find(v => {
           const startzeitString = typeof v.startzeit === "string" ? v.startzeit : v.startzeit?.$date;
           if (!startzeitString) return false;
           const startzeit = new Date(startzeitString);
           return startzeit.getTime() === dateObj.getTime();
+        });
+        */
+
+        const vorstellung = res.data.find(v => {
+          const startzeitString = typeof v.startzeit === "string" ? v.startzeit : v.startzeit?.$date;
+          if (!startzeitString) return false;
+        
+          const startzeit = new Date(startzeitString);
+          const zeitenGleich = startzeit.getTime() === dateObj.getTime();
+          const idGleich = v.filmId === id || v.filmId?.$oid === id;
+        
+          return zeitenGleich && idGleich;
         });
         
 
@@ -146,17 +159,29 @@ function Sitzplaetze() {
   // Prüfen ob Sitz belegt ist
   const istSitzBelegt = (reihe, nummer) => {
     if (!aktuelleVorstellung?._id) return false;
-
-    return vorstellungssitze.some(s => {
+  
+    console.log("WICHTIG " + aktuelleVorstellung?._id);
+    console.log("WICHTIG " + film?._id);
+    const gefunden = vorstellungssitze.find(s => {
       const vorstellungIdStr = typeof s.vorstellungId === "object" ? s.vorstellungId.$oid : s.vorstellungId;
-      return (
+      const match =
         s.status === "belegt" &&
         vorstellungIdStr === aktuelleVorstellung._id &&
         s.sitz?.reihe === reihe &&
-        s.sitz?.nummer === nummer
-      );
+        s.sitz?.nummer === nummer;
+  
+      if (match) {
+        console.log("Belegter Sitz gefunden:", s.sitz, "für Vorstellung", aktuelleVorstellung._id);
+      }
+      return match;
     });
+  
+    if (!gefunden) {
+      console.log(`Sitz ${reihe}${nummer} nicht belegt`);
+    }
+    return !!gefunden;
   };
+  
 
   // Sitz klicken zum Auswählen
   const handleClick = (index) => {
