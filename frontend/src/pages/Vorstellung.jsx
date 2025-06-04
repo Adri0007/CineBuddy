@@ -33,7 +33,7 @@ function Vorstellung() {
     setSelectedDate(e.target.value);
   };
 
-  const getNaechste7Tage = (tage) => {
+    const getNaechste7Tage = (tage) => {
     const heute = new Date();
     heute.setHours(0, 0, 0, 0);
 
@@ -96,7 +96,6 @@ function Vorstellung() {
             </span>
           )}
         </p>
-
         <div className="right-sidebar-content button-container">
           <button
             className="bewertung-button"
@@ -129,6 +128,7 @@ function Vorstellung() {
             {uhrzeit}
           </button>
         ))}
+
       </div>
       <div>
         <button className="suchButton" onClick={() => navigate('/')}>
