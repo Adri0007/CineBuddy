@@ -14,23 +14,23 @@ function Vorstellung() {
   const [selectedTag, setSelectedTag] = useState('');
   const descriptionMaxLength = 200;
 
-  // Filme und Vorstellungen laden
+  
   useEffect(() => {
     axios.get(`http://localhost:5000/api/filme/${id}`)
       .then(res => setFilm(res.data))
       .catch(err => console.error(err));
 
     axios.get(`http://localhost:5000/api/vorstellungen/${id}`)
-      .then(res => setVorstellungen(res.data)) // Jetzt ein Array!
+      .then(res => setVorstellungen(res.data)) 
       .catch(err => console.error(err));
   }, [id]);
 
-  // Falls noch nicht geladen
+
   if (!film || vorstellungen.length === 0) {
     return <div>Keine Verbindung zum Backend</div>;
   }
 
-  // Alle verfügbaren Tage als Auswahl (Format: 04.06.2025)
+ 
   const tage = [
     ...new Set(
       vorstellungen.map(v =>
@@ -39,7 +39,7 @@ function Vorstellung() {
     )
   ];
 
-  // Alle Uhrzeiten zu einem Tag
+ 
   const uhrzeitenFuerTag = selectedTag
     ? vorstellungen
         .filter(v => new Date(v.startzeit).toLocaleDateString("de-DE") === selectedTag)
@@ -82,7 +82,7 @@ function Vorstellung() {
         </div>
       </div>
 
-      {/* Datumsauswahl */}
+      
       <select
         className="datum-dropdown"
         value={selectedTag}
@@ -94,7 +94,7 @@ function Vorstellung() {
         ))}
       </select>
 
-      {/* Uhrzeiten für gewähltes Datum */}
+     
       <div className="button-grid vorstellung-container">
         {uhrzeitenFuerTag.map(uhr => (
           <button
