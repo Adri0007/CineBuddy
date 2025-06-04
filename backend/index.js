@@ -142,7 +142,7 @@ app.get('/api/vorstellungssitze', async (req, res) => {
   try {
     const sitze = await VorstellungSitze.find();
     res.json(sitze);
-
+  }catch(err){}})
 
 app.post('/api/login', async (req, res) => {
   try {
@@ -229,7 +229,7 @@ app.get('/api/vorstellung', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Serverfehler", details: err.message });
-
+  }});
 
 app.get('/api/user-data', async (req, res) => {
   try {
