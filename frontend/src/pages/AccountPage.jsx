@@ -4,49 +4,49 @@ import './AccountPage.css'; // Importiere die neue CSS-Datei
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
 
+
 function AccountPage() {
   const navigate = useNavigate();
-  // Verwende State, um Benutzerdaten zu speichern.
-  // In einer echten App würden diese Daten von deinem Backend geladen.
+
+  // State für Benutzerdaten
   const [userData, setUserData] = useState({
-    username: 'MaxMustermann', // Platzhalter
-    email: 'max.mustermann@example.com', // Platzhalter
+    username: '',
+    email: ''
   });
 
+  // Lade Benutzerdaten aus dem Backend
   useEffect(() => {
-    // Hier würdest du normalerweise einen API-Aufruf machen,
-    // um die tatsächlichen Benutzerdaten vom Backend zu laden.
-    // Beispiel:
-    // const fetchUserData = async () => {
-    //   try {
-    //     const response = await fetch('/api/user-data'); // Dein API-Endpunkt
-    //     const data = await response.json();
-    //     setUserData(data);
-    //   } catch (error) {
-    //     console.error('Fehler beim Laden der Benutzerdaten:', error);
-    //     // Optional: Benutzer abmelden oder Fehlermeldung anzeigen
-    //     handleLogout();
-    //   }
-    // };
-    // fetchUserData();
+    const fetchUserData = async () => {
+      try {
+        const email = localStorage.getItem('userEmail');
+        if (!email) {
+          // Keine E-Mail gespeichert → ausloggen
+          handleLogout();
+          return;
+        }
 
-    // Für die Demo verwenden wir simulierte Daten
-    const simulatedUserData = {
-      username: 'FilmFan2025',
-      email: 'filmfan@kino.com',
+        // Backend-API call
+        const response = await fetch(
+          `http://localhost:5000/api/user-data?email=${encodeURIComponent(email)}`
+        );
+        if (!response.ok) throw new Error('Fehler beim Laden der Daten');
+        const data = await response.json();
+        setUserData(data);
+      } catch (error) {
+        console.error('Fehler beim Laden der Benutzerdaten:', error);
+        handleLogout();
+      }
     };
-    setUserData(simulatedUserData);
 
-  }, []); // Leeres Array bedeutet, dass dieser Effekt nur einmal beim Mounten ausgeführt wird
-
+    fetchUserData();
+    // eslint-disable-next-line
+  }, []); // Nur beim Mounten
 
   // Funktion zum Abmelden
   const handleLogout = () => {
-    // Simuliere das Entfernen des Anmeldestatus
-    localStorage.removeItem('isLoggedIn'); // Entferne den Status aus dem localStorage
-    // In einer echten Anwendung würdest du hier einen API-Call zum Abmelden machen
-    // Beispiel: axios.post('/api/logout').then(() => navigate('/Anmeldung'));
-    navigate('/Anmeldung'); // Leite zur Anmeldeseite weiter
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userEmail');
+    navigate('/Anmeldung');
   };
 
   return (
@@ -64,10 +64,8 @@ function AccountPage() {
             <label>E-Mail:</label>
             <span>{userData.email}</span>
           </div>
-          {/* Das "Mitglied seit"-Feld wurde entfernt */}
         </div>
 
-        {/* Optional: Hier könnten weitere Sektionen folgen, z.B. Einstellungen, Bestellungen */}
         <div className="account-actions-section">
           <button onClick={handleLogout} className="logout-button">
             Abmelden
