@@ -216,6 +216,10 @@ function Sitzplaetze() {
               const index = saal.sitze.indexOf(sitz);
               const isSelected = selectedSeats.includes(index);
 
+              console.log(
+                `Sitz ${sitz.reihe}${sitz.nummer} | Typ: ${sitz.typ} | Belegt: ${isBelegt} | Disabled: ${isDisabled}`
+              );
+
               return (
                 <button
                   key={`${reiheLabel}-${nummer}`}
