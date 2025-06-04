@@ -237,3 +237,24 @@
    text-decoration: underline;
    /* Unterstreichung beim Hover */
  }
+
+ /* ... (Dein vorhandenes CSS) ... */
+
+.uhrzeit-button:disabled {
+  background-color: #555; /* Dunkleres Grau für deaktivierte Buttons */
+  color: #aaa; /* Helleres Grau für Text */
+  cursor: not-allowed; /* Zeigt an, dass der Button nicht klickbar ist */
+  opacity: 0.6; /* Leicht transparent */
+  box-shadow: none; /* Kein Schatten für deaktivierte Buttons */
+  transform: none; /* Keine Animation beim Hover */
+}
+
+.uhrzeit-button:disabled:hover {
+  background-color: #555; /* Verhindert Farbänderung beim Hover */
+  color: #aaa;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* ... (Rest deines CSS) ... */
