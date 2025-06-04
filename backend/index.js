@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bcrypt = require("bcrypt")
 const User = require('./models/User');
+const Vorstellung = require('./models/Vorstellungen.js');
 
 
 require("dotenv").config({ path: "./config.env" })
@@ -58,15 +59,15 @@ app.get('/api/filme/:id', async (req, res) => {
   }
 });
 
+
 app.get('/api/vorstellungen/:filmId', async (req, res) => {
   try {
     const filmId = req.params.filmId;
-    const vorstellung = await mongoose.connection.db.collection('Vorstellungen')
-      .findOne({ id_film: new ObjectId(filmId) });
-    if (!vorstellung) {
+    const vorstellungen = await Vorstellung.find({ filmId: new ObjectId(filmId) });
+    if (!vorstellungen || vorstellungen.length === 0) {
       return res.status(404).json({ message: "Vorstellung nicht gefunden" });
     }
-    res.json(vorstellung);
+    res.json(vorstellungen);
   } catch (err) {
     res.status(500).json({ error: "Serverfehler", details: err.message });
   }
