@@ -72,6 +72,7 @@ function Vorstellung() {
     return vorstellungsDateTime <= now;
   };
 
+
   const displayedDescription =
     film.beschreibung.length > descriptionMaxLength && !showFullDescription
       ? film.beschreibung.substring(0, descriptionMaxLength) + "..."
