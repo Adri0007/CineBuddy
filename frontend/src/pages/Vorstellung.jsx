@@ -9,45 +9,72 @@ function Vorstellung() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [film, setFilm] = useState(null);
-  const [vorstellungen, setVorstellungen] = useState([]);
+  const [vorstellungen, setVorstellungen] = useState([]); // Beibehalten des Namens 'vorstellungen'
+  const [selectedDate, setSelectedDate] = useState('');
   const [showFullDescription, setShowFullDescription] = useState(false);
-  const [selectedTag, setSelectedTag] = useState('');
   const descriptionMaxLength = 200;
 
-  
   useEffect(() => {
+    // Annahme: Diese API-Aufrufe funktionieren jetzt korrekt
+    // und 'id' ist entweder eine Film-ID oder die Logik im Backend
+    // sorgt dafür, dass die richtigen Daten zurückkommen.
     axios.get(`http://localhost:5000/api/filme/${id}`)
       .then(res => setFilm(res.data))
       .catch(err => console.error(err));
 
     axios.get(`http://localhost:5000/api/vorstellungen/${id}`)
-      .then(res => setVorstellungen(res.data)) 
+      .then(res => setVorstellungen(res.data))
       .catch(err => console.error(err));
   }, [id]);
 
-
+  // Wenn der Film oder die Vorstellungen noch nicht geladen sind,
+  // oder wenn keine Vorstellungen verfügbar sind, zeige die Lade-/Fehlermeldung.
   if (!film || vorstellungen.length === 0) {
-    return <div>Keine Verbindung zum Backend</div>;
+    return <div>Keine Verbindung zum Backend oder keine Daten verfügbar.</div>;
   }
 
- 
-  const tage = [
-    ...new Set(
-      vorstellungen.map(v =>
-        new Date(v.startzeit).toLocaleDateString("de-DE")
-      )
-    )
-  ];
+  const getNaechste7Tage = () => {
+    const heute = new Date();
+    heute.setHours(0, 0, 0, 0); // Setze Stunden auf 0 für den Tagesanfang
 
- 
-  const uhrzeitenFuerTag = selectedTag
+    const dates = [
+      ...new Set(
+        vorstellungen.map(v =>
+          new Date(v.startzeit).toLocaleDateString("de-DE")
+        )
+      )
+    ]
+      .map(dateStr => {
+        const [day, month, year] = dateStr.split(".");
+        // Erstelle ein Date-Objekt im korrekten Format (YYYY-MM-DD) für zuverlässige Date-Objekt-Erstellung
+        const dateObj = new Date(Number(year), Number(month) - 1, Number(day));
+        return { original: dateStr, date: dateObj };
+      })
+      .filter(obj => obj.date >= heute) // Filtere nur zukünftige Daten
+      .sort((a, b) => a.date.getTime() - b.date.getTime()) // Sortiere chronologisch
+      .slice(0, 7); // Begrenze auf die nächsten 7 Tage
+
+    return dates.map(d => d.original);
+  };
+
+  const uhrzeitenFuerTag = selectedDate
     ? vorstellungen
-        .filter(v => new Date(v.startzeit).toLocaleDateString("de-DE") === selectedTag)
+        .filter(v => new Date(v.startzeit).toLocaleDateString("de-DE") === selectedDate)
         .map(v => ({
           id: v._id,
-          zeit: new Date(v.startzeit).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })
+          zeit: new Date(v.startzeit).toLocaleTimeString("de-DE", {
+            hour: "2-digit",
+            minute: "2-digit"
+          }),
+          startzeit: v.startzeit
         }))
+        .sort((a, b) => new Date(a.startzeit).getTime() - new Date(b.startzeit).getTime()) // Uhrzeiten sortieren
     : [];
+
+  const isTimeSlotDisabled = (startzeit) => {
+    const now = new Date();
+    return new Date(startzeit) < now;
+  };
 
   const displayedDescription =
     film.beschreibung.length > descriptionMaxLength && !showFullDescription
@@ -70,6 +97,7 @@ function Vorstellung() {
             </span>
           )}
         </p>
+
         <div className="right-sidebar-content button-container">
           <button
             className="bewertung-button"
@@ -82,29 +110,37 @@ function Vorstellung() {
         </div>
       </div>
 
-      
       <select
         className="datum-dropdown"
-        value={selectedTag}
-        onChange={e => setSelectedTag(e.target.value)}
+        value={selectedDate}
+        onChange={(e) => setSelectedDate(e.target.value)}
       >
-        <option value="">Datum auswählen</option>
-        {tage.map(tag => (
-          <option key={tag} value={tag}>{tag}</option>
+        {/* Die "Datum auswählen" Option wird nur angezeigt, wenn noch kein Datum ausgewählt ist. */}
+        {/* Das verhindert, dass sie erneut wählbar ist, nachdem ein Datum gewählt wurde. */}
+        {selectedDate === '' && <option value="">Datum auswählen</option>}
+        {getNaechste7Tage().map((tag, index) => (
+          <option key={index} value={tag}>
+            {tag}
+          </option>
         ))}
       </select>
 
-     
       <div className="button-grid vorstellung-container">
-        {uhrzeitenFuerTag.map(uhr => (
-          <button
-            key={uhr.id}
-            className="uhrzeit-button"
-            onClick={() => navigate(`/Film/${film._id}/vorstellung/${uhr.id}`)}
-          >
-            {uhr.zeit}
-          </button>
-        ))}
+        {uhrzeitenFuerTag.length > 0 ? (
+          uhrzeitenFuerTag.map(uhr => (
+            <button
+              key={uhr.id}
+              className="uhrzeit-button"
+              // Annahme: film._id ist korrekt und uhr.id ist die Vorstellung._id
+              onClick={() => navigate(`/Film/${film._id}/vorstellung/${uhr.id}`)}
+              disabled={isTimeSlotDisabled(uhr.startzeit)}
+            >
+              {uhr.zeit}
+            </button>
+          ))
+        ) : (
+          selectedDate && <p className="no-vorstellungen-message">Keine Vorstellungen für dieses Datum verfügbar.</p>
+        )}
       </div>
 
       <div>
