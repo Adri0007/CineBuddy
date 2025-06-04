@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
@@ -10,76 +9,50 @@ function Vorstellung() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [film, setFilm] = useState(null);
-  const [vorstellung, setVorstellung] = useState(null);
+  const [vorstellungen, setVorstellungen] = useState([]);
   const [showFullDescription, setShowFullDescription] = useState(false);
-  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedTag, setSelectedTag] = useState('');
   const descriptionMaxLength = 200;
 
+  // Filme und Vorstellungen laden
   useEffect(() => {
     axios.get(`http://localhost:5000/api/filme/${id}`)
       .then(res => setFilm(res.data))
       .catch(err => console.error(err));
 
     axios.get(`http://localhost:5000/api/vorstellungen/${id}`)
-      .then(res => setVorstellungen(res.data)) 
+      .then(res => setVorstellungen(res.data)) // Jetzt ein Array!
       .catch(err => console.error(err));
   }, [id]);
 
-  
+  // Falls noch nicht geladen
   if (!film || vorstellungen.length === 0) {
     return <div>Keine Verbindung zum Backend</div>;
   }
 
-  const datumChange = (e) => {
-    setSelectedDate(e.target.value);
-  };
+  // Alle verfügbaren Tage als Auswahl (Format: 04.06.2025)
+  const tage = [
+    ...new Set(
+      vorstellungen.map(v =>
+        new Date(v.startzeit).toLocaleDateString("de-DE")
+      )
+    )
+  ];
 
-    const getNaechste7Tage = (tage) => {
-    const heute = new Date();
-    heute.setHours(0, 0, 0, 0);
-
-    const zukunftstage = tage
-      .map(tag => {
-        const [tagStr, monatStr, jahrStr] = tag.split("-");
-        const dateObj = new Date(parseInt(jahrStr), parseInt(monatStr) - 1, parseInt(tagStr));
-        dateObj.setHours(0, 0, 0, 0);
-
-        return {
-          original: tag,
-          date: dateObj
-        };
-      })
-      .filter(obj => obj.date >= heute)
-      .sort((a, b) => a.date - b.date)
-      .slice(0, 7);
-
-    return zukunftstage.map(obj => obj.original);
-  };
-
-  const isTimeSlotDisabled = (uhrzeit) => {
-    if (!selectedDate) {
-      return true; // Deaktiviert, wenn kein Datum ausgewählt ist
-    }
-
-    const [day, month, year] = selectedDate.split("-").map(Number);
-    const [hour, minute] = uhrzeit.split(":").map(Number);
-
-    // Erstelle ein Date-Objekt für die spezifische Vorstellung
-    const vorstellungsDateTime = new Date(year, month - 1, day, hour, minute);
-
-    const now = new Date(); // Aktuelle Zeit
-
-    // Überprüfe, ob die Vorstellung in der Vergangenheit liegt
-    return vorstellungsDateTime <= now;
-  };
-
+  // Alle Uhrzeiten zu einem Tag
+  const uhrzeitenFuerTag = selectedTag
+    ? vorstellungen
+        .filter(v => new Date(v.startzeit).toLocaleDateString("de-DE") === selectedTag)
+        .map(v => ({
+          id: v._id,
+          zeit: new Date(v.startzeit).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })
+        }))
+    : [];
 
   const displayedDescription =
     film.beschreibung.length > descriptionMaxLength && !showFullDescription
       ? film.beschreibung.substring(0, descriptionMaxLength) + "..."
       : film.beschreibung;
-
-  const availableDates = vorstellung.tage ? getNaechste7Tage(vorstellung.tage) : [];
 
   return (
     <div className="bodyVorstellung">
@@ -109,28 +82,31 @@ function Vorstellung() {
         </div>
       </div>
 
-      <select className="datum-dropdown" onChange={datumChange} value={selectedDate}>
-        {!selectedDate && <option value="">Datum auswählen</option>}
-        {availableDates.map((tag, index) => (
-          <option key={index} value={tag}>
-            {tag}
-          </option>
+      {/* Datumsauswahl */}
+      <select
+        className="datum-dropdown"
+        value={selectedTag}
+        onChange={e => setSelectedTag(e.target.value)}
+      >
+        <option value="">Datum auswählen</option>
+        {tage.map(tag => (
+          <option key={tag} value={tag}>{tag}</option>
         ))}
       </select>
 
+      {/* Uhrzeiten für gewähltes Datum */}
       <div className="button-grid vorstellung-container">
-        {vorstellung.uhrzeiten.map((uhrzeit, index) => (
+        {uhrzeitenFuerTag.map(uhr => (
           <button
-            key={index}
+            key={uhr.id}
             className="uhrzeit-button"
-            onClick={() => navigate(`/Film/${film._id}/${index}`)}
-            disabled={isTimeSlotDisabled(uhrzeit)} // Hier wird die neue Funktion verwendet
+            onClick={() => navigate(`/Film/${film._id}/vorstellung/${uhr.id}`)}
           >
-            {uhrzeit}
+            {uhr.zeit}
           </button>
         ))}
-
       </div>
+
       <div>
         <button className="suchButton" onClick={() => navigate('/')}>
           <FontAwesomeIcon icon={faHome} />

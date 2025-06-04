@@ -127,3 +127,20 @@ app.post('/api/register', async (req, res) => {
     res.status(500).json({ error: 'Serverfehler' });
   }
 });
+
+
+app.get('/api/user-data', async (req, res) => {
+  try {
+    
+    const { email } = req.query;
+    if (!email) return res.status(400).json({ error: "Keine E-Mail übergeben" });
+
+    
+    const user = await User.findOne({ email }).select('username email');
+    if (!user) return res.status(404).json({ error: "User nicht gefunden" });
+
+    res.json({ username: user.username, email: user.email });
+  } catch (err) {
+    res.status(500).json({ error: "Serverfehler" });
+  }
+});

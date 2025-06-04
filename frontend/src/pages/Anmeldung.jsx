@@ -23,6 +23,8 @@ function Anmeldung() {
         setMessage('✅ Anmeldung erfolgreich!');
         setMessageType('success');
         localStorage.setItem('isLoggedIn', 'true'); // Set login status
+        localStorage.setItem('userEmail', email);
+
         setTimeout(() => {
           navigate('/Account'); // Redirect to Account page
         }, 1000); // Short delay to see the message
@@ -30,6 +32,7 @@ function Anmeldung() {
         setMessage(`❌ ${response.data.message}`);
         setMessageType('error');
         localStorage.setItem('isLoggedIn', 'false'); // Set login status to false
+        localStorage.removeItem('userEmail');
       }
     } catch (error) {
       console.error('Login error:', error);
