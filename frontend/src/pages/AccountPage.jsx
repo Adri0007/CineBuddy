@@ -20,12 +20,11 @@ function AccountPage() {
       try {
         const email = localStorage.getItem('userEmail');
         if (!email) {
-          // Keine E-Mail gespeichert → ausloggen
           handleLogout();
           return;
         }
 
-        // Backend-API call
+
         const response = await fetch(
           `http://localhost:5000/api/user-data?email=${encodeURIComponent(email)}`
         );
@@ -39,8 +38,7 @@ function AccountPage() {
     };
 
     fetchUserData();
-    // eslint-disable-next-line
-  }, []); // Nur beim Mounten
+  }, []);
 
   // Funktion zum Abmelden
   const handleLogout = () => {
@@ -73,14 +71,14 @@ function AccountPage() {
         </div>
       </div>
       <button className="suchButton" onClick={() => navigate('/')}>
-                            <FontAwesomeIcon icon={faHome} />
-                          </button>
-                          <button className="ticketButton" onClick={() => navigate('/Tickets')}>
-                            <FontAwesomeIcon icon={faTicket} />
-                          </button>
-                          <button className="accountButton" onClick={() => navigate('/Account')}>
-                            <FontAwesomeIcon icon={faUser} />
-                          </button>
+        <FontAwesomeIcon icon={faHome} />
+      </button>
+      <button className="ticketButton" onClick={() => navigate('/Tickets')}>
+        <FontAwesomeIcon icon={faTicket} />
+      </button>
+      <button className="accountButton" onClick={() => navigate('/Account')}>
+        <FontAwesomeIcon icon={faUser} />
+      </button>
     </div>
   );
 }

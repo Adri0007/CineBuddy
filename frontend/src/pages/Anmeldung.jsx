@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './Anmeldung.css'; // Stelle sicher, dass deine CSS-Datei importiert wird
-import { useNavigate } from 'react-router-dom'; // Importiere useNavigate
+import './Anmeldung.css';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
@@ -10,14 +10,14 @@ function Anmeldung() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState(''); // 'success' oder 'error'
-  const navigate = useNavigate(); // Hook für die Navigation
+  const [messageType, setMessageType] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/api/login', { // Changed to POST
+      const response = await axios.post('http://localhost:5000/api/login', {
         email,
         password,
       });
@@ -25,23 +25,23 @@ function Anmeldung() {
       if (response.data.success) {
         setMessage('✅ Anmeldung erfolgreich!');
         setMessageType('success');
-        localStorage.setItem('isLoggedIn', 'true'); // Set login status
+        localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userEmail', email);
 
         setTimeout(() => {
-          navigate('/Account'); // Redirect to Account page
-        }, 1000); // Short delay to see the message
+          navigate('/Account');
+        }, 1000);
       } else {
         setMessage(`❌ ${response.data.message}`);
         setMessageType('error');
-        localStorage.setItem('isLoggedIn', 'false'); // Set login status to false
+        localStorage.setItem('isLoggedIn', 'false');
         localStorage.removeItem('userEmail');
       }
     } catch (error) {
       console.error('Login error:', error);
       setMessage('❌ Serverfehler bei der Anmeldung.');
       setMessageType('error');
-      localStorage.setItem('isLoggedIn', 'false'); // Set login status to false on server error
+      localStorage.setItem('isLoggedIn', 'false');
     }
   };
 
@@ -87,16 +87,16 @@ function Anmeldung() {
         </div>
       </form>
       <button className="suchButton" onClick={() => navigate('/')}>
-                <FontAwesomeIcon icon={faHome} />
-              </button>
-              <button className="ticketButton" onClick={() => navigate('/Tickets')}>
-                <FontAwesomeIcon icon={faTicket} />
-              </button>
-              <button className="accountButton" onClick={() => navigate('/Account')}>
-                <FontAwesomeIcon icon={faUser} />
-              </button>
+        <FontAwesomeIcon icon={faHome} />
+      </button>
+      <button className="ticketButton" onClick={() => navigate('/Tickets')}>
+        <FontAwesomeIcon icon={faTicket} />
+      </button>
+      <button className="accountButton" onClick={() => navigate('/Account')}>
+        <FontAwesomeIcon icon={faUser} />
+      </button>
     </div>
-    
+
   );
 }
 

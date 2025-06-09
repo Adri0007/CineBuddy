@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
 
 function Registrierung() {
-  const [username, setUsername] = useState(''); // <-- Änderung!
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [passwort, setPasswort] = useState('');
   const [bestaetigung, setBestaetigung] = useState('');
@@ -30,7 +30,7 @@ function Registrierung() {
     setGlobalMessage('');
     setGlobalMessageType('');
 
-		let isValid = true;
+    let isValid = true;
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -150,14 +150,14 @@ function Registrierung() {
         </div>
       </form>
       <button className="suchButton" onClick={() => navigate('/')}>
-                      <FontAwesomeIcon icon={faHome} />
-                    </button>
-                    <button className="ticketButton" onClick={() => navigate('/Tickets')}>
-                      <FontAwesomeIcon icon={faTicket} />
-                    </button>
-                    <button className="accountButton" onClick={() => navigate('/Account')}>
-                      <FontAwesomeIcon icon={faUser} />
-                    </button>
+        <FontAwesomeIcon icon={faHome} />
+      </button>
+      <button className="ticketButton" onClick={() => navigate('/Tickets')}>
+        <FontAwesomeIcon icon={faTicket} />
+      </button>
+      <button className="accountButton" onClick={() => navigate('/Account')}>
+        <FontAwesomeIcon icon={faUser} />
+      </button>
     </div>
   );
 }

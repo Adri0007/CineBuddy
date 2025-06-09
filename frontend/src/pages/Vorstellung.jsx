@@ -53,16 +53,16 @@ function Vorstellung() {
 
   const uhrzeitenFuerTag = selectedDate
     ? vorstellungen
-        .filter(v => new Date(v.startzeit).toLocaleDateString("de-DE") === selectedDate)
-        .map(v => ({
-          id: v._id,
-          zeit: new Date(v.startzeit).toLocaleTimeString("de-DE", {
-            hour: "2-digit",
-            minute: "2-digit"
-          }),
-          startzeit: v.startzeit
-        }))
-        .sort((a, b) => new Date(a.startzeit).getTime() - new Date(b.startzeit).getTime())
+      .filter(v => new Date(v.startzeit).toLocaleDateString("de-DE") === selectedDate)
+      .map(v => ({
+        id: v._id,
+        zeit: new Date(v.startzeit).toLocaleTimeString("de-DE", {
+          hour: "2-digit",
+          minute: "2-digit"
+        }),
+        startzeit: v.startzeit
+      }))
+      .sort((a, b) => new Date(a.startzeit).getTime() - new Date(b.startzeit).getTime())
     : [];
 
   const isTimeSlotDisabled = (startzeit) => {
