@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCouch } from '@fortawesome/free-solid-svg-icons';
+import { faCouch, faHome, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import './Sitzplaetze.css';
 
 function Sitzplaetze() {
-  const { id, date} = useParams();
-
+  const { id, date } = useParams();
+  const navigate = useNavigate();
   const [film, setFilm] = useState(null);
   const [saal, setSaal] = useState(null);
   const [aktuelleVorstellung, setAktuelleVorstellung] = useState(null);
@@ -80,23 +81,25 @@ function Sitzplaetze() {
     };
   }, [id, date]);
 
-  // Saal laden (abhängig vom Film)
+  // Saal laden (abhängig von der Vorstellung)
   useEffect(() => {
-    if (!film) return;
-
+    if (!aktuelleVorstellung?.saalId) return;
+  
     let isMounted = true;
     axios.get("http://localhost:5000/api/saal")
       .then(res => {
         if (!isMounted) return;
-        const passenderSaal = res.data.find(s => s._id === film.saalId || s.id === film.saalId);
+        const saalId = typeof aktuelleVorstellung.saalId === "object" ? aktuelleVorstellung.saalId.$oid : aktuelleVorstellung.saalId;
+        const passenderSaal = res.data.find(s => s._id === saalId || s.id === saalId);
         setSaal(passenderSaal || null);
       })
       .catch(err => console.error("Fehler beim Laden des Saals:", err));
-
+  
     return () => {
       isMounted = false;
     };
-  }, [film]);
+  }, [aktuelleVorstellung]);
+  
 
   // Vorstellungssitze für aktuelle Vorstellung laden
   useEffect(() => {
@@ -159,6 +162,13 @@ function Sitzplaetze() {
     : [];
   const leinwandBreite = `calc(${spaltenLabels.length} * clamp(6vh, 10vw, 10vh) + ${(spaltenLabels.length - 1)} * 1vh)`;
 
+  const formatDateTime = (isoString) => {
+    const datum = new Date(isoString);
+    const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const optionsTime = { hour: '2-digit', minute: '2-digit' };
+    return `${datum.toLocaleDateString('de-DE', optionsDate)}, ${datum.toLocaleTimeString('de-DE', optionsTime)} Uhr`;
+  };
+
 
   const reihenLabels = saal?.sitze
     ? [...new Set(saal.sitze.map(s => s.reihe))].sort()
@@ -166,9 +176,8 @@ function Sitzplaetze() {
 
   return (
     <div className="bodySitzplaetze">
-      <h1>
-        {film ? film.name || film.titel || film.id : "wird geladen..."} {date}
-      </h1>
+      <h1>{film ? film.name || film.titel || film.id : "wird geladen..."}</h1>
+      <h2> {formatDateTime(date)} </h2>
       <h2>{saal ? saal.name : "Saal wird geladen..."}</h2>
 
       <div className="grid-container">
@@ -251,6 +260,10 @@ function Sitzplaetze() {
           <button className="Sitze loge" disabled><FontAwesomeIcon icon={faCouch} /></button>
           <span>Loge</span>
         </div>
+        <div className="legendeneintrag">
+          <button className="Sitze ausgewählt" disabled><FontAwesomeIcon icon={faCouch} /></button>
+          <span>Ausgewählt</span>
+        </div>
       </div>
 
       <div style={{ textAlign: "center", marginTop: "4vh" }}>
@@ -269,6 +282,38 @@ function Sitzplaetze() {
           {selectedSeats.length === 0 && <li>Keine Sitze ausgewählt</li>}
         </ul>
       </div>
+
+      <div>
+        <button className="suchButton" onClick={() => navigate('/')}>
+          <FontAwesomeIcon icon={faHome} />
+        </button>
+        <button className="ticketButton" onClick={() => navigate('/Tickets')}>
+          <FontAwesomeIcon icon={faTicket} />
+        </button>
+        <button className="accountButton" onClick={() => navigate('/Account')}>
+          <FontAwesomeIcon icon={faUser} />
+        </button>
+      </div>
+
+      <button
+        className="Weiter"
+        disabled={selectedSeats.length === 0}
+        style={{
+          opacity: selectedSeats.length === 0 ? 0.5 : 1,
+          cursor: selectedSeats.length === 0 ? 'not-allowed' : 'pointer',
+          marginTop: '20px'
+        }}
+        onClick={() => {
+          if (!saal || selectedSeats.length === 0) return;
+
+          const ausgewaehlteSitze = selectedSeats.map(index => saal.sitze[index]);
+          sessionStorage.setItem("ausgewählteSitze", JSON.stringify(ausgewaehlteSitze));
+          navigate('/Buchungsseite');
+        }}
+      >
+        Weiter
+      </button>
+
 
 
     </div>

@@ -7,6 +7,7 @@ import AccountRouteWrapper from './pages/AccountRouteWrapper'; // Behält den Wr
 import Registrierung from './pages/Registrierung.jsx';
 import Anmeldung from './pages/Anmeldung.jsx';
 import AccountPage from './pages/AccountPage.jsx'; // Importiere die neue AccountPage
+import Buchungsseite from './pages/Buchungsseite.jsx';
 
 // Dummy-Komponenten für noch nicht vorhandene Seiten (Platzhalter)
 const Tickets = () => <div>Tickets Seite noch nicht verfügbar</div>;
@@ -23,6 +24,7 @@ export default function AppRouter() {
       <Route path="/film/:id" element={<Vorstellung />} />
       <Route path="/Registrieren" element={<Registrierung />} />
       <Route path="/Anmeldung" element={<Anmeldung />} />
+      <Route path="/Buchungsseite" element={<Buchungsseite />} />
     </Routes>
   );
 }
