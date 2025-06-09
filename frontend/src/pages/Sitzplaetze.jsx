@@ -7,7 +7,7 @@ import axios from "axios";
 import './Sitzplaetze.css';
 
 function Sitzplaetze() {
-  const { id, date, time } = useParams();
+  const { id, date} = useParams();
 
   const [film, setFilm] = useState(null);
   const [saal, setSaal] = useState(null);
@@ -33,43 +33,13 @@ function Sitzplaetze() {
     };
   }, [id]);
 
-  // Helfer: Datum und Zeit in ISO-String mit UTC (Z) umwandeln
-  const convertToDate = (dateStr, timeStr) => {
-    try {
-      const [day, month, year] = dateStr.split(/[-.]/).map(Number);
-      const [hour, minute] = timeStr.split(":").map(Number);
-      if ([day, month, year, hour, minute].some(isNaN)) throw new Error("Ungültiges Datum oder Zeit");
-
-      // Date in UTC erzeugen
-      const utcTimestamp = Date.UTC(year, month - 1, day, hour, minute, 0, 0);
-      const date = new Date(utcTimestamp);
-
-      const pad = (num) => num.toString().padStart(2, "0");
-
-      const isoString =
-        `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())}T` +
-        `${pad(date.getUTCHours())}:${pad(date.getUTCMinutes())}:${pad(date.getUTCSeconds())}.000Z`;
-
-      console.log("convertToDate:", dateStr, timeStr, "->", isoString);
-      return isoString;
-    } catch {
-      console.warn("convertToDate: Ungültiges Datum oder Zeit:", dateStr, timeStr);
-      return null;
-    }
-  };
 
   // Vorstellung laden anhand Film-ID + date + time
   useEffect(() => {
-    if (!id || !date || !time) return;
+    if (!id || !date) return;
 
     let isMounted = true;
-    const isoString = convertToDate(date, time);
-    if (!isoString) {
-      setAktuelleVorstellung(null);
-      return;
-    }
-
-    const dateObj = new Date(isoString);
+    const dateObj = new Date(date);
 
     axios.get(`http://localhost:5000/api/vorstellungen`, { params: { filmId: id } })
       .then(res => {
@@ -80,15 +50,6 @@ function Sitzplaetze() {
           setAktuelleVorstellung(null);
           return;
         }
-
-        /*
-        const vorstellung = res.data.find(v => {
-          const startzeitString = typeof v.startzeit === "string" ? v.startzeit : v.startzeit?.$date;
-          if (!startzeitString) return false;
-          const startzeit = new Date(startzeitString);
-          return startzeit.getTime() === dateObj.getTime();
-        });
-        */
 
         const vorstellung = res.data.find(v => {
           const startzeitString = typeof v.startzeit === "string" ? v.startzeit : v.startzeit?.$date;
@@ -117,7 +78,7 @@ function Sitzplaetze() {
     return () => {
       isMounted = false;
     };
-  }, [id, date, time]);
+  }, [id, date]);
 
   // Saal laden (abhängig vom Film)
   useEffect(() => {
@@ -206,7 +167,7 @@ function Sitzplaetze() {
   return (
     <div className="bodySitzplaetze">
       <h1>
-        {film ? film.name || film.titel || film.id : "wird geladen..."} {date} {time}
+        {film ? film.name || film.titel || film.id : "wird geladen..."} {date}
       </h1>
       <h2>{saal ? saal.name : "Saal wird geladen..."}</h2>
 

@@ -19,7 +19,7 @@ export default function AppRouter() {
       <Route path="/Film/:id" element={<Vorstellung />} />
       <Route path="/Account" element={<AccountRouteWrapper />} />
       <Route path="/Tickets" element={<Tickets />} />
-      <Route path="/Film/:id/:index/:date/:time" element={<Sitzplaetze />} />
+      <Route path="/Film/:id/:index/:date" element={<Sitzplaetze />} />
       <Route path="/film/:id" element={<Vorstellung />} />
       <Route path="/Registrieren" element={<Registrierung />} />
       <Route path="/Anmeldung" element={<Anmeldung />} />
