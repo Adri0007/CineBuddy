@@ -1,11 +1,12 @@
 h1{
   font-weight: bold;
-  font-size: 6rem !important; 
+  font-size: 6rem !important;
+  text-align: center;
 }
 
 .bodySitzplaetze {
   background: linear-gradient(to right, #300000, #600000, #300000);
-  min-height: 185vh;
+  min-height: 120vh;
   padding: 2vh 2vw;
   font-family: Arial, sans-serif;
   color: white;
@@ -205,6 +206,7 @@ h1{
     width: 80%;
     height: 3rem;
     font-size: 1.1rem;
+    margin-bottom: 7rem;
   }
 
   h1{
@@ -218,6 +220,7 @@ h1{
     width: 30%;
     height: 4rem;
     font-size: 1.9rem;
+    margin-bottom: 9rem;
   }
   h1{
     font-weight: bold;
@@ -248,4 +251,5 @@ h1{
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
 

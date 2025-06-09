@@ -8,9 +8,8 @@ mongoose.connect("mongodb://localhost:27017/Cinebuddy");
 
 async function generateVorstellungen() {
   try {
-    //const film = await Film.findOne();  // Hier Film angeben mit zb Film.findOne({ _id: "FilmId" });
-    const film = await Film.findById("6831bd2ce4040f29ff607855");
-    const saal = await Saal.findById("683d963769afaf833e1daadf"); // Hier Saal angeben
+    const film = await Film.findOne({ _id: "682f47ba9855a28157d7eadb" });  // Hier Film angeben mit zb Film.findOne({ _id: "FilmId" });
+    const saal = await Saal.findOne(); // Hier Saal angeben
 
     if (!film || !saal) {
       console.log("Kein Film oder Saal gefunden");
@@ -52,7 +51,7 @@ async function generateVorstellungen() {
       }
     }
 
-    console.log("Alle Vorstellungen und Sitzstatus wurden erstellt ✅");
+    console.log("Alle Vorstellungen und Sitzstatus wurden erstellt");
   } catch (err) {
     console.error("Fehler:", err);
   } finally {
