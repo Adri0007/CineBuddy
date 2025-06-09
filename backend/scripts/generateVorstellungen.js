@@ -9,8 +9,8 @@ mongoose.connect("mongodb://localhost:27017/Cinebuddy");
 async function generateVorstellungen() {
   try {
     //const film = await Film.findOne();  // Hier Film angeben mit zb Film.findOne({ _id: "FilmId" });
-    const film = await Film.findById("6831bd2ce4040f29ff607854");
-    const saal = await Saal.findOne(); // Hier Saal angeben
+    const film = await Film.findById("6831bd2ce4040f29ff607855");
+    const saal = await Saal.findById("683d963769afaf833e1daadf"); // Hier Saal angeben
 
     if (!film || !saal) {
       console.log("Kein Film oder Saal gefunden");
