@@ -3,6 +3,7 @@
   min-height: 100vh;
 }
 
+@media (max-width:480px) {
 .bild-galerie {
   padding: 2rem;
   background: linear-gradient(to right, #300000, #600000, #300000);
@@ -10,6 +11,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 .bild-galerie a {
@@ -27,6 +29,37 @@
 
 .bild-galerie img:hover {
   transform: scale(1.04);
+}
+}
+
+@media (min-width:480px) {
+.bild-galerie {
+  padding: 2rem;
+  background: linear-gradient(to right, #300000, #600000, #300000);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 4.5rem;
+}
+
+.bild-galerie a {
+  display: block;
+  width: 40%; /* feste Breite für gleichmäßiges Grid */
+  text-align: center;
+}
+
+.bild-galerie img {
+  width: 100%; /* füllt den a-Container */
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+}
+
+.bild-galerie img:hover {
+  transform: scale(1.04);
+}
 }
 
 .suchButton svg,
