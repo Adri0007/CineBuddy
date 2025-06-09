@@ -16,7 +16,6 @@ body {
   box-shadow: 0 4px 20px #0008;
 }
 
-/* ========== Klassisches Kino Look ========== */
 .bodyVorstellung {
   margin: 0;
   padding: 0;
@@ -31,24 +30,18 @@ body {
 .vorstellung-container {
   display: flex;
   flex-direction: column;
-  /* Bild, Text, Grid untereinander */
   align-items: center;
-  /* horizontal zentrieren */
   gap: 20px;
   padding: 20px;
 }
 
 .button-grid {
   display: grid;
-  /* Beibehalten deiner ursprünglichen festen Spaltenbreite */
   grid-template-columns: repeat(2, 140px);
   grid-template-rows: repeat(2, 50px);
   gap: 30px 40px;
   justify-content: center;
-  /* Grid horizontal zentrieren */
   margin-top: 100px;
-  /* Entferne max-width: 650px; und width: 100%; hier, wenn du es nicht brauchst */
-  /* Lass es wie im Original, wenn es die Zentrierung beibehält */
 }
 
 .uhrzeit-button {
@@ -58,11 +51,10 @@ body {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  
-  /* NEU: Feste Breite und Höhe für den Button für Konsistenz */
-  width: 140px; /* Gleiche Breite wie die Spaltenbreite im Grid */
-  height: 50px; /* Gleiche Höhe wie die Reihenhöhe im Grid */
-  padding: 0; /* Padding entfernen, da wir feste Höhe/Breite haben und Inhalt zentrieren */
+
+  width: 140px;
+  height: 50px;
+  padding: 0;
 
   border-radius: 4px;
   position: relative;
@@ -100,21 +92,19 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
-/* NEU: Stil für deaktivierte Uhrzeit-Buttons */
 .uhrzeit-button:disabled {
-  background-color: #333; /* Dunklerer Hintergrund */
-  color: #888;           /* Ausgegraute Schriftfarbe */
-  cursor: not-allowed;    /* Mauszeiger zeigt an, dass er nicht klickbar ist */
-  opacity: 0.6;           /* Leicht transparent, um den Status noch deutlicher zu machen */
-  box-shadow: none;       /* Entferne den Schatten, um es flacher erscheinen zu lassen */
-  pointer-events: none;   /* Stellt sicher, dass keine Maus-Events ausgelöst werden */
+  background-color: #333;
+  color: #888;
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+  pointer-events: none;
 }
 
-/* Optional: Entferne den Hover-Effekt, wenn der Button deaktiviert ist */
 .uhrzeit-button:disabled:hover {
-  background-color: #333; /* Bleibt dunkel */
-  transform: none;        /* Keine Skalierung */
-  box-shadow: none;       /* Kein Schatten */
+  background-color: #333;
+  transform: none;
+  box-shadow: none;
 }
 
 
@@ -133,12 +123,6 @@ body {
     margin-left: 20px;
     margin-right: 20px;
   }
-  /* Hier bleibt die ursprüngliche responsive Regel, falls du sie brauchst */
-  /* Du hattest hier keine spezifische grid-template-columns für 700px im letzten CSS */
-  /* Wenn du sie für Responsivität brauchst, kannst du sie wieder einfügen: */
-  /* .button-grid {
-    grid-template-columns: repeat(2, 1fr);
-  } */
 }
 
 .datum-dropdown {
@@ -156,10 +140,9 @@ body {
   margin: 0 auto 30px auto;
   display: block;
   text-align: center;
-  
-  /* NEU: Feste Mindestbreite, damit das Dropdown nicht zu klein wird */
+
   min-width: 200px;
-  width: auto; /* Kann breiter werden, wenn der Inhalt es erfordert */
+  width: auto;
 }
 
 .datum-dropdown:hover {

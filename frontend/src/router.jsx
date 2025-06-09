@@ -3,9 +3,10 @@ import { Routes, Route } from 'react-router-dom';
 import Startseite from './pages/Startseite.jsx';
 import Vorstellung from "./pages/Vorstellung.jsx";
 import Sitzplaetze from "./pages/Sitzplaetze.jsx";
-import AccountRouteWrapper from './pages/AccountRouteWrapper'; // Behält den Wrapper
+import AccountRouteWrapper from './pages/AccountRouteWrapper';
 import Registrierung from './pages/Registrierung.jsx';
 import Anmeldung from './pages/Anmeldung.jsx';
+
 import AccountPage from './pages/AccountPage.jsx'; // Importiere die neue AccountPage
 import Buchungsseite from './pages/Buchungsseite.jsx';
 

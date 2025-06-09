@@ -1,9 +1,8 @@
-.bodyStartseite{
+.bodyStartseite {
   background: linear-gradient(to right, #300000, #600000, #300000);
   min-height: 100vh;
 }
 
-/* --- Bild-Galerie --- */
 .bild-galerie {
   padding: 2rem;
   background: linear-gradient(to right, #300000, #600000, #300000);
@@ -30,23 +29,16 @@
   transform: scale(1.04);
 }
 
-/* Gemeinsame Icon Styles */
 .suchButton svg,
 .ticketButton svg,
 .accountButton svg {
   background: none;
-  /* Kein Hintergrund */
   color: white;
-  /* Farbe des Icons */
   font-size: 2rem;
-  /* Größe erhöhen */
   width: 2rem;
-  /* optional */
   height: 2rem;
-  /* optional */
 }
 
-/* Gemeinsame Button Styles */
 .suchButton,
 .accountButton,
 .ticketButton {
@@ -64,7 +56,6 @@
   z-index: 1000;
 }
 
-/* Such- und Account-Button spezifisch */
 .suchButton {
   background: radial-gradient(circle, #440000, #1a0000 80%);
   left: 25%;
@@ -81,7 +72,6 @@
   z-index: 1050;
 }
 
-/* Ticket-Button spezifisch */
 .ticketButton {
   background: radial-gradient(circle, #440000, #1a0000 80%);
   width: 12vh;
@@ -91,7 +81,6 @@
   flex-direction: column;
 }
 
-/* --- Suchbereich --- */
 .suchbereich {
   background: linear-gradient(to top, #300000, #600000);
   padding: 1rem;

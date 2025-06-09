@@ -72,25 +72,6 @@ app.get('/api/vorstellungen/:filmId', async (req, res) => {
   }
 });
 
-
-/*
-app.get('/api/vorstellungen/:filmId', async (req, res) => {
-  try {
-    const filmId = req.params.filmId;
-    const vorstellungen = await mongoose.connection.db.collection('Vorstellungen')
-      .find({ id_film: new ObjectId(filmId) })  // alle Vorstellungen mit diesem Film
-      .toArray();
-
-    if (vorstellungen.length === 0) {
-      return res.status(404).json({ message: "Keine Vorstellungen gefunden" });
-    }
-    res.json(vorstellungen);
-  } catch (err) {
-    res.status(500).json({ error: "Serverfehler", details: err.message });
-  }
-});
-*/
-
 app.get('/api/vorstellungen', async (req, res) => {
   try {
     const vorstellungen = await mongoose.connection.db.collection('Vorstellungen')
@@ -142,33 +123,29 @@ app.get('/api/vorstellungssitze', async (req, res) => {
   try {
     const sitze = await VorstellungSitze.find();
     res.json(sitze);
-  }catch(err){}})
+  } catch (err) { }
+})
 
 app.post('/api/login', async (req, res) => {
   try {
-    const { email, password } = req.body; // email and password from request body
+    const { email, password } = req.body;
     const user = await mongoose.connection.db.collection('users').findOne({ email: email });
 
     if (!user) {
-      return res.json({ success: false, message: "User not found!" });
+      return res.json({ success: false, message: "Nutzer nicht gefunden!" });
     }
 
-    // In a real application, you would hash and compare passwords securely.
-    // For this example, we'll do a plain text comparison (NOT SECURE FOR PRODUCTION).
-    if (bcrypt.compare(req.body.password, user.password)) { // Assuming 'password' field in your User collection
-      // In a real app, establish a session (e.g., using express-session)
-      // For now, we'll just indicate success.
-      return res.json({ success: true, message: "Login successful!" });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (isMatch) {
+      return res.json({ success: true, message: "Login erfolgreich!" });
     } else {
-      return res.json({ success: false, message: "Invalid email or password" });
+      return res.json({ success: false, message: "Benutzername oder E-Mail ist falsch" });
     }
   } catch (error) {
     console.error("Login error:", error);
-    res.status(500).json({ success: false, message: "Server error" });
+    res.status(500).json({ success: false, message: "Serverfehler" });
   }
 });
-
-
 
 app.post('/api/register', async (req, res) => {
   try {
@@ -209,12 +186,6 @@ app.get('/api/vorstellung', async (req, res) => {
       return res.status(400).json({ message: "filmId, date und time sind erforderlich" });
     }
 
-    // Datum-Formatierung beachten: ggf. anpassen je nachdem, wie das in DB gespeichert ist
-    // Beispiel: date im Format "yyyy-mm-dd" oder "dd-mm-yyyy"? Hier nehme ich an "dd-mm-yyyy" bleibt so.
-
-    // MongoDB-Suche mit ObjectId für filmId und passenden Feldern für date und time
-    // Ich nehme an, in DB heißen die Felder so (bitte anpassen, falls anders):
-    // id_film, datum, uhrzeit
     const vorstellung = await mongoose.connection.db.collection('Vorstellungen').findOne({
       id_film: new ObjectId(filmId),
       datum: date,
@@ -229,15 +200,15 @@ app.get('/api/vorstellung', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Serverfehler", details: err.message });
-  }});
+  }
+});
 
 app.get('/api/user-data', async (req, res) => {
   try {
-    
+
     const { email } = req.query;
     if (!email) return res.status(400).json({ error: "Keine E-Mail übergeben" });
 
-    
     const user = await User.findOne({ email }).select('username email');
     if (!user) return res.status(404).json({ error: "User nicht gefunden" });
 

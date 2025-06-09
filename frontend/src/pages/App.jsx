@@ -1,4 +1,4 @@
-import AppRouter from '../router.jsx'; // Dein eigener Router
+import AppRouter from '../router.jsx';
 
 function App() {
   return <AppRouter />;
