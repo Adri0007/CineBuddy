@@ -128,7 +128,10 @@ app.get('/api/vorstellungssitze', async (req, res) => {
 
 app.post('/api/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    
+    const email = req.body.email.toLowerCase();
+    const password = req.body.password;
+
     const user = await mongoose.connection.db.collection('users').findOne({ email: email });
 
     if (!user) {
@@ -149,22 +152,21 @@ app.post('/api/login', async (req, res) => {
 
 app.post('/api/register', async (req, res) => {
   try {
-    const { username, email, password } = req.body;
-
+    const username = req.body.username;
+    const email = req.body.email.toLowerCase(); 
+    const password = req.body.password;
 
     const existUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existUser) {
       return res.status(400).json({ message: 'Benutzername oder E-Mail schon vergeben' });
     }
 
-
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-
     const user = new User({
       username,
-      email,
+      email, 
       password: hashedPassword
     });
     await user.save();
@@ -176,6 +178,7 @@ app.post('/api/register', async (req, res) => {
     res.status(500).json({ error: 'Serverfehler' });
   }
 });
+
 
 
 app.get('/api/vorstellung', async (req, res) => {
