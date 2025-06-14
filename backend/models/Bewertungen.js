@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const BewertungenSchema = new mongoose.Schema({
-  userId: String,
+  userName: String,
   ticketId: String,
   filmId: String,
   kommentar: String,

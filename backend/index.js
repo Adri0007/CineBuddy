@@ -263,3 +263,25 @@ app.get('/api/bewertungen/durchschnitt/:filmId', async (req, res) => {
     res.status(500).json({ error: 'Fehler beim Berechnen des Durchschnitts' });
   }
 });
+
+// Neue Bewertung speichern
+
+app.post('/api/bewertungen/:filmId', async (req, res) => {
+  const { filmId } = req.params;
+  const { sterne, kommentar, ticketId, userName } = req.body;
+
+  try {
+    const neueBewertung = new Bewertungen({
+      filmId,
+      sterne,
+      kommentar,
+      ticketId,
+      userName,
+    });
+    await neueBewertung.save();
+    res.status(201).json(neueBewertung);
+  } catch (error) {
+    res.status(500).json({ error: 'Fehler beim Speichern der Bewertung' });
+  }
+});
+

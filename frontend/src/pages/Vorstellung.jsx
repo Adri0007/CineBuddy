@@ -28,10 +28,6 @@ function Vorstellung() {
       .catch(err => console.error(err));
   }, [id]);
 
-  if (!film || vorstellungen.length === 0) {
-    return <div>Keine Verbindung zum Backend oder keine Daten verfügbar.</div>;
-  }
-
   const getNaechste7Tage = () => {
     const heute = new Date();
     heute.setHours(0, 0, 0, 0);
