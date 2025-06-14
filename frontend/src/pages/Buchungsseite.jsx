@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef} from "react";
+import { QRCodeCanvas } from 'qrcode.react';
 import './Buchungsseite.css'; // Die CSS-Datei ohne globale Stile
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,6 +11,10 @@ function Buchungsseite() {
   const [email, setEmail] = useState("");
   const [bookingMessage, setBookingMessage] = useState('');
   const [messageType, setMessageType] = useState('');
+  const qrRef = useRef(null);
+
+  //Test
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState('');
 
   const navigate = useNavigate();
 
@@ -42,13 +47,13 @@ function Buchungsseite() {
   const handleBooking = async () => {
     setBookingMessage('');
     setMessageType('');
-
+  
     if (ausgewaehlteSitze.length === 0) {
       setBookingMessage("Bitte wählen Sie zuerst Sitze aus.");
       setMessageType('error');
       return;
     }
-
+  
     if (!isLoggedIn) {
       if (!email) {
         setBookingMessage("Bitte geben Sie eine Mail ein.");
@@ -61,30 +66,56 @@ function Buchungsseite() {
         return;
       }
     }
-
+  
+    // QR-Code DataURL vom Canvas holen
+    const qrCanvas = qrRef.current.querySelector('canvas');
+    const dataUrl = qrCanvas.toDataURL();
+    setQrCodeDataUrl(dataUrl);
+  
     const bookingDetails = {
       sitze: ausgewaehlteSitze,
       userEmail: email,
       timestamp: new Date().toISOString(),
     };
-
-    console.log("Buchungsdetails:", bookingDetails);
-
-    setBookingMessage('✅ Buchung erfolgreich!');
-    setMessageType('success');
-    sessionStorage.removeItem("ausgewählteSitze");
-    setAusgewaehlteSitze([]);
-
-    if (!isLoggedIn) {
-      setTimeout(() => {
-        navigate('/');
-      }, 2000);
-    } else {
-      setTimeout(() => {
-        navigate('/Tickets');
-      }, 2000);
+  
+    try {
+      const response = await fetch('http://localhost:5000/api/send-booking-mail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          sitze: ausgewaehlteSitze,
+          qrCode: dataUrl,
+        }),
+      });
+    
+      if (!response.ok) {
+        const errorDetails = await response.text();
+        throw new Error('Mailversand fehlgeschlagen: ' + errorDetails);
+      }
+    
+      setBookingMessage('✅ Buchung erfolgreich! Mail wurde versendet.');
+      setMessageType('success');
+  
+      sessionStorage.removeItem("ausgewählteSitze");
+      setAusgewaehlteSitze([]);
+  
+      if (!isLoggedIn) {
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          navigate('/Tickets');
+        }, 2000);
+      }
+    } catch (error) {
+      console.error(error);
+      setBookingMessage(`❌ Buchung erfolgreich, aber Mailversand fehlgeschlagen: ${error.message}`);
+      setMessageType('error');
     }
   };
+  
 
   return (
     // Neuer Wrapper, der die globalen Styles übernimmt
@@ -142,6 +173,12 @@ function Buchungsseite() {
         >
           {isLoggedIn ? "Buchung bestätigen" : "Jetzt buchen"}
         </button>
+      </div>
+
+      {qrCodeDataUrl && <img src={qrCodeDataUrl} alt="QR Code" />}
+      <h2>Mein QR Code</h2>
+      <div ref={qrRef}>
+        <QRCodeCanvas value="https://www.youtube.com/watch?v=xvFZjo5PgG0" size={200} />
       </div>
 
       <div>
