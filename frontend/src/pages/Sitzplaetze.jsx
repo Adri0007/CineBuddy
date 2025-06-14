@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCouch, faHome, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCouch} from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import './Sitzplaetze.css';
+import MenuButtons from "../components/MenuButtons";
 
 function Sitzplaetze() {
   const { id, date } = useParams();
@@ -283,17 +284,7 @@ function Sitzplaetze() {
         </ul>
       </div>
 
-      <div>
-        <button className="suchButton" onClick={() => navigate('/')}>
-          <FontAwesomeIcon icon={faHome} />
-        </button>
-        <button className="ticketButton" onClick={() => navigate('/Tickets')}>
-          <FontAwesomeIcon icon={faTicket} />
-        </button>
-        <button className="accountButton" onClick={() => navigate('/Account')}>
-          <FontAwesomeIcon icon={faUser} />
-        </button>
-      </div>
+      <MenuButtons />
 
       <button
         className="Weiter"

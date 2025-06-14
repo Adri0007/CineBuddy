@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AccountPage.css'; // Importiere die neue CSS-Datei
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
+import MenuButtons from "../components/MenuButtons";
 
 
 function AccountPage() {
@@ -70,15 +69,7 @@ function AccountPage() {
           </button>
         </div>
       </div>
-      <button className="suchButton" onClick={() => navigate('/')}>
-        <FontAwesomeIcon icon={faHome} />
-      </button>
-      <button className="ticketButton" onClick={() => navigate('/Tickets')}>
-        <FontAwesomeIcon icon={faTicket} />
-      </button>
-      <button className="accountButton" onClick={() => navigate('/Account')}>
-        <FontAwesomeIcon icon={faUser} />
-      </button>
+      <MenuButtons />
     </div>
   );
 }

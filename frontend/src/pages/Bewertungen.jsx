@@ -1,5 +1,6 @@
 import "./Bewertungen.css";
 import SterneAnzeige from '../components/SterneAnzeige';
+import MenuButtons from "../components/MenuButtons";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
@@ -51,7 +52,7 @@ function Bewertungen() {
         <div>
             <h2>Film Bewerten</h2>
             <form onSubmit={handleSubmit} className="bewertung-form">
-                <p>
+                <div>
                 <label>
                     Sterne: 
                     <select value={sterne} onChange={(e) => setSterne(parseInt(e.target.value))}>
@@ -61,18 +62,18 @@ function Bewertungen() {
                         ))}
                     </select>
                 </label>
-                </p>
+                </div>
                 
                 <label>
                     Kommentar (optional): 
-                    <p>
+                    <div>
                     <textarea
                         value={kommentar}
                         onChange={(e) => setKommentar(e.target.value)}
                         rows={4}
                         placeholder="Dein Kommentar"
                     />
-                    </p>
+                    </div>
                 </label>
                 <button type="submit">Bewertung absenden</button>
             </form>
@@ -81,13 +82,14 @@ function Bewertungen() {
                 bewertungen.map((bewertung, index) => (
                     <div key={index} className="bewertung-eintrag">
                         <p className="User"><strong>User: {bewertung.userName}</strong></p>
-                        <p className="Sterne"><strong>Sterne:</strong><SterneAnzeige rating={bewertung.sterne} /></p>
+                        <div className="Sterne"><strong>Sterne:</strong><SterneAnzeige rating={bewertung.sterne} /></div>
                         <p className="Kommentar"><strong>Kommentar: {bewertung.kommentar}</strong></p>
                     </div>
                 ))
             ) : (
                 <p>Keine Bewertungen vorhanden.</p>
             )}
+             <MenuButtons />
         </div>
     );
 }
