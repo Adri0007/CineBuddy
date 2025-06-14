@@ -128,7 +128,7 @@ app.get('/api/vorstellungssitze', async (req, res) => {
 
 app.post('/api/login', async (req, res) => {
   try {
-    
+
     const email = req.body.email.toLowerCase();
     const password = req.body.password;
 
@@ -153,7 +153,7 @@ app.post('/api/login', async (req, res) => {
 app.post('/api/register', async (req, res) => {
   try {
     const username = req.body.username;
-    const email = req.body.email.toLowerCase(); 
+    const email = req.body.email.toLowerCase();
     const password = req.body.password;
 
     const existUser = await User.findOne({ $or: [{ username }, { email }] });
@@ -166,7 +166,7 @@ app.post('/api/register', async (req, res) => {
 
     const user = new User({
       username,
-      email, 
+      email,
       password: hashedPassword
     });
     await user.save();
