@@ -33,7 +33,7 @@ app.get('/api/test', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Backend läuft auf Port ${PORT}`));
+
 
 const Film = require('./models/Filme.js');
 
@@ -285,3 +285,4 @@ app.post('/api/bewertungen/:filmId', async (req, res) => {
   }
 });
 
+app.listen(PORT, () => console.log(`Backend läuft auf Port ${PORT}`));

@@ -1,5 +1,9 @@
+.site{
+    margin-bottom: 5rem;
+}
 .bewertung-eintrag{
     background-color: red;
+    margin-bottom: 1rem;
 }
 .User{
     background-color: darkred;
