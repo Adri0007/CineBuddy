@@ -1,0 +1,6 @@
+.bodyTicket{
+    background: linear-gradient(to right, #300000, #600000, #300000);
+    min-height: 100vh;
+    text-align: center;
+}
+
