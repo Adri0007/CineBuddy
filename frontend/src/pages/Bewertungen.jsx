@@ -1,6 +1,7 @@
 import "./Bewertungen.css";
 import SterneAnzeige from '../components/SterneAnzeige';
 import MenuButtons from "../components/MenuButtons";
+import SterneAuswahl from '../components/SterneAuswahl';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
@@ -12,7 +13,7 @@ function Bewertungen() {
     const [userData, setUserData] = useState(null);
     const { id } = useParams();
     const userName = userData?.username || "";
-    
+
     //Test variablen
     const ticketId = "adsa235352"
     const filmId = "682f47ba9855a28157d7eace"
@@ -40,9 +41,13 @@ function Bewertungen() {
             return;
         }
         if (!userName || !localStorage.getItem("isLoggedIn")) {
-        alert("Bitte melde dich erst an, um eine Bewertung abzugeben.");
-        return;
-    }   
+            alert("Bitte melde dich erst an, um eine Bewertung abzugeben.");
+            return;
+        }
+        if (bewertungen.some((bewertung) => bewertung.userName === userName)) {
+            alert("Du hast diesen Film bereits bewertet.");
+            return;
+        }
         //Speichern der Bewertungen
         axios.post(`http://localhost:5000/api/bewertungen/${id}`, {
             sterne,
@@ -63,18 +68,14 @@ function Bewertungen() {
             });
     };
     return (
-        <div className = "site">
+        <div className="site">
             <h2>Film Bewerten</h2>
             <form onSubmit={handleSubmit} className="bewertung-form">
                 <div>
                     <label>
                         Sterne:
-                        <select value={sterne} onChange={(e) => setSterne(parseFloat(e.target.value))}>
-                            <option value={0}>-- Bitte wählen --</option>
-                            {[1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5].map(n => (
-                                <option key={n} value={n}>{n} Stern{n > 1 ? 'e' : ''}</option>
-                            ))}
-                        </select>
+                        <SterneAuswahl value={sterne} onChange={setSterne} />
+                        <p>{sterne} Stern{sterne !== 1 ? 'e' : ''}</p>
                     </label>
                 </div>
 
@@ -86,6 +87,7 @@ function Bewertungen() {
                             onChange={(e) => setKommentar(e.target.value)}
                             rows={4}
                             placeholder="Dein Kommentar"
+                            maxLength={200}
                         />
                     </div>
                 </label>
