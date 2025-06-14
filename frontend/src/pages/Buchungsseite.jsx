@@ -175,11 +175,16 @@ function Buchungsseite() {
         </button>
       </div>
 
-      {qrCodeDataUrl && <img src={qrCodeDataUrl} alt="QR Code" />}
+      {/* {qrCodeDataUrl && <img src={qrCodeDataUrl} alt="QR Code" />}
       <h2>Mein QR Code</h2>
       <div ref={qrRef}>
         <QRCodeCanvas value="https://www.youtube.com/watch?v=xvFZjo5PgG0" size={200} />
-      </div>
+      </div> */}
+
+<div ref={qrRef} style={{ display: 'none' }}>
+  <QRCodeCanvas value="https://www.youtube.com/watch?v=xvFZjo5PgG0" size={200} />
+</div>
+
 
       <div>
         <button className="suchButton" onClick={() => navigate('/')}>
