@@ -10,6 +10,7 @@ function Vorstellung() {
   const { id } = useParams();
   const [film, setFilm] = useState(null);
   const [vorstellungen, setVorstellungen] = useState([]);
+  const [bewertungen, setBewertungen] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
   const [showFullDescription, setShowFullDescription] = useState(false);
   const descriptionMaxLength = 200;
@@ -21,6 +22,9 @@ function Vorstellung() {
 
     axios.get(`http://localhost:5000/api/vorstellungen/${id}`)
       .then(res => setVorstellungen(res.data))
+      .catch(err => console.error(err));
+    axios.get(`http://localhost:5000/api/bewertungen/durchschnitt/${id}`)
+      .then(res => setBewertungen(res.data))
       .catch(err => console.error(err));
   }, [id]);
 
@@ -97,8 +101,13 @@ function Vorstellung() {
             className="bewertung-button"
             onClick={() => navigate(`/Film/${film._id}/Bewertungen`)}
           >
-            4,5
+            {bewertungen.anzahl > 0 ? (
+              <p>{bewertungen.durchschnitt.toFixed(1)}</p> //Bewertungen auf erste nachkommastelle gerundet
+            ) : (
+              <p>0</p> //falls keine Bewertungen vorhanden
+            )}
           </button>
+          {<div className="film-info-text anzahlBewerungen">{bewertungen.anzahl} Bewertungen</div>}
           {film.dauer && <div className="film-info-text dauer">{film.dauer} Min.</div>}
           {film.fsk && <div className="film-info-text fsk">FSK {film.fsk}</div>}
         </div>
