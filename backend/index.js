@@ -108,6 +108,7 @@ app.get('/api/saal/:id', async (req, res) => {
 
 const VorstellungSitze = require('./models/VorstellungSitze.js');
 
+
 app.get('/api/vorstellungssitze/:vorstellungId', async (req, res) => {
   try {
     const vorstellungId = req.params.vorstellungId;
@@ -219,5 +220,46 @@ app.get('/api/user-data', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: "Serverfehler" });
 
+  }
+});
+
+//Alle Bewertungen von bestimmtem Film finden
+
+const Bewertungen = require('./models/Bewertungen.js');
+
+app.get('/api/bewertungen/:filmId', async (req, res) => {
+  try {
+    const filmId = req.params.filmId;
+    const bewertungen = await Bewertungen.find({ filmId });
+    res.json(bewertungen);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Serverfehler' });
+  }
+});
+
+// Bewertungsdurchschnitt für Vorstellungsseite
+
+app.get('/api/bewertungen/durchschnitt/:filmId', async (req, res) => {
+  try {
+    const result = await Bewertungen.aggregate([
+      { $match: { filmId: req.params.filmId } },
+      {
+        $group: {
+          _id: "$filmId",
+          durchschnitt: { $avg: "$sterne" },
+          anzahl: { $sum: 1 }
+        }
+      }
+    ]);
+
+    if (result.length === 0) {
+      return res.json({ durchschnitt: 0, anzahl: 0 });
+    }
+
+    res.json(result[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Fehler beim Berechnen des Durchschnitts' });
   }
 });
