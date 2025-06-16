@@ -234,13 +234,14 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/api/send-booking-mail', async (req, res) => {
-  const { email, sitze, qrCode } = req.body;
+  const { email, sitze, qrCode, filmTitel, datum, uhrzeit } = req.body;
 
   if (!email || !sitze || !qrCode) {
     return res.status(400).json({ error: "Fehlende Daten" });
   }
 
   const sitzeListeHtml = sitze.map(s => `<li>Reihe ${s.reihe}, Platz ${s.nummer} (${s.typ})</li>`).join('');
+
 
   const mailOptions = {
     // from: '"CineBuddy" <mikado.dummy.acc@gmail.com>',
@@ -249,6 +250,7 @@ app.post('/api/send-booking-mail', async (req, res) => {
     subject: 'Dein Kinoticket und Buchungsbestätigung',
     html: `
       <h1>Vielen Dank für deine Buchung!</h1>
+      <h2>${filmTitel} - ${datum} - ${uhrzeit}</h2>
       <p>Hier sind deine gebuchten Sitzplätze:</p>
       <ul>${sitzeListeHtml}</ul>
       <p>Zeige diesen QR-Code beim Einlass vor:</p>
@@ -280,6 +282,7 @@ app.post('/api/save-ticket', async (req, res) => {
   }
 
   try {
+    // 1. Ticket speichern
     const newTicket = new Ticket({
       filmId,
       vorstellungsId,
@@ -287,12 +290,33 @@ app.post('/api/save-ticket', async (req, res) => {
       userEmail,
       qrCodeDataUrl: qrCode,
     });
-
     await newTicket.save();
-    res.status(201).json({ message: "Ticket erfolgreich gespeichert", ticketId: newTicket._id });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Fehler beim Speichern des Tickets" });
+
+    // 2. Sitzstatus in VorstellungSitze updaten
+    // Angenommen, VorstellungSitze hat Felder: id_vorstellung, reihe, nummer, status
+    const vorstellungObjId = new mongoose.Types.ObjectId(vorstellungsId);
+
+const bulkOps = sitze.map(sitz => ({
+  updateOne: {
+    filter: {
+      vorstellungId: vorstellungObjId,
+      "sitz.reihe": sitz.reihe,
+      "sitz.nummer": sitz.nummer,
+    },
+    update: { $set: { status: "belegt" } }
+  }
+}));
+
+const result = await VorstellungSitze.bulkWrite(bulkOps);
+
+res.status(201).json({ 
+  message: "Ticket erfolgreich gespeichert und Sitze belegt", 
+  ticketId: newTicket._id, 
+  updateResult: result 
+});
+  } catch (error) {
+    console.error("Fehler beim Speichern des Tickets oder Aktualisieren der Sitzplätze", error);
+    res.status(500).json({ error: "Fehler beim Speichern des Tickets oder Aktualisieren der Sitzplätze", details: error.message });
   }
 });
 

@@ -128,7 +128,12 @@ function Vorstellung() {
               className="uhrzeit-button"
               onClick={() => {
                 sessionStorage.setItem("filmId", film._id);
-                sessionStorage.setItem("vorstellungsId", uhr.id); // oder uhr._id – je nachdem, was du brauchst
+                sessionStorage.setItem("vorstellungsId", uhr.id);
+
+                sessionStorage.setItem("filmTitel", film.titel);
+    sessionStorage.setItem("datum", selectedDate);
+    sessionStorage.setItem("uhrzeit", uhr.zeit);
+
                 navigate(`/Film/${film._id}/1/${uhr.startzeit}`);
               }}
               disabled={isTimeSlotDisabled(uhr.startzeit)}
