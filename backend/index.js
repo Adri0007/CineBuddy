@@ -6,6 +6,7 @@ const cors = require('cors');
 const bcrypt = require("bcrypt")
 const User = require('./models/User');
 const Vorstellung = require('./models/Vorstellungen.js');
+const Ticket = require('./models/Ticket');
 
 const nodemailer = require('nodemailer');
 
@@ -268,6 +269,30 @@ app.post('/api/send-booking-mail', async (req, res) => {
   } catch (error) {
     console.error("Fehler beim Mailversand:", error);
     res.status(500).json({ error: "Mailversand fehlgeschlagen" });
+  }
+});
+
+app.post('/api/save-ticket', async (req, res) => {
+  const { filmId, vorstellungsId, sitze, userEmail, qrCode } = req.body;
+
+  if (!filmId || !vorstellungsId || !sitze || !userEmail || !qrCode) {
+    return res.status(400).json({ error: "Fehlende Buchungsdaten" });
+  }
+
+  try {
+    const newTicket = new Ticket({
+      filmId,
+      vorstellungsId,
+      sitze,
+      userEmail,
+      qrCodeDataUrl: qrCode,
+    });
+
+    await newTicket.save();
+    res.status(201).json({ message: "Ticket erfolgreich gespeichert", ticketId: newTicket._id });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Fehler beim Speichern des Tickets" });
   }
 });
 
