@@ -234,13 +234,14 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/api/send-booking-mail', async (req, res) => {
-  const { email, sitze, qrCode } = req.body;
+  const { email, sitze, qrCode, filmTitel, datum, uhrzeit } = req.body;
 
   if (!email || !sitze || !qrCode) {
     return res.status(400).json({ error: "Fehlende Daten" });
   }
 
   const sitzeListeHtml = sitze.map(s => `<li>Reihe ${s.reihe}, Platz ${s.nummer} (${s.typ})</li>`).join('');
+
 
   const mailOptions = {
     // from: '"CineBuddy" <mikado.dummy.acc@gmail.com>',
@@ -249,6 +250,7 @@ app.post('/api/send-booking-mail', async (req, res) => {
     subject: 'Dein Kinoticket und Buchungsbestätigung',
     html: `
       <h1>Vielen Dank für deine Buchung!</h1>
+      <h2>${filmTitel} - ${datum} - ${uhrzeit}</h2>
       <p>Hier sind deine gebuchten Sitzplätze:</p>
       <ul>${sitzeListeHtml}</ul>
       <p>Zeige diesen QR-Code beim Einlass vor:</p>

@@ -12,6 +12,9 @@ function Buchungsseite() {
   const [bookingMessage, setBookingMessage] = useState("");
   const [messageType, setMessageType] = useState("");
   const qrRef = useRef(null);
+  const [filmTitel, setFilmTitel] = useState("");
+  const [datum, setDatum] = useState("");
+  const [uhrzeit, setUhrzeit] = useState("");
 
   const filmId = sessionStorage.getItem("filmId");
   const vorstellungsId = sessionStorage.getItem("vorstellungsId");
@@ -20,6 +23,9 @@ function Buchungsseite() {
     filmId,
     vorstellungsId,
     sitze: ausgewaehlteSitze,
+    filmTitel,
+    datum,      
+    uhrzeit      
   });
 
   const navigate = useNavigate();
@@ -44,6 +50,52 @@ function Buchungsseite() {
       }
     }
   }, []);
+
+  useEffect(() => {
+    const fetchFilmTitel = async () => {
+      if (!filmId) return;
+      try {
+        const res = await fetch(`http://localhost:5000/api/filme/${filmId}`);
+        if (!res.ok) throw new Error("Film nicht gefunden");
+        const filmData = await res.json();
+        setFilmTitel(filmData.titel); // assuming the film model has a "titel" field
+      } catch (err) {
+        console.error("Fehler beim Laden des Filmtitels:", err);
+      }
+    };
+  
+    fetchFilmTitel();
+  }, [filmId]);
+  
+
+  useEffect(() => {
+    const fetchDetails = async () => {
+      try {
+        const vorstellungenRes = await fetch(`http://localhost:5000/api/vorstellungen/${filmId}`);
+        const vorstellungen = await vorstellungenRes.json();
+  
+        const matching = vorstellungen.find(v => v._id.toString() === vorstellungsId);
+        console.log("Gefundene Vorstellung:", matching);
+  
+        if (matching) {
+          const startzeit = new Date(matching.startzeit);
+          const datum = startzeit.toLocaleDateString('de-DE');
+          const uhrzeit = startzeit.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+          setDatum(datum);
+          setUhrzeit(uhrzeit);
+        } else {
+          console.warn("Keine passende Vorstellung gefunden");
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  
+    if (filmId && vorstellungsId) {
+      fetchDetails();
+    }
+  }, [filmId, vorstellungsId]);
+  
 
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -104,6 +156,9 @@ function Buchungsseite() {
           email: email,
           sitze: ausgewaehlteSitze,
           qrCode: dataUrl,
+          filmTitel,
+          datum,
+          uhrzeit
         }),
       });
 
