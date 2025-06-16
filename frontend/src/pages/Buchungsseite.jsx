@@ -256,7 +256,7 @@ function Buchungsseite() {
       </div>
 
       <div ref={qrRef} style={{ display: "none" }}>
-        <QRCodeCanvas value={qrCodeContent} size={200} />
+        <QRCodeCanvas value={qrCodeContent} size={500} />
       </div>
 
       <div>
