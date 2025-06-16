@@ -285,4 +285,38 @@ app.post('/api/bewertungen/:filmId', async (req, res) => {
   }
 });
 
+//Alle Tickets von bestimmtem User finden per email
+
+const Ticket = require('./models/Ticket.js');
+
+app.get('/api/Ticket', async (req, res) => {
+  try {
+    const { email } = req.query;
+    if (!email) return res.status(400).json({ error: "Keine E-Mail übergeben" });
+
+    const ticket = await Ticket.find({ userEmail: email });
+    res.json(ticket);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Serverfehler' });
+  }
+});
+
+//Vorstellung durch vorstellungsId holen
+
+app.get('/api/vorstellung', async (req, res) => {
+  try {
+    const vorstellungsId  = req.query;
+    if (!vorstellungsId) return res.status(400).json({ error: "Keine vorstellungsId übergeben" });
+
+    const vorstellung = await Vorstellung.findById( vorstellungsId );
+    res.json(vorstellung);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Serverfehler' });
+  }
+});
+
 app.listen(PORT, () => console.log(`Backend läuft auf Port ${PORT}`));
