@@ -280,6 +280,7 @@ app.post('/api/save-ticket', async (req, res) => {
   }
 
   try {
+    // 1. Ticket speichern
     const newTicket = new Ticket({
       filmId,
       vorstellungsId,
@@ -287,12 +288,33 @@ app.post('/api/save-ticket', async (req, res) => {
       userEmail,
       qrCodeDataUrl: qrCode,
     });
-
     await newTicket.save();
-    res.status(201).json({ message: "Ticket erfolgreich gespeichert", ticketId: newTicket._id });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Fehler beim Speichern des Tickets" });
+
+    // 2. Sitzstatus in VorstellungSitze updaten
+    // Angenommen, VorstellungSitze hat Felder: id_vorstellung, reihe, nummer, status
+    const vorstellungObjId = new mongoose.Types.ObjectId(vorstellungsId);
+
+const bulkOps = sitze.map(sitz => ({
+  updateOne: {
+    filter: {
+      vorstellungId: vorstellungObjId,
+      "sitz.reihe": sitz.reihe,
+      "sitz.nummer": sitz.nummer,
+    },
+    update: { $set: { status: "belegt" } }
+  }
+}));
+
+const result = await VorstellungSitze.bulkWrite(bulkOps);
+
+res.status(201).json({ 
+  message: "Ticket erfolgreich gespeichert und Sitze belegt", 
+  ticketId: newTicket._id, 
+  updateResult: result 
+});
+  } catch (error) {
+    console.error("Fehler beim Speichern des Tickets oder Aktualisieren der Sitzplätze", error);
+    res.status(500).json({ error: "Fehler beim Speichern des Tickets oder Aktualisieren der Sitzplätze", details: error.message });
   }
 });
 
