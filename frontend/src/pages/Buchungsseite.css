@@ -1,0 +1,317 @@
+/* Styling für den neuen Wrapper, der die früheren globalen Body/HTML-Styles übernimmt */
+.booking-page-wrapper {
+  margin: 0;
+  padding: 3rem 2rem;
+  overflow-x: hidden; /* Verhindert horizontales Scrollen */
+  overflow-y: auto;   /* <<< NEU: Vertikales Scrollen erlauben, wenn Inhalt größer ist */
+  background: radial-gradient(circle, #440000, #1a0000 80%);
+  color: #f8e8d6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh; /* Sorgt dafür, dass es die gesamte Viewport-Höhe einnimmt */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Zentriert den Buchungscontainer horizontal */
+  justify-content: flex-start; /* <<< GEÄNDERT: Inhalt oben beginnen lassen, nicht zentrieren */
+  box-sizing: border-box;
+  padding-bottom: 80px; /* <<< NEU: Zusätzlicher Platz am unteren Rand für die feste Leiste */
+}
+
+/* Container der Buchungsseite, angelehnt an account-box */
+.buchungsseite-container {
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(5px);
+  padding: 3.5rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 700px;
+  max-width: 90%; /* Hält den Container auf Desktop-Ansichten im Rahmen */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+/* Überschriften im Stil der Account-Seite */
+.buchungsseite-container h1 {
+  font-size: 2.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  margin: 0 auto 2.5rem;
+  font-weight: 700;
+  color: #ff6b6b;
+  text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
+  text-align: center;
+}
+
+.buchungsseite-container h2 {
+  font-size: 1.8rem;
+  color: #ff9999;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.6rem;
+  text-align: left;
+}
+
+/* Liste der ausgewählten Sitze */
+.buchungsseite-container ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
+  text-align: left;
+}
+
+.buchungsseite-container li {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 15px 20px;
+  font-size: 1.1em;
+  color: #f8e8d6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.buchungsseite-container li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  border-color: #ff6b6b;
+}
+
+.buchungsseite-container li span:first-child {
+  font-weight: 600;
+  color: #ff9999;
+}
+
+.buchungsseite-container li span:last-child {
+  font-style: italic;
+  color: #d8c8b6;
+}
+
+/* Nachricht, wenn keine Sitzdaten gefunden wurden */
+.buchungsseite-container .no-seats-message {
+  font-style: italic;
+  color: #d8c8b6;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border: 1px dashed rgba(255, 107, 107, 0.2);
+  margin-top: 25px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* E-Mail Sektion */
+.email-input-section {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: left;
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  box-sizing: border-box;
+}
+
+.email-input-section h2 {
+  margin-top: 0;
+  padding-bottom: 0.6rem;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.email-input-field {
+  width: 100%;
+  padding: 15px 20px;
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 107, 107, 0.4);
+  border-radius: 8px;
+  color: #f8e8d6;
+  font-size: 1.1em;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.email-input-field::placeholder {
+  color: rgba(248, 232, 214, 0.6);
+}
+
+.email-input-field:focus {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+}
+
+/* Buchungs-Button */
+.booking-button {
+  width: 100%;
+  padding: 1.2rem;
+  margin-top: 30px;
+  background: linear-gradient(to right, #ff6b6b, #e63946);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-sizing: border-box;
+}
+
+.booking-button:hover:not(:disabled) {
+  background: linear-gradient(to right, #e63946, #cc2936);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.booking-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.booking-button:disabled {
+  background: #666;
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+  transform: none;
+}
+
+.booking-message {
+  margin-top: 10px;
+  padding: 0;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 600;
+  transition: opacity 0.3s ease;
+  box-shadow: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.booking-message.success {
+  background-color: transparent;
+  color: #a8ffb2;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 15px;
+  padding-bottom: 0;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.booking-message.error {
+  background-color: transparent;
+  color: #ff9999;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin-top: 5px;
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* --- */
+/* Media Queries für Responsivität */
+/* --- */
+@media (max-width: 768px) {
+  .booking-page-wrapper {
+    padding: 2rem 1.5rem;
+    padding-bottom: 80px; /* Sicherstellen, dass auch hier der Abstand bleibt */
+  }
+
+  .buchungsseite-container {
+    padding: 2rem;
+    width: 95%;
+    max-width: 100%;
+  }
+
+  .email-input-section,
+  .booking-message {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+  }
+
+  .buchungsseite-container h1 {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .buchungsseite-container h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .buchungsseite-container li {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 15px;
+  }
+
+  .buchungsseite-container li span {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .buchungsseite-container li span:last-child {
+    margin-bottom: 0;
+  }
+
+  .email-input-field {
+    width: 100%;
+    padding: 12px 15px;
+  }
+
+  .booking-button {
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-page-wrapper {
+    padding: 1.5rem 1rem;
+    padding-bottom: 80px; /* Sicherstellen, dass auch hier der Abstand bleibt */
+  }
+
+  .buchungsseite-container {
+    padding: 1.5rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .buchungsseite-container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .buchungsseite-container h2 {
+    font-size: 1.3rem;
+  }
+
+  .email-input-field {
+    padding: 10px;
+  }
+
+  .booking-button {
+    font-size: 1rem;
+    padding: 0.9rem;
+  }
+}

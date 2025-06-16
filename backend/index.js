@@ -1,9 +1,14 @@
+require("dotenv").config({ path: "./.env" })
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bcrypt = require("bcrypt")
 const User = require('./models/User');
 const Vorstellung = require('./models/Vorstellungen.js');
+const Ticket = require('./models/Ticket');
+
+const nodemailer = require('nodemailer');
 
 
 require("dotenv").config({ path: "./config.env" })
@@ -31,9 +36,6 @@ app.get('/', (req, res) => {
 app.get('/api/test', (req, res) => {
   res.json({ message: 'API funktioniert!' });
 });
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Backend läuft auf Port ${PORT}`));
 
 const Film = require('./models/Filme.js');
 
@@ -221,3 +223,79 @@ app.get('/api/user-data', async (req, res) => {
 
   }
 });
+
+// Ab hier neu
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.MAIL,
+    pass: process.env.PW,
+  },
+});
+
+app.post('/api/send-booking-mail', async (req, res) => {
+  const { email, sitze, qrCode } = req.body;
+
+  if (!email || !sitze || !qrCode) {
+    return res.status(400).json({ error: "Fehlende Daten" });
+  }
+
+  const sitzeListeHtml = sitze.map(s => `<li>Reihe ${s.reihe}, Platz ${s.nummer} (${s.typ})</li>`).join('');
+
+  const mailOptions = {
+    // from: '"CineBuddy" <mikado.dummy.acc@gmail.com>',
+    from: '"CineBuddy" <CineBuddy@gmail.com>',
+    to: email,
+    subject: 'Dein Kinoticket und Buchungsbestätigung',
+    html: `
+      <h1>Vielen Dank für deine Buchung!</h1>
+      <p>Hier sind deine gebuchten Sitzplätze:</p>
+      <ul>${sitzeListeHtml}</ul>
+      <p>Zeige diesen QR-Code beim Einlass vor:</p>
+      <img src="${qrCode}" alt="QR Code im Anhang" style="width:200px; height:200px;" />
+    `,
+    attachments: [
+      {
+        filename: 'qrcode.png',
+        path: qrCode,
+        cid: 'qrcode' 
+      }
+    ]
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Mail erfolgreich versendet" });
+  } catch (error) {
+    console.error("Fehler beim Mailversand:", error);
+    res.status(500).json({ error: "Mailversand fehlgeschlagen" });
+  }
+});
+
+app.post('/api/save-ticket', async (req, res) => {
+  const { filmId, vorstellungsId, sitze, userEmail, qrCode } = req.body;
+
+  if (!filmId || !vorstellungsId || !sitze || !userEmail || !qrCode) {
+    return res.status(400).json({ error: "Fehlende Buchungsdaten" });
+  }
+
+  try {
+    const newTicket = new Ticket({
+      filmId,
+      vorstellungsId,
+      sitze,
+      userEmail,
+      qrCodeDataUrl: qrCode,
+    });
+
+    await newTicket.save();
+    res.status(201).json({ message: "Ticket erfolgreich gespeichert", ticketId: newTicket._id });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Fehler beim Speichern des Tickets" });
+  }
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Backend läuft auf Port ${PORT}`));
+
