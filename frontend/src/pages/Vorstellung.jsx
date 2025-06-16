@@ -124,13 +124,18 @@ function Vorstellung() {
             console.log("ID der Vorstellung:", uhr.startzeit);
             return (
               <button
-                key={uhr.id}
-                className="uhrzeit-button"
-                onClick={() => navigate(`/Film/${film._id}/1/${uhr.startzeit}`)}
-                disabled={isTimeSlotDisabled(uhr.startzeit)}
-              >
-                {uhr.zeit}
-              </button>
+              key={uhr.id}
+              className="uhrzeit-button"
+              onClick={() => {
+                sessionStorage.setItem("filmId", film._id);
+                sessionStorage.setItem("vorstellungsId", uhr.id); // oder uhr._id – je nachdem, was du brauchst
+                navigate(`/Film/${film._id}/1/${uhr.startzeit}`);
+              }}
+              disabled={isTimeSlotDisabled(uhr.startzeit)}
+            >
+              {uhr.zeit}
+            </button>
+            
             );
           })
         ) : (

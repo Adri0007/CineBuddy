@@ -13,6 +13,16 @@ function Buchungsseite() {
   const [messageType, setMessageType] = useState('');
   const qrRef = useRef(null);
 
+  const filmId = sessionStorage.getItem("filmId");
+  const vorstellungsId = sessionStorage.getItem("vorstellungsId");
+
+  const qrCodeContent = JSON.stringify({
+    filmId,
+    vorstellungsId,
+    sitze: ausgewaehlteSitze,
+  });
+  
+
   //Test
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState('');
 
@@ -178,12 +188,16 @@ function Buchungsseite() {
       {/* {qrCodeDataUrl && <img src={qrCodeDataUrl} alt="QR Code" />}
       <h2>Mein QR Code</h2>
       <div ref={qrRef}>
+       Datum Sitzplatz FSK
+       
+       VorstellungsID FilmID Sitzplatz
         <QRCodeCanvas value="https://www.youtube.com/watch?v=xvFZjo5PgG0" size={200} />
       </div> */}
 
 <div ref={qrRef} style={{ display: 'none' }}>
-  <QRCodeCanvas value="https://www.youtube.com/watch?v=xvFZjo5PgG0" size={200} />
+  <QRCodeCanvas value={qrCodeContent} size={200} />
 </div>
+
 
 
       <div>
