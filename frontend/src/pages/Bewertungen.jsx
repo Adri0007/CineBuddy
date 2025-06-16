@@ -141,7 +141,9 @@ function Bewertungen() {
               <div key={index} className="bewertungEintrag">
                 <p className="user"><strong>User: {bewertung.userName}</strong></p>
                 <div className="sterne"><strong>Sterne:</strong><SterneAnzeige rating={bewertung.sterne} /></div>
-                <p className="kommentar"><strong>Kommentar: {bewertung.kommentar}</strong></p>
+                {bewertung.kommentar && bewertung.kommentar.trim() !== "" && (
+                  <p className="kommentar"><strong>Kommentar:</strong> {bewertung.kommentar}</p>
+                )}
               </div>
             ))
           ) : (
