@@ -372,7 +372,8 @@ app.get('/api/vorstellung', async (req, res) => {
   app.post('/api/save-ticket', async (req, res) => {
     const { filmId, vorstellungsId, sitze, userEmail, qrCode } = req.body;
 
-    if (!filmId || !vorstellungsId || !sitze || !userEmail || !qrCode) {
+
+    if (!filmId || !vorstellungsId || !sitze || !userEmail /*|| !qrCode */) {
       return res.status(400).json({ error: "Fehlende Buchungsdaten" });
     }
 
@@ -383,7 +384,7 @@ app.get('/api/vorstellung', async (req, res) => {
         vorstellungsId,
         sitze,
         userEmail,
-        qrCodeDataUrl: qrCode,
+        // qrCodeDataUrl: qrCode,
       });
       await newTicket.save();
 

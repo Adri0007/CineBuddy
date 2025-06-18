@@ -138,7 +138,7 @@ function Buchungsseite() {
           vorstellungsId,
           sitze: ausgewaehlteSitze,
           userEmail: email,
-          qrCode: dataUrl,
+          // qrCode: dataUrl,
         }),
       });
 
