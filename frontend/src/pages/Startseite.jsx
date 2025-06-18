@@ -17,7 +17,7 @@ export function Startseite() {
       .then(res => setFilme(res.data))
       .catch(err => console.error("Fehler beim Laden der Filme:", err));
   }, []);
-  
+
   //Filme nach Name filtern
   const gefilterteFilme = filme.filter(film =>
     film.titel.toLowerCase().includes(searchTerm.toLowerCase())
@@ -53,6 +53,9 @@ export function Startseite() {
       <button className="accountButton" onClick={() => navigate('/Account')}>
         <FontAwesomeIcon icon={faUser} />
       </button>
+      <footer className="footer">
+        <Link to="/quellen">Quellen</Link>
+      </footer>
     </div>
   );
 }

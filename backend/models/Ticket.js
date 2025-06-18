@@ -11,7 +11,6 @@ const TicketSchema = new mongoose.Schema({
     },
   ],
   userEmail: { type: String, required: true },
-  qrCodeDataUrl: { type: String, required: false },
   timestamp: { type: Date, default: Date.now }
 });
 

@@ -7,7 +7,7 @@ import AccountRouteWrapper from './pages/AccountRouteWrapper';
 import Registrierung from './pages/Registrierung.jsx';
 import Anmeldung from './pages/Anmeldung.jsx';
 import Ticketseite from './pages/Ticketseite.jsx';
-
+import Quellen from './pages/Quellen';
 
 import AccountPage from './pages/AccountPage.jsx'; // Importiere die neue AccountPage
 import Buchungsseite from './pages/Buchungsseite.jsx';
@@ -30,6 +30,7 @@ export default function AppRouter() {
       <Route path="/Anmeldung" element={<Anmeldung />} />
       <Route path="/Buchungsseite" element={<Buchungsseite />} />
       <Route path="/Film/:id/Bewertungen" element={<Bewertungen />} />
+      <Route path="/quellen" element={<Quellen />} />
     </Routes>
   );
 }
