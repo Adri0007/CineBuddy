@@ -1,10 +1,14 @@
+// externe Imports
 import React, { useEffect, useState, useRef } from "react";
 import { QRCodeCanvas } from "qrcode.react";
-import "./Buchungsseite.css";
 import { useNavigate } from "react-router-dom";
+
+// interne Imports
 import MenuButtons from "../components/MenuButtons";
+import "./Buchungsseite.css";
 
 function Buchungsseite() {
+  //State-Variablen
   const [ausgewaehlteSitze, setAusgewaehlteSitze] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
@@ -15,21 +19,25 @@ function Buchungsseite() {
   const [datum, setDatum] = useState("");
   const [uhrzeit, setUhrzeit] = useState("");
 
+  // IDs aus SessionStorage abrufen
   const filmId = sessionStorage.getItem("filmId");
   const vorstellungsId = sessionStorage.getItem("vorstellungsId");
 
+  // Inhalt für QR-Code vorbereiten
   const qrCodeContent = JSON.stringify({
     filmId,
     vorstellungsId,
     sitze: ausgewaehlteSitze,
     filmTitel,
-    datum,      
-    uhrzeit      
+    datum,
+    uhrzeit
   });
 
   const navigate = useNavigate();
 
+  // Beim Laden: Sitze und Login-Status abrufen
   useEffect(() => {
+    // Sitzplatzdaten aus SessionStorage laden
     const gespeicherteSitze = sessionStorage.getItem("ausgewählteSitze");
     if (gespeicherteSitze) {
       try {
@@ -39,9 +47,11 @@ function Buchungsseite() {
       }
     }
 
+    // Login-Status prüfen
     const userIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     setIsLoggedIn(userIsLoggedIn);
 
+    // E-Mail aus LocalStorage laden (falls eingeloggt)
     if (userIsLoggedIn) {
       const storedEmail = localStorage.getItem("userEmail");
       if (storedEmail) {
@@ -50,6 +60,7 @@ function Buchungsseite() {
     }
   }, []);
 
+  // Filmtitel laden
   useEffect(() => {
     const fetchFilmTitel = async () => {
       if (!filmId) return;
@@ -57,25 +68,24 @@ function Buchungsseite() {
         const res = await fetch(`http://localhost:5000/api/filme/${filmId}`);
         if (!res.ok) throw new Error("Film nicht gefunden");
         const filmData = await res.json();
-        setFilmTitel(filmData.titel); // assuming the film model has a "titel" field
+        setFilmTitel(filmData.titel);
       } catch (err) {
         console.error("Fehler beim Laden des Filmtitels:", err);
       }
     };
-  
     fetchFilmTitel();
   }, [filmId]);
-  
 
+  // Datum & Uhrzeit der Vorstellung abrufen
   useEffect(() => {
     const fetchDetails = async () => {
       try {
         const vorstellungenRes = await fetch(`http://localhost:5000/api/vorstellungen/${filmId}`);
         const vorstellungen = await vorstellungenRes.json();
-  
+
         const matching = vorstellungen.find(v => v._id.toString() === vorstellungsId);
         console.log("Gefundene Vorstellung:", matching);
-  
+
         if (matching) {
           const startzeit = new Date(matching.startzeit);
           const datum = startzeit.toLocaleDateString('de-DE');
@@ -89,28 +99,29 @@ function Buchungsseite() {
         console.error(err);
       }
     };
-  
+
     if (filmId && vorstellungsId) {
       fetchDetails();
     }
   }, [filmId, vorstellungsId]);
-  
 
+  // Validierung der E-Mail
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
+  // Buchung ausführen
   const handleBooking = async () => {
     setBookingMessage("");
     setMessageType("");
 
+    // Validierungen
     if (ausgewaehlteSitze.length === 0) {
       setBookingMessage("Bitte wählen Sie zuerst Sitze aus.");
       setMessageType("error");
       return;
     }
-
     if (!isLoggedIn) {
       if (!email) {
         setBookingMessage("Bitte geben Sie eine Mail ein.");
@@ -124,7 +135,7 @@ function Buchungsseite() {
       }
     }
 
-    // QR-Code DataURL vom Canvas holen
+    // QR-Code generieren
     const qrCanvas = qrRef.current.querySelector("canvas");
     const dataUrl = qrCanvas.toDataURL();
 
@@ -138,7 +149,6 @@ function Buchungsseite() {
           vorstellungsId,
           sitze: ausgewaehlteSitze,
           userEmail: email,
-          // qrCode: dataUrl,
         }),
       });
 
@@ -147,7 +157,7 @@ function Buchungsseite() {
         throw new Error("Fehler beim Speichern des Tickets: " + errText);
       }
 
-      // 2) Mail senden
+      // 2) E-Mail mit Ticket senden
       const mailResponse = await fetch("http://localhost:5000/api/send-booking-mail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -166,12 +176,15 @@ function Buchungsseite() {
         throw new Error("Mailversand fehlgeschlagen: " + errText);
       }
 
+      // Erfolgreiche Buchung
       setBookingMessage("✅ Buchung erfolgreich! Mail wurde versendet.");
       setMessageType("success");
 
+      // Sitzplätze zurücksetzen
       sessionStorage.removeItem("ausgewählteSitze");
       setAusgewaehlteSitze([]);
 
+      // Weiterleitung
       if (!isLoggedIn) {
         setTimeout(() => {
           navigate("/");
@@ -187,7 +200,7 @@ function Buchungsseite() {
       setMessageType("error");
     }
   };
-
+  // ---------- JSX ----------
   return (
     <div className="booking-page-wrapper">
       <div className="buchungsseite-container">

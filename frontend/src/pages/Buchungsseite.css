@@ -1,22 +1,20 @@
-/* Styling für den neuen Wrapper, der die früheren globalen Body/HTML-Styles übernimmt */
 .booking-page-wrapper {
   margin: 0;
   padding: 3rem 2rem;
-  overflow-x: hidden; /* Verhindert horizontales Scrollen */
-  overflow-y: auto;   /* <<< NEU: Vertikales Scrollen erlauben, wenn Inhalt größer ist */
+  overflow-x: hidden;
+  overflow-y: auto;
   background: radial-gradient(circle, #440000, #1a0000 80%);
   color: #f8e8d6;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  min-height: 100vh; /* Sorgt dafür, dass es die gesamte Viewport-Höhe einnimmt */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Zentriert den Buchungscontainer horizontal */
-  justify-content: flex-start; /* <<< GEÄNDERT: Inhalt oben beginnen lassen, nicht zentrieren */
+  align-items: center;
+  justify-content: flex-start;
   box-sizing: border-box;
-  padding-bottom: 80px; /* <<< NEU: Zusätzlicher Platz am unteren Rand für die feste Leiste */
+  padding-bottom: 80px;
 }
 
-/* Container der Buchungsseite, angelehnt an account-box */
 .buchungsseite-container {
   background-color: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(5px);
@@ -24,13 +22,12 @@
   border-radius: 16px;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 700px;
-  max-width: 90%; /* Hält den Container auf Desktop-Ansichten im Rahmen */
+  max-width: 90%;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.3s ease-in-out;
   box-sizing: border-box;
 }
 
-/* Überschriften im Stil der Account-Seite */
 .buchungsseite-container h1 {
   font-size: 2.4rem;
   white-space: nowrap;
@@ -55,7 +52,6 @@
   text-align: left;
 }
 
-/* Liste der ausgewählten Sitze */
 .buchungsseite-container ul {
   list-style: none;
   padding: 0;
@@ -95,7 +91,6 @@
   color: #d8c8b6;
 }
 
-/* Nachricht, wenn keine Sitzdaten gefunden wurden */
 .buchungsseite-container .no-seats-message {
   font-style: italic;
   color: #d8c8b6;
@@ -108,7 +103,6 @@
   box-sizing: border-box;
 }
 
-/* E-Mail Sektion */
 .email-input-section {
   margin-top: 30px;
   margin-bottom: 30px;
@@ -151,7 +145,6 @@
   box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
 }
 
-/* Buchungs-Button */
 .booking-button {
   width: 100%;
   padding: 1.2rem;
@@ -225,13 +218,10 @@
   margin-right: auto;
 }
 
-/* --- */
-/* Media Queries für Responsivität */
-/* --- */
 @media (max-width: 768px) {
   .booking-page-wrapper {
     padding: 2rem 1.5rem;
-    padding-bottom: 80px; /* Sicherstellen, dass auch hier der Abstand bleibt */
+    padding-bottom: 80px;
   }
 
   .buchungsseite-container {
@@ -287,7 +277,7 @@
 @media (max-width: 480px) {
   .booking-page-wrapper {
     padding: 1.5rem 1rem;
-    padding-bottom: 80px; /* Sicherstellen, dass auch hier der Abstand bleibt */
+    padding-bottom: 80px;
   }
 
   .buchungsseite-container {
