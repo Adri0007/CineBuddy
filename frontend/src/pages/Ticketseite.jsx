@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { QRCodeCanvas } from 'qrcode.react';
 import './Ticketseite.css';
+import MenuButtons from "../components/MenuButtons";
 
 function Ticketseite() {
   const navigate = useNavigate();
@@ -95,17 +94,7 @@ function Ticketseite() {
         </>
       )}
       {/* Bottom Navigation */}
-      <div className="bottom-nav">
-        <button className="suchButton" onClick={() => navigate('/')}>
-          <FontAwesomeIcon icon={faHome} />
-        </button>
-        <button className="ticketButton" onClick={() => navigate('/Tickets')}>
-          <FontAwesomeIcon icon={faTicket} />
-        </button>
-        <button className="accountButton" onClick={() => navigate('/Account')}>
-          <FontAwesomeIcon icon={faUser} />
-        </button>
-      </div>
+      <MenuButtons />
     </div>
   );
 }

@@ -62,6 +62,11 @@ function Bewertungen() {
       alert("Bitte melde dich erst an, um eine Bewertung abzugeben.");
       return;
     }
+    //Überprüfen ob bereits bewertet
+    if (bewertungen.some((bewertung) => bewertung.userName === userName)) {
+      alert("Du hast diesen Film bereits bewertet.");
+      return;
+    }
     //Überprüfen des Tickets und Vorstellung ablauf
     const passendesTicket = tickets.find(ticket => String(ticket.filmId) === String(id));
     if (!passendesTicket) {
@@ -96,6 +101,10 @@ function Bewertungen() {
       setKommentar("");
       setSterne(0);
       await fetchBewertungen(); //Kommentare aktualisieren um neuen anzuzeigen
+      console.log(vorstellungen)
+      console.log(echteVorstellung)
+      console.log(ticketId)
+      console.log(echteVorstellung.endzeit)
     } catch (err) {
       console.error(err);
       alert("Fehler beim Absenden der Bewertung.");

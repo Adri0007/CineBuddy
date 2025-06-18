@@ -2,8 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import "./Buchungsseite.css";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faTicket, faUser } from "@fortawesome/free-solid-svg-icons";
+import MenuButtons from "../components/MenuButtons";
 
 function Buchungsseite() {
   const [ausgewaehlteSitze, setAusgewaehlteSitze] = useState([]);
@@ -259,17 +258,7 @@ function Buchungsseite() {
         <QRCodeCanvas value={qrCodeContent} size={500} />
       </div>
 
-      <div>
-        <button className="suchButton" onClick={() => navigate("/")}>
-          <FontAwesomeIcon icon={faHome} />
-        </button>
-        <button className="ticketButton" onClick={() => navigate("/Tickets")}>
-          <FontAwesomeIcon icon={faTicket} />
-        </button>
-        <button className="accountButton" onClick={() => navigate("/Account")}>
-          <FontAwesomeIcon icon={faUser} />
-        </button>
-      </div>
+      <MenuButtons />
     </div>
   );
 }

@@ -415,25 +415,6 @@ app.get('/api/vorstellung', async (req, res) => {
     }
   });
 
-
-
-  app.get('/api/ticket-details', async (req, res) => {
-
-    try {
-      const { email } = req.query;
-      if (!email) return res.status(400).json({ error: "Keine E-Mail übergeben" });
-
-
-      const ticket = await Ticket.find({ userEmail: email });
-      res.json(ticket);
-
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Serverfehler' });
-    }
-  });
-
-
   app.get('/api/ticket-details', async (req, res) => {
     try {
       const { email } = req.query;
