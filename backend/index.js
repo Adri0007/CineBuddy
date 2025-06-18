@@ -1,9 +1,14 @@
+require("dotenv").config({ path: "./.env" })
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bcrypt = require("bcrypt")
 const User = require('./models/User');
 const Vorstellung = require('./models/Vorstellungen.js');
+const Ticket = require('./models/Ticket');
+
+const nodemailer = require('nodemailer');
 
 
 require("dotenv").config({ path: "./config.env" })
@@ -31,9 +36,6 @@ app.get('/', (req, res) => {
 app.get('/api/test', (req, res) => {
   res.json({ message: 'API funktioniert!' });
 });
-
-const PORT = process.env.PORT || 5000;
-
 
 const Film = require('./models/Filme.js');
 
@@ -129,7 +131,7 @@ app.get('/api/vorstellungssitze', async (req, res) => {
 
 app.post('/api/login', async (req, res) => {
   try {
-    
+
     const email = req.body.email.toLowerCase();
     const password = req.body.password;
 
@@ -154,7 +156,7 @@ app.post('/api/login', async (req, res) => {
 app.post('/api/register', async (req, res) => {
   try {
     const username = req.body.username;
-    const email = req.body.email.toLowerCase(); 
+    const email = req.body.email.toLowerCase();
     const password = req.body.password;
 
     const existUser = await User.findOne({ $or: [{ username }, { email }] });
@@ -167,7 +169,7 @@ app.post('/api/register', async (req, res) => {
 
     const user = new User({
       username,
-      email, 
+      email,
       password: hashedPassword
     });
     await user.save();
@@ -222,6 +224,7 @@ app.get('/api/user-data', async (req, res) => {
 
   }
 });
+
 
 //Alle Bewertungen von bestimmtem Film finden
 
@@ -290,9 +293,111 @@ app.post('/api/bewertungen/:filmId', async (req, res) => {
 const Ticket = require('./models/Ticket.js');
 
 app.get('/api/Ticket', async (req, res) => {
+
+// Ab hier neu
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.MAIL,
+    pass: process.env.PW,
+  },
+});
+
+app.post('/api/send-booking-mail', async (req, res) => {
+  const { email, sitze, qrCode, filmTitel, datum, uhrzeit } = req.body;
+
+  if (!email || !sitze || !qrCode) {
+    return res.status(400).json({ error: "Fehlende Daten" });
+  }
+
+  const sitzeListeHtml = sitze.map(s => `<li>Reihe ${s.reihe}, Platz ${s.nummer} (${s.typ})</li>`).join('');
+
+
+  const mailOptions = {
+    // from: '"CineBuddy" <mikado.dummy.acc@gmail.com>',
+    from: '"CineBuddy" <CineBuddy@gmail.com>',
+    to: email,
+    subject: 'Dein Kinoticket und Buchungsbestätigung',
+    html: `
+      <h1>Vielen Dank für deine Buchung!</h1>
+      <h2>${filmTitel} - ${datum} - ${uhrzeit}</h2>
+      <p>Hier sind deine gebuchten Sitzplätze:</p>
+      <ul>${sitzeListeHtml}</ul>
+      <p>Zeige diesen QR-Code beim Einlass vor:</p>
+      <img src="${qrCode}" alt="QR Code im Anhang" style="width:500px; height:500px;" />
+    `,
+    attachments: [
+      {
+        filename: 'qrcode.png',
+        path: qrCode,
+        cid: 'qrcode' 
+      }
+    ]
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Mail erfolgreich versendet" });
+  } catch (error) {
+    console.error("Fehler beim Mailversand:", error);
+    res.status(500).json({ error: "Mailversand fehlgeschlagen" });
+  }
+});
+
+app.post('/api/save-ticket', async (req, res) => {
+  const { filmId, vorstellungsId, sitze, userEmail, qrCode } = req.body;
+
+  if (!filmId || !vorstellungsId || !sitze || !userEmail || !qrCode) {
+    return res.status(400).json({ error: "Fehlende Buchungsdaten" });
+  }
+
+  try {
+    // 1. Ticket speichern
+    const newTicket = new Ticket({
+      filmId,
+      vorstellungsId,
+      sitze,
+      userEmail,
+      qrCodeDataUrl: qrCode,
+    });
+    await newTicket.save();
+
+    // 2. Sitzstatus in VorstellungSitze updaten
+    // Angenommen, VorstellungSitze hat Felder: id_vorstellung, reihe, nummer, status
+    const vorstellungObjId = new mongoose.Types.ObjectId(vorstellungsId);
+
+const bulkOps = sitze.map(sitz => ({
+  updateOne: {
+    filter: {
+      vorstellungId: vorstellungObjId,
+      "sitz.reihe": sitz.reihe,
+      "sitz.nummer": sitz.nummer,
+    },
+    update: { $set: { status: "belegt" } }
+  }
+}));
+
+const result = await VorstellungSitze.bulkWrite(bulkOps);
+
+res.status(201).json({ 
+  message: "Ticket erfolgreich gespeichert und Sitze belegt", 
+  ticketId: newTicket._id, 
+  updateResult: result 
+});
+  } catch (error) {
+    console.error("Fehler beim Speichern des Tickets oder Aktualisieren der Sitzplätze", error);
+    res.status(500).json({ error: "Fehler beim Speichern des Tickets oder Aktualisieren der Sitzplätze", details: error.message });
+  }
+});
+
+
+
+app.get('/api/ticket-details', async (req, res) => {
+
   try {
     const { email } = req.query;
     if (!email) return res.status(400).json({ error: "Keine E-Mail übergeben" });
+
 
     const ticket = await Ticket.find({ userEmail: email });
     res.json(ticket);
@@ -313,10 +418,56 @@ app.get('/api/vorstellung', async (req, res) => {
     const vorstellung = await Vorstellung.findById( vorstellungsId );
     res.json(vorstellung);
 
+    // Alle Tickets für diesen User
+    const tickets = await Ticket.find({ userEmail: email });
+
+    const Film = require('./models/Filme.js');
+    const Vorstellung = require('./models/Vorstellungen.js');
+    const Saal = require('./models/Saal.js');
+
+    // Alle Tickets mit Filmdaten/Datum/Saal anreichern
+    const allTicketInfos = [];
+    for (const ticket of tickets) {
+      const film = await Film.findById(ticket.filmId);
+      const vorstellung = await Vorstellung.findById(ticket.vorstellungsId);
+
+      if (!vorstellung) continue; // Kein Vorstellungsobjekt gefunden, Ticket überspringen
+
+      // Zeitfilter: Nur Tickets mit Vorstellung in der Zukunft!
+      const vorstellungsDate = new Date(vorstellung.startzeit);
+      if (vorstellungsDate < new Date()) continue; // Vergangenheit = überspringen
+
+      const saal = await Saal.findById(vorstellung.saalId);
+
+      // Alle Sitzplätze anzeigen (auch mehrere!)
+      for (const sitz of ticket.sitze) {
+        allTicketInfos.push({
+          filmId: ticket.filmId,
+          vorstellungsId: ticket.vorstellungsId,
+          sitze: [sitz], // Pro Eintrag ein Sitz, für besseren QR!
+          film: film ? film.titel : "",
+          datum: vorstellungsDate.toLocaleDateString('de-DE'),
+          uhrzeit: vorstellungsDate.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' }),
+          saal: saal ? saal.name : "",
+          reihe: sitz.reihe || "",
+          platz: sitz.nummer || sitz.platz || ""
+        });
+      }
+    }
+
+    // Wenn keine Tickets, entsprechende Meldung
+    if (allTicketInfos.length === 0) {
+      return res.status(404).json({ error: "Kein Ticket gefunden" });
+    }
+
+    res.json({ tickets: allTicketInfos });
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Serverfehler' });
   }
 });
 
+
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Backend läuft auf Port ${PORT}`));

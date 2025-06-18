@@ -150,12 +150,17 @@ function Sitzplaetze() {
 
   // Sitz klicken zum Auswählen
   const handleClick = (index) => {
-    if (selectedSeats.includes(index)) {
+    const isAlreadySelected = selectedSeats.includes(index);
+  
+    if (isAlreadySelected) {
+      // Sitz abwählen
       setSelectedSeats(selectedSeats.filter(i => i !== index));
-    } else {
+    } else if (selectedSeats.length < 5) {
+      // Nur hinzufügen, wenn noch weniger als 5 ausgewählt sind
       setSelectedSeats([...selectedSeats, index]);
     }
   };
+  
 
   // Spalten- und Reihenlabels aus Saal-Sitzen extrahieren und sortieren
   const spaltenLabels = saal?.sitze
@@ -304,9 +309,6 @@ function Sitzplaetze() {
       >
         Weiter
       </button>
-
-
-
     </div>
   );
 }

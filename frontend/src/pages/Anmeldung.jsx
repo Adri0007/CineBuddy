@@ -26,6 +26,7 @@ function Anmeldung() {
         setMessageType('success');
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userEmail', email);
+        localStorage.setItem('userId', response.data.userId);
 
         setTimeout(() => {
           navigate('/Account');
@@ -35,6 +36,7 @@ function Anmeldung() {
         setMessageType('error');
         localStorage.setItem('isLoggedIn', 'false');
         localStorage.removeItem('userEmail');
+        localStorage.removeItem('userId');
       }
     } catch (error) {
       console.error('Login error:', error);
