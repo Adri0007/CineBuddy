@@ -49,7 +49,7 @@ function Ticketseite() {
         <div style={{ color: "#fff", marginTop: "2rem" }}>Lade Ticketdaten...</div>
       ) : error ? (
         error === "Kein Ticket gefunden" ? (
-          <div className="ticket-headline" style={{ marginTop: "2.5rem" }}>
+          <div className="ticket-headline" style={{ marginTop: "0rem" }}>
             Keine Tickets vorhanden.
           </div>
         ) : (
