@@ -6,11 +6,14 @@ const cors = require('cors');
 const bcrypt = require("bcrypt")
 const User = require('./models/User');
 const Vorstellung = require('./models/Vorstellungen.js');
-
 const nodemailer = require('nodemailer');
-
-
 const { ObjectId } = require('mongoose').Types;
+
+const Film = require('./models/Filme.js');
+const Saal = require('./models/Saal.js');
+const VorstellungSitze = require('./models/VorstellungSitze.js');
+const Bewertungen = require('./models/Bewertungen.js');
+const Ticket = require('./models/Ticket.js');
 
 const app = express();
 app.use(cors());
@@ -19,23 +22,23 @@ app.use(express.json());
 //Für Dima nicht löschen
 //const mongoUrl = 'mongodb://admin:SWP2025Projekt@localhost:27017/cinebuddys?authSource=admin';
 
+//Verbinden mit der DB
 const mongoUrl = 'mongodb://localhost:27017/Cinebuddy'
-
 mongoose.connect(mongoUrl)
   .then(() => console.log('MongoDB verbunden!'))
   .catch(err => console.error('MongoDB Fehler:', err));
 
+//Test ob Verbindung zu DB hergestellt wurde
 app.get('/', (req, res) => {
   res.send('Hallo von CineBuddy-Backend!');
 });
 
-
+//Auch Test ob Verbindung zu DB hergestellt wurde
 app.get('/api/test', (req, res) => {
   res.json({ message: 'API funktioniert!' });
 });
 
-const Film = require('./models/Filme.js');
-
+//Alle Filme abrufen
 app.get('/api/filme', async (req, res) => {
   try {
     const filme = await Film.find();
@@ -46,6 +49,7 @@ app.get('/api/filme', async (req, res) => {
   }
 });
 
+//Einen Film abrufen
 app.get('/api/filme/:id', async (req, res) => {
   try {
     const film = await Film.findById(req.params.id);
@@ -58,6 +62,7 @@ app.get('/api/filme/:id', async (req, res) => {
   }
 });
 
+//Alle Vorstellungen eines Films abrufen
 app.get('/api/vorstellungen/:filmId', async (req, res) => {
   try {
     const filmId = req.params.filmId;
@@ -71,6 +76,7 @@ app.get('/api/vorstellungen/:filmId', async (req, res) => {
   }
 });
 
+//Alle Vorstellungen abrufen und Umwandlung zum Array
 app.get('/api/vorstellungen', async (req, res) => {
   try {
     const vorstellungen = await mongoose.connection.db.collection('Vorstellungen')
@@ -82,9 +88,7 @@ app.get('/api/vorstellungen', async (req, res) => {
   }
 });
 
-
-const Saal = require('./models/Saal.js');
-
+//Abrufen aller Säle
 app.get('/api/saal', async (req, res) => {
   try {
     const saele = await Saal.find();
@@ -95,6 +99,7 @@ app.get('/api/saal', async (req, res) => {
   }
 });
 
+//Abrufen eins Saales
 app.get('/api/saal/:id', async (req, res) => {
   try {
     const saal = await Saal.findById(req.params.id);
@@ -105,9 +110,7 @@ app.get('/api/saal/:id', async (req, res) => {
   }
 });
 
-const VorstellungSitze = require('./models/VorstellungSitze.js');
-
-
+//Sitzplatzstatus einer Vorstellung abrufen
 app.get('/api/vorstellungssitze/:vorstellungId', async (req, res) => {
   try {
     const vorstellungId = req.params.vorstellungId;
@@ -119,6 +122,7 @@ app.get('/api/vorstellungssitze/:vorstellungId', async (req, res) => {
   }
 });
 
+//Alle Sitzplatzdaten abrufen
 app.get('/api/vorstellungssitze', async (req, res) => {
   try {
     const sitze = await VorstellungSitze.find();
@@ -184,8 +188,7 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-
-
+//Vorstellung anhand von filmId, datum und uhrzeit suchen
 app.get('/api/vorstellung', async (req, res) => {
   try {
     const { filmId, date, time } = req.query;
@@ -211,6 +214,7 @@ app.get('/api/vorstellung', async (req, res) => {
   }
 });
 
+//Nutzerdaten anhand der E-Mail abrufen
 app.get('/api/user-data', async (req, res) => {
   try {
 
@@ -229,9 +233,6 @@ app.get('/api/user-data', async (req, res) => {
 
 
 //Alle Bewertungen von bestimmtem Film finden
-
-const Bewertungen = require('./models/Bewertungen.js');
-
 app.get('/api/bewertungen/:filmId', async (req, res) => {
   try {
     const filmId = req.params.filmId;
@@ -244,7 +245,6 @@ app.get('/api/bewertungen/:filmId', async (req, res) => {
 });
 
 // Bewertungsdurchschnitt für Vorstellungsseite
-
 app.get('/api/bewertungen/durchschnitt/:filmId', async (req, res) => {
   try {
     const result = await Bewertungen.aggregate([
@@ -270,7 +270,6 @@ app.get('/api/bewertungen/durchschnitt/:filmId', async (req, res) => {
 });
 
 // Neue Bewertung speichern
-
 app.post('/api/bewertungen/:filmId', async (req, res) => {
   const { filmId } = req.params;
   const { sterne, kommentar, ticketId, userName } = req.body;
@@ -291,9 +290,6 @@ app.post('/api/bewertungen/:filmId', async (req, res) => {
 });
 
 //Alle Tickets von bestimmtem User finden per email
-
-const Ticket = require('./models/Ticket.js');
-
 app.get('/api/Ticket', async (req, res) => {
   try {
     const { email } = req.query;
@@ -309,7 +305,6 @@ app.get('/api/Ticket', async (req, res) => {
 });
 
 //Vorstellung durch vorstellungsId holen
-
 app.get('/api/vorstellung', async (req, res) => {
   try {
     const vorstellungsId = req.query;
@@ -333,6 +328,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+//Ticket per e-Mail verschicken
 app.post('/api/send-booking-mail', async (req, res) => {
   const { email, sitze, qrCode, filmTitel, datum, uhrzeit } = req.body;
 
@@ -431,9 +427,8 @@ app.get('/api/ticket-details', async (req, res) => {
     // Alle Tickets für diesen User
     const tickets = await Ticket.find({ userEmail: email });
 
-    const Film = require('./models/Filme.js');
     const Vorstellung = require('./models/Vorstellungen.js');
-    const Saal = require('./models/Saal.js');
+
 
     // Alle Tickets mit Filmdaten/Datum/Saal anreichern
     const allTicketInfos = [];
