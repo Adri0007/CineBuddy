@@ -329,7 +329,7 @@ app.get('/api/vorstellung', async (req, res) => {
   });
 
   app.post('/api/send-booking-mail', async (req, res) => {
-    const { email, sitze, qrCode, filmTitel, datum, uhrzeit } = req.body;
+    const { email, sitze, qrCode, filmTitel, datum, uhrzeit} = req.body;
 
     if (!email || !sitze || !qrCode) {
       return res.status(400).json({ error: "Fehlende Daten" });
@@ -337,6 +337,8 @@ app.get('/api/vorstellung', async (req, res) => {
 
     const sitzeListeHtml = sitze.map(s => `<li>Reihe ${s.reihe}, Platz ${s.nummer} (${s.typ})</li>`).join('');
 
+    const user = await User.findOne({ email: email });
+    const userName = user ? user.username : null;
 
     const mailOptions = {
       // from: '"CineBuddy" <mikado.dummy.acc@gmail.com>',
@@ -344,7 +346,7 @@ app.get('/api/vorstellung', async (req, res) => {
       to: email,
       subject: 'Dein Kinoticket und Buchungsbestätigung',
       html: `
-      <h1>Vielen Dank für deine Buchung!</h1>
+      ${userName ? `<h1>Hallo ${userName}! Vielen Dank für deine Buchung!</h1>` : `<h1>Hallo Kinofan! Vielen Dank für deine Buchung!</h1>`}
       <h2>${filmTitel} - ${datum} - ${uhrzeit}</h2>
       <p>Hier sind deine gebuchten Sitzplätze:</p>
       <ul>${sitzeListeHtml}</ul>
