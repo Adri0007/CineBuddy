@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './Anmeldung.css';
 import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
+import MenuButtons from "../components/MenuButtons";
 import axios from 'axios';
 
 
@@ -88,15 +87,7 @@ function Anmeldung() {
           </a>
         </div>
       </form>
-      <button className="suchButton" onClick={() => navigate('/')}>
-        <FontAwesomeIcon icon={faHome} />
-      </button>
-      <button className="ticketButton" onClick={() => navigate('/Tickets')}>
-        <FontAwesomeIcon icon={faTicket} />
-      </button>
-      <button className="accountButton" onClick={() => navigate('/Account')}>
-        <FontAwesomeIcon icon={faUser} />
-      </button>
+      <MenuButtons />
     </div>
 
   );

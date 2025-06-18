@@ -11,6 +11,7 @@ import Ticketseite from './pages/Ticketseite.jsx';
 
 import AccountPage from './pages/AccountPage.jsx'; // Importiere die neue AccountPage
 import Buchungsseite from './pages/Buchungsseite.jsx';
+import Bewertungen from './pages/Bewertungen.jsx';
 
 // Dummy-Komponenten für noch nicht vorhandene Seiten (Platzhalter)
 const Tickets = () => <div>Tickets Seite noch nicht verfügbar</div>;
@@ -28,6 +29,7 @@ export default function AppRouter() {
       <Route path="/Registrieren" element={<Registrierung />} />
       <Route path="/Anmeldung" element={<Anmeldung />} />
       <Route path="/Buchungsseite" element={<Buchungsseite />} />
+      <Route path="/Film/:id/Bewertungen" element={<Bewertungen />} />
     </Routes>
   );
 }

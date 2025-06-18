@@ -1,0 +1,51 @@
+.suchButton svg,
+.ticketButton svg,
+.accountButton svg {
+  background: none;
+  color: white;
+  font-size: 2rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+.suchButton,
+.accountButton,
+.ticketButton {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  background-color: #530f0f;
+  border: 0.3rem solid black;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+.suchButton {
+  background: radial-gradient(circle, #440000, #1a0000 80%);
+  left: 25%;
+  width: 50%;
+  height: 7vh;
+  z-index: 1050;
+}
+
+.accountButton {
+  background: radial-gradient(circle, #440000, #1a0000 80%);
+  left: 75%;
+  width: 50%;
+  height: 7vh;
+  z-index: 1050;
+}
+
+.ticketButton {
+  background: radial-gradient(circle, #440000, #1a0000 80%);
+  width: 12vh;
+  height: 12vh;
+  border-radius: 50%;
+  z-index: 1100;
+  flex-direction: column;
+}

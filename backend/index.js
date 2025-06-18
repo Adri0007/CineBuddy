@@ -110,6 +110,7 @@ app.get('/api/saal/:id', async (req, res) => {
 
 const VorstellungSitze = require('./models/VorstellungSitze.js');
 
+
 app.get('/api/vorstellungssitze/:vorstellungId', async (req, res) => {
   try {
     const vorstellungId = req.params.vorstellungId;
@@ -224,6 +225,75 @@ app.get('/api/user-data', async (req, res) => {
   }
 });
 
+
+//Alle Bewertungen von bestimmtem Film finden
+
+const Bewertungen = require('./models/Bewertungen.js');
+
+app.get('/api/bewertungen/:filmId', async (req, res) => {
+  try {
+    const filmId = req.params.filmId;
+    const bewertungen = await Bewertungen.find({ filmId });
+    res.json(bewertungen);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Serverfehler' });
+  }
+});
+
+// Bewertungsdurchschnitt für Vorstellungsseite
+
+app.get('/api/bewertungen/durchschnitt/:filmId', async (req, res) => {
+  try {
+    const result = await Bewertungen.aggregate([
+      { $match: { filmId: req.params.filmId } },
+      {
+        $group: {
+          _id: "$filmId",
+          durchschnitt: { $avg: "$sterne" },
+          anzahl: { $sum: 1 }
+        }
+      }
+    ]);
+
+    if (result.length === 0) {
+      return res.json({ durchschnitt: 0, anzahl: 0 });
+    }
+
+    res.json(result[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Fehler beim Berechnen des Durchschnitts' });
+  }
+});
+
+// Neue Bewertung speichern
+
+app.post('/api/bewertungen/:filmId', async (req, res) => {
+  const { filmId } = req.params;
+  const { sterne, kommentar, ticketId, userName } = req.body;
+
+  try {
+    const neueBewertung = new Bewertungen({
+      filmId,
+      sterne,
+      kommentar,
+      ticketId,
+      userName,
+    });
+    await neueBewertung.save();
+    res.status(201).json(neueBewertung);
+  } catch (error) {
+    res.status(500).json({ error: 'Fehler beim Speichern der Bewertung' });
+  }
+});
+
+//Alle Tickets von bestimmtem User finden per email
+
+const Ticket = require('./models/Ticket.js');
+
+app.get('/api/Ticket', async (req, res) => {
+
 // Ab hier neu
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -323,9 +393,30 @@ res.status(201).json({
 
 
 app.get('/api/ticket-details', async (req, res) => {
+
   try {
     const { email } = req.query;
     if (!email) return res.status(400).json({ error: "Keine E-Mail übergeben" });
+
+
+    const ticket = await Ticket.find({ userEmail: email });
+    res.json(ticket);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Serverfehler' });
+  }
+});
+
+//Vorstellung durch vorstellungsId holen
+
+app.get('/api/vorstellung', async (req, res) => {
+  try {
+    const vorstellungsId  = req.query;
+    if (!vorstellungsId) return res.status(400).json({ error: "Keine vorstellungsId übergeben" });
+
+    const vorstellung = await Vorstellung.findById( vorstellungsId );
+    res.json(vorstellung);
 
     // Alle Tickets für diesen User
     const tickets = await Ticket.find({ userEmail: email });
@@ -380,4 +471,3 @@ app.get('/api/ticket-details', async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Backend läuft auf Port ${PORT}`));
-

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
+import MenuButtons from "../components/MenuButtons";
 import axios from "axios";
 import "./Vorstellung.css";
 
@@ -10,6 +9,7 @@ function Vorstellung() {
   const { id } = useParams();
   const [film, setFilm] = useState(null);
   const [vorstellungen, setVorstellungen] = useState([]);
+  const [bewertungen, setBewertungen] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
   const [showFullDescription, setShowFullDescription] = useState(false);
   const descriptionMaxLength = 200;
@@ -22,10 +22,13 @@ function Vorstellung() {
     axios.get(`http://localhost:5000/api/vorstellungen/${id}`)
       .then(res => setVorstellungen(res.data))
       .catch(err => console.error(err));
+    axios.get(`http://localhost:5000/api/bewertungen/durchschnitt/${id}`)
+      .then(res => setBewertungen(res.data))
+      .catch(err => console.error(err));
   }, [id]);
 
   if (!film || vorstellungen.length === 0) {
-    return <div>Keine Verbindung zum Backend oder keine Daten verfügbar.</div>;
+    return <div></div>;
   }
 
   const getNaechste7Tage = () => {
@@ -97,8 +100,13 @@ function Vorstellung() {
             className="bewertung-button"
             onClick={() => navigate(`/Film/${film._id}/Bewertungen`)}
           >
-            4,5
+            {bewertungen.anzahl > 0 ? (
+              <p>{bewertungen.durchschnitt.toFixed(1)}</p> //Bewertungen auf erste nachkommastelle gerundet
+            ) : (
+              <p>0</p> //falls keine Bewertungen vorhanden
+            )}
           </button>
+          {<div className="film-info-text anzahlBewerungen">{bewertungen.anzahl} Bewertungen</div>}
           {film.dauer && <div className="film-info-text dauer">{film.dauer} Min.</div>}
           {film.fsk && <div className="film-info-text fsk">FSK {film.fsk}</div>}
         </div>
@@ -148,17 +156,7 @@ function Vorstellung() {
         )}
       </div>
 
-      <div>
-        <button className="suchButton" onClick={() => navigate('/')}>
-          <FontAwesomeIcon icon={faHome} />
-        </button>
-        <button className="ticketButton" onClick={() => navigate('/Tickets')}>
-          <FontAwesomeIcon icon={faTicket} />
-        </button>
-        <button className="accountButton" onClick={() => navigate('/Account')}>
-          <FontAwesomeIcon icon={faUser} />
-        </button>
-      </div>
+      <MenuButtons />
     </div>
   );
 }

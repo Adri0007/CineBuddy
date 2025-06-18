@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import './Registrierung.css';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faTicket, faUser } from '@fortawesome/free-solid-svg-icons';
-
+import MenuButtons from "../components/MenuButtons";
 function Registrierung() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -149,15 +147,7 @@ function Registrierung() {
           </a>
         </div>
       </form>
-      <button className="suchButton" onClick={() => navigate('/')}>
-        <FontAwesomeIcon icon={faHome} />
-      </button>
-      <button className="ticketButton" onClick={() => navigate('/Tickets')}>
-        <FontAwesomeIcon icon={faTicket} />
-      </button>
-      <button className="accountButton" onClick={() => navigate('/Account')}>
-        <FontAwesomeIcon icon={faUser} />
-      </button>
+      <MenuButtons />
     </div>
   );
 }

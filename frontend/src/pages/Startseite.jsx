@@ -13,11 +13,12 @@ export function Startseite() {
   const [filme, setFilme] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/filme')
+    axios.get('http://localhost:5000/api/filme') //Alle Filme holen
       .then(res => setFilme(res.data))
       .catch(err => console.error("Fehler beim Laden der Filme:", err));
   }, []);
-
+  
+  //Filme nach Name filtern
   const gefilterteFilme = filme.filter(film =>
     film.titel.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -26,7 +27,7 @@ export function Startseite() {
     <div className="bodyStartseite">
       {showSearch && (
         <div className="suchbereich">
-          <input
+          <input //Suche
             type="text"
             placeholder="Film suchen..."
             value={searchTerm}
