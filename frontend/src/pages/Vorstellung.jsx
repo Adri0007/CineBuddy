@@ -6,14 +6,15 @@ import "./Vorstellung.css";
 
 function Vorstellung() {
   const navigate = useNavigate();
-  const { id } = useParams();
-  const [film, setFilm] = useState(null);
-  const [vorstellungen, setVorstellungen] = useState([]);
-  const [bewertungen, setBewertungen] = useState([]);
-  const [selectedDate, setSelectedDate] = useState('');
-  const [showFullDescription, setShowFullDescription] = useState(false);
-  const descriptionMaxLength = 200;
+  const { id } = useParams(); // ID aus URL holen
+  const [film, setFilm] = useState(null); // Film-Details
+  const [vorstellungen, setVorstellungen] = useState([]); // Alle Vorstellungen für den Film
+  const [bewertungen, setBewertungen] = useState([]); // Bewertungsdaten
+  const [selectedDate, setSelectedDate] = useState(''); // Vom User gewähltes Datum
+  const [showFullDescription, setShowFullDescription] = useState(false); // Beschreibung ganz anzeigen oder kürzen
+  const descriptionMaxLength = 200; // Zeichenlänge für gekürzte Beschreibung
 
+  // Film-, Vorstellungs- und Bewertungsdaten laden
   useEffect(() => {
     axios.get(`http://localhost:5000/api/filme/${id}`)
       .then(res => setFilm(res.data))
@@ -22,15 +23,18 @@ function Vorstellung() {
     axios.get(`http://localhost:5000/api/vorstellungen/${id}`)
       .then(res => setVorstellungen(res.data))
       .catch(err => console.error(err));
+
     axios.get(`http://localhost:5000/api/bewertungen/durchschnitt/${id}`)
       .then(res => setBewertungen(res.data))
       .catch(err => console.error(err));
   }, [id]);
 
+  // Wenn noch keine Daten geladen sind
   if (!film || vorstellungen.length === 0) {
     return <div></div>;
   }
 
+  // Gibt die nächsten 7 Tage mit verfügbaren Vorstellungen zurück
   const getNaechste7Tage = () => {
     const heute = new Date();
     heute.setHours(0, 0, 0, 0);
@@ -54,25 +58,28 @@ function Vorstellung() {
     return dates.map(d => d.original);
   };
 
+  // Filtert Uhrzeiten nach gewähltem Tag
   const uhrzeitenFuerTag = selectedDate
     ? vorstellungen
-      .filter(v => new Date(v.startzeit).toLocaleDateString("de-DE") === selectedDate)
-      .map(v => ({
-        id: v._id,
-        zeit: new Date(v.startzeit).toLocaleTimeString("de-DE", {
-          hour: "2-digit",
-          minute: "2-digit"
-        }),
-        startzeit: v.startzeit
-      }))
-      .sort((a, b) => new Date(a.startzeit).getTime() - new Date(b.startzeit).getTime())
+        .filter(v => new Date(v.startzeit).toLocaleDateString("de-DE") === selectedDate)
+        .map(v => ({
+          id: v._id,
+          zeit: new Date(v.startzeit).toLocaleTimeString("de-DE", {
+            hour: "2-digit",
+            minute: "2-digit"
+          }),
+          startzeit: v.startzeit
+        }))
+        .sort((a, b) => new Date(a.startzeit).getTime() - new Date(b.startzeit).getTime())
     : [];
 
+  // Prüfung, ob Zeit bereits vergangen ist
   const isTimeSlotDisabled = (startzeit) => {
     const now = new Date();
     return new Date(startzeit) < now;
   };
 
+  // Kürzt Beschreibung, "mehr anzeigen" möglich
   const displayedDescription =
     film.beschreibung.length > descriptionMaxLength && !showFullDescription
       ? film.beschreibung.substring(0, descriptionMaxLength) + "..."
@@ -101,17 +108,19 @@ function Vorstellung() {
             onClick={() => navigate(`/Film/${film._id}/Bewertungen`)}
           >
             {bewertungen.anzahl > 0 ? (
-              <p>{bewertungen.durchschnitt.toFixed(1)}</p> //Bewertungen auf erste nachkommastelle gerundet
+              <p>{bewertungen.durchschnitt.toFixed(1)}</p> // Bewertungen auf erste Nachkommastelle gerundet
             ) : (
-              <p>0</p> //falls keine Bewertungen vorhanden
+              <p>0</p> // falls keine Bewertungen vorhanden
             )}
           </button>
+          {/* Bewertungsanzahl, Dauer und FSK */}
           {<div className="film-info-text anzahlBewerungen">{bewertungen.anzahl} Bewertungen</div>}
           {film.dauer && <div className="film-info-text dauer">{film.dauer} Min.</div>}
           {film.fsk && <div className="film-info-text fsk">FSK {film.fsk}</div>}
         </div>
       </div>
 
+      {/* Dropdownmenü zur Datumsauswahl */}
       <select
         className="datum-dropdown"
         value={selectedDate}
@@ -125,37 +134,42 @@ function Vorstellung() {
         ))}
       </select>
 
+      {/* Uhrzeit-Buttons */}
       <div className="button-grid vorstellung-container">
         {uhrzeitenFuerTag.length > 0 ? (
           uhrzeitenFuerTag.map(uhr => {
-            // HIER die console.log-Anweisung einfügen
-            console.log("ID der Vorstellung:", uhr.startzeit);
+            console.log("ID der Vorstellung:", uhr.startzeit); // Debug-Ausgabe der Startzeit
             return (
               <button
-              key={uhr.id}
-              className="uhrzeit-button"
-              onClick={() => {
-                sessionStorage.setItem("filmId", film._id);
-                sessionStorage.setItem("vorstellungsId", uhr.id);
+                key={uhr.id}
+                className="uhrzeit-button"
+                onClick={() => {
+                  // Daten in SessionStorage speichern
+                  sessionStorage.setItem("filmId", film._id);
+                  sessionStorage.setItem("vorstellungsId", uhr.id);
+                  sessionStorage.setItem("filmTitel", film.titel);
+                  sessionStorage.setItem("datum", selectedDate);
+                  sessionStorage.setItem("uhrzeit", uhr.zeit);
 
-                sessionStorage.setItem("filmTitel", film.titel);
-    sessionStorage.setItem("datum", selectedDate);
-    sessionStorage.setItem("uhrzeit", uhr.zeit);
-
-                navigate(`/Film/${film._id}/1/${uhr.startzeit}`);
-              }}
-              disabled={isTimeSlotDisabled(uhr.startzeit)}
-            >
-              {uhr.zeit}
-            </button>
-            
+                  // Zur Platzwahl weiterleiten
+                  navigate(`/Film/${film._id}/1/${uhr.startzeit}`);
+                }}
+                disabled={isTimeSlotDisabled(uhr.startzeit)} // Button deaktivieren, wenn vergangen
+              >
+                {uhr.zeit}
+              </button>
             );
           })
         ) : (
-          selectedDate && <p className="no-vorstellungen-message">Keine Vorstellungen für dieses Datum verfügbar.</p>
+          selectedDate && (
+            <p className="no-vorstellungen-message">
+              Keine Vorstellungen für dieses Datum verfügbar.
+            </p>
+          )
         )}
       </div>
 
+      {/* Navigationsmenü unten */}
       <MenuButtons />
     </div>
   );

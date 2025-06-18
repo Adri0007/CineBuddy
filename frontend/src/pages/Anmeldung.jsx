@@ -4,16 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import MenuButtons from "../components/MenuButtons";
 import axios from 'axios';
 
-
 function Anmeldung() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState('');
-  const navigate = useNavigate();
+  const [email, setEmail] = useState(''); // Eingabe für E-Mail
+  const [password, setPassword] = useState(''); // Eingabe für Passwort
+  const [message, setMessage] = useState(''); // Rückmeldung an den Nutzer
+  const [messageType, setMessageType] = useState(''); // Art der Rückmeldung (success oder error)
+  const navigate = useNavigate(); // Navigation in React Router
 
+  // Wird beim Abschicken des Formulars ausgeführt
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Verhindert Neuladen der Seite
 
     try {
       const response = await axios.post('http://localhost:5000/api/login', {
@@ -21,17 +21,19 @@ function Anmeldung() {
         password,
       });
 
+      // Wenn Anmeldung erfolgreich
       if (response.data.success) {
         setMessage('✅ Anmeldung erfolgreich!');
         setMessageType('success');
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userEmail', email);
-        localStorage.setItem('userId', response.data.userId);
+        localStorage.setItem('isLoggedIn', 'true'); // Login-Status speichern
+        localStorage.setItem('userEmail', email); // Nutzer-E-Mail speichern
+        localStorage.setItem('userId', response.data.userId); // Nutzer-ID speichern
 
         setTimeout(() => {
-          navigate('/Account');
+          navigate('/Account'); // Weiterleitung zur Account-Seite
         }, 1000);
       } else {
+        // Bei falschen Anmeldedaten
         setMessage(`❌ ${response.data.message}`);
         setMessageType('error');
         localStorage.setItem('isLoggedIn', 'false');
@@ -39,6 +41,7 @@ function Anmeldung() {
         localStorage.removeItem('userId');
       }
     } catch (error) {
+      // Fehler beim Server
       console.error('Login error:', error);
       setMessage('❌ Serverfehler bei der Anmeldung.');
       setMessageType('error');
@@ -87,9 +90,10 @@ function Anmeldung() {
           </a>
         </div>
       </form>
+
+      {/* Navigationsmenü unten */}
       <MenuButtons />
     </div>
-
   );
 }
 

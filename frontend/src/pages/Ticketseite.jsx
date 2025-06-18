@@ -11,7 +11,7 @@ function Ticketseite() {
   const [error, setError] = useState("");
   const userEmail = localStorage.getItem('userEmail');
 
-  const handleLogout = () => {
+  const handleLogout = () => { // wenn der user nicht eingelogt ist, wird er zur Anmeldung umgeleitet.
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('userEmail');
     navigate('/Anmeldung');
@@ -23,7 +23,7 @@ function Ticketseite() {
       return;
     }
     async function fetchTickets() {
-      try {
+      try {  // API-Request zum Backend für alle Tickets dieses Nutzers, nach der suche der E-Mail.
         const response = await fetch(
           `http://localhost:5000/api/ticket-details?email=${encodeURIComponent(userEmail)}`
         );
@@ -93,7 +93,6 @@ function Ticketseite() {
           </div>
         </>
       )}
-      {/* Bottom Navigation */}
       <MenuButtons />
     </div>
   );
