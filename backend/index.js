@@ -320,6 +320,64 @@ res.status(201).json({
   }
 });
 
+
+
+app.get('/api/ticket-details', async (req, res) => {
+  try {
+    const { email } = req.query;
+    if (!email) return res.status(400).json({ error: "Keine E-Mail übergeben" });
+
+    // Alle Tickets für diesen User
+    const tickets = await Ticket.find({ userEmail: email });
+
+    const Film = require('./models/Filme.js');
+    const Vorstellung = require('./models/Vorstellungen.js');
+    const Saal = require('./models/Saal.js');
+
+    // Alle Tickets mit Filmdaten/Datum/Saal anreichern
+    const allTicketInfos = [];
+    for (const ticket of tickets) {
+      const film = await Film.findById(ticket.filmId);
+      const vorstellung = await Vorstellung.findById(ticket.vorstellungsId);
+
+      if (!vorstellung) continue; // Kein Vorstellungsobjekt gefunden, Ticket überspringen
+
+      // Zeitfilter: Nur Tickets mit Vorstellung in der Zukunft!
+      const vorstellungsDate = new Date(vorstellung.startzeit);
+      if (vorstellungsDate < new Date()) continue; // Vergangenheit = überspringen
+
+      const saal = await Saal.findById(vorstellung.saalId);
+
+      // Alle Sitzplätze anzeigen (auch mehrere!)
+      for (const sitz of ticket.sitze) {
+        allTicketInfos.push({
+          filmId: ticket.filmId,
+          vorstellungsId: ticket.vorstellungsId,
+          sitze: [sitz], // Pro Eintrag ein Sitz, für besseren QR!
+          film: film ? film.titel : "",
+          datum: vorstellungsDate.toLocaleDateString('de-DE'),
+          uhrzeit: vorstellungsDate.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' }),
+          saal: saal ? saal.name : "",
+          reihe: sitz.reihe || "",
+          platz: sitz.nummer || sitz.platz || ""
+        });
+      }
+    }
+
+    // Wenn keine Tickets, entsprechende Meldung
+    if (allTicketInfos.length === 0) {
+      return res.status(404).json({ error: "Kein Ticket gefunden" });
+    }
+
+    res.json({ tickets: allTicketInfos });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Serverfehler' });
+  }
+});
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Backend läuft auf Port ${PORT}`));
 

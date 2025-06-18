@@ -6,6 +6,8 @@ import Sitzplaetze from "./pages/Sitzplaetze.jsx";
 import AccountRouteWrapper from './pages/AccountRouteWrapper';
 import Registrierung from './pages/Registrierung.jsx';
 import Anmeldung from './pages/Anmeldung.jsx';
+import Ticketseite from './pages/Ticketseite.jsx';
+
 
 import AccountPage from './pages/AccountPage.jsx'; // Importiere die neue AccountPage
 import Buchungsseite from './pages/Buchungsseite.jsx';
@@ -20,7 +22,7 @@ export default function AppRouter() {
       <Route path="/" element={<Startseite />} />
       <Route path="/Film/:id" element={<Vorstellung />} />
       <Route path="/Account" element={<AccountRouteWrapper />} />
-      <Route path="/Tickets" element={<Tickets />} />
+      <Route path="/Tickets" element={<Ticketseite />} />
       <Route path="/Film/:id/:index/:date" element={<Sitzplaetze />} />
       <Route path="/film/:id" element={<Vorstellung />} />
       <Route path="/Registrieren" element={<Registrierung />} />
