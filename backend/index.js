@@ -254,7 +254,7 @@ app.post('/api/send-booking-mail', async (req, res) => {
       <p>Hier sind deine gebuchten Sitzplätze:</p>
       <ul>${sitzeListeHtml}</ul>
       <p>Zeige diesen QR-Code beim Einlass vor:</p>
-      <img src="${qrCode}" alt="QR Code im Anhang" style="width:200px; height:200px;" />
+      <img src="${qrCode}" alt="QR Code im Anhang" style="width:500px; height:500px;" />
     `,
     attachments: [
       {
