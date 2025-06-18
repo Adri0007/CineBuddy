@@ -43,6 +43,7 @@
   font-size: 16px;
   box-sizing: border-box;
   min-height: 100px;
+  margin-bottom: 1rem;
 }
 
 .bewertungButton {
@@ -118,6 +119,38 @@
   margin-bottom: 30px;
   font-size: 2.5em;
   color: #fce8c6;
+}
+
+.message {
+  margin-top: -0.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.message.success {
+  color: #7aff7a;
+  text-shadow: 0 0 3px rgba(122, 255, 122, 0.5);
+}
+
+.message.error {
+  color: #ff9999;
+  text-shadow: 0 0 3px rgba(255, 153, 153, 0.5);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 600px) {

@@ -16,6 +16,8 @@ function Bewertungen() {
   const [durchschnitt, setDurchschnitt] = useState(null);
   const [film, setFilm] = useState(null);
   const userName = userData?.username || "";
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('');
 
   const email = localStorage.getItem('userEmail'); // Email aus Local Storage holen
 
@@ -54,23 +56,27 @@ function Bewertungen() {
     e.preventDefault();
     //Überprüfen ob Sterne ausgewählt
     if (sterne < 0.5 || sterne > 5) {
-      alert("Bitte wähle eine Sternebewertung zwischen 0,5 und 5.");
+      setMessage('❌ Bitte wähle eine Sternebewertung zwischen 0,5 und 5.');
+      setMessageType('error');
       return;
     }
     //Überprüfen ob angemeldet
     if (!userName || !localStorage.getItem("isLoggedIn")) {
-      alert("Bitte melde dich erst an, um eine Bewertung abzugeben.");
+      setMessage('❌ Bitte melde dich erst an, um eine Bewertung abzugeben.');
+      setMessageType('error');
       return;
     }
     //Überprüfen ob bereits bewertet
     if (bewertungen.some((bewertung) => bewertung.userName === userName)) {
-      alert("Du hast diesen Film bereits bewertet.");
+      setMessage('❌ Du hast diesen Film bereits bewertet.');
+      setMessageType('error');
       return;
     }
     //Überprüfen des Tickets und Vorstellung ablauf
     const passendesTicket = tickets.find(ticket => String(ticket.filmId) === String(id));
     if (!passendesTicket) {
-      alert("Kein Ticket für diesen Film gefunden.");
+      setMessage('❌ Kein Ticket für diesen Film gefunden.');
+      setMessageType('error');
       return;
     }
     const ticketId = passendesTicket._id;
@@ -81,12 +87,14 @@ function Bewertungen() {
       const echteVorstellung = vorstellungen.find(v => v._id === passendesTicket.vorstellungsId);
 
       if (!echteVorstellung) {
-        alert("Vorstellung nicht gefunden.");
+        setMessage('❌ Vorstellung nicht gefunden.');
+        setMessageType('error');
         return;
       }
 
       if (new Date(echteVorstellung.endzeit) > new Date()) {
-        alert("Die Vorstellung ist noch nicht vorbei.");
+        setMessage('❌ Du kannst erst nach der Vorstellung bewerten.');
+        setMessageType('error');
         return;
       }
       //Speichern der Bewertungen
@@ -98,13 +106,11 @@ function Bewertungen() {
         id,
       });
 
+      setMessage('✅ Bewertung hinzugefügt!');
+      setMessageType('success');
       setKommentar("");
       setSterne(0);
       await fetchBewertungen(); //Kommentare aktualisieren um neuen anzuzeigen
-      console.log(vorstellungen)
-      console.log(echteVorstellung)
-      console.log(ticketId)
-      console.log(echteVorstellung.endzeit)
     } catch (err) {
       console.error(err);
       alert("Fehler beim Absenden der Bewertung.");
@@ -137,6 +143,7 @@ function Bewertungen() {
               />
             </div>
           </label>
+          {message && <div className={`message ${messageType}`}>{message}</div>}
           <button type="submit" className="bewertungButton">Bewertung absenden</button>
         </form>
 
